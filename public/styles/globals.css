@@ -25,6 +25,6 @@
     @apply my-2 rounded-lg border border-solid border-gray-500 p-1.5 w-32
    }
    .textStyle{
-    @apply max-w-xl mb-3
+    @apply max-w-2xl mb-3
    }
 }

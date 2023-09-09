@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 
 export default async function Home({ params }: { params: { id: string } }) {
 
+    //page validation
   const sessionID = params.id;
   const validationResult = await validateSessionID(sessionID);
   if (!validationResult) {
@@ -15,7 +16,7 @@ export default async function Home({ params }: { params: { id: string } }) {
   return (
     <main>
       <div className="container mx-auto">
-        <h1 className="my-3">ゲームの説明</h1>
+        <h1 className="my-3">データの使われ方について</h1>
         <div className="textStyle">
           <SplitText text={G_text1} />
         </div>
@@ -25,7 +26,7 @@ export default async function Home({ params }: { params: { id: string } }) {
         <div className="textStyle">
           <SplitText text={G_text3} />
         </div>
-        <Link className="inputStyle" href={`/${sessionID}/profile`}>
+        <Link className="inputStyle" href={`/${sessionID}/gamerule`}>
           回答者情報の入力
         </Link>
       </div>
