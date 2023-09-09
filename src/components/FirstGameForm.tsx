@@ -63,7 +63,7 @@ export default function FirstGameForm({
 
         <RandomNavigateButton
           formData={responseBody}
-          buttonWord="次のページへ移る"
+          buttonWord="2回目のゲームを始める"
           grandParentPass={sessionId}
           parentpass={"2ndgame"}
           childpass1={"enw"}

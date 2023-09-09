@@ -1,3 +1,4 @@
+// idk whether this is used or not... Sep.9
 import SplitText from "@/components/SplitText";
 import { G_text1, G_text2, G_text3 } from "@/lib/textlist";
 import { validateSessionID } from "@/lib/validateSessionId";

@@ -12,7 +12,6 @@ export default async function page({params}:{params:{id:string}}) {
 
   return (
     <div>
-      <h1>This is bad page</h1>
       <FirstGameForm sessionId={sessionID} condition="bad" money={"250"} />
     </div>
   );

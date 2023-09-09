@@ -12,7 +12,6 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <h1>hope you can see this continue condition page</h1>
       <SecondGameForm sessionId={sessionID} condition="continue" />
     </>
   );

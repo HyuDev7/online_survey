@@ -39,7 +39,7 @@ export default function page() {
 
       if (sessionId) {
         console.log("you are authorised!");
-        router.push(`${sessionId}/useddata`);
+        router.push(`${sessionId}/gamerule`);
       }
     } catch (e) {
       console.dir(e);

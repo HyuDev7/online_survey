@@ -9,21 +9,16 @@ export default function Page() {
   return (
     <main>
       <div className="container mx-auto">
-        <h1 className="my-3">実験を始めるにあたっての説明</h1>
+        <h1 className="my-3">経済学研究に用いる分配に関するアンケート調査</h1>
         <div className="textStyle">
-          <SplitText text={T_text1} />
+          この度は実験へ参加してくださり、ありがとうございます。
+          本実験は工学院大学の研究室が実施する経済学研究に関わるアンケート調査です。
+          実験の概要とその流れについては「本実験の概要と流れについて」というページで説明しております。
+          下のボタンを押してページへお進みください。
         </div>
-        <div className="textStyle">
-          <SplitText text={T_text2} />
-        </div>
-        <div className="textStyle">
-          <SplitText text={T_text3} />
-        </div>
-        <div className="textStyle">
-          <SplitText text={T_text4} />
-        </div>
-        <Link className="inputStyle" href="/auth">
-          実験のログイン
+        
+        <Link className="inputStyle" href="/briefing">
+          本実験の概要と流れについて
         </Link>
       </div>
     </main>

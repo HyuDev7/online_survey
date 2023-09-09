@@ -50,7 +50,7 @@ export default function SecondGameForm({
 
         <RandomNavigateButton
           formData={responseBody}
-          buttonWord="実験を終了する"
+          buttonWord="実験の事後説明へ移る"
           parentpass={sessionId}
           childpass1={"debriefing"}
           childpass2={"debriefing"}
