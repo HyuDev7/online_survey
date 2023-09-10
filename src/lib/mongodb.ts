@@ -1,4 +1,5 @@
 import {
+  AgreementFormDataType,
   FirstFormDataType,
   ProfileFormDataType,
   SecondFormDataType,
@@ -10,6 +11,7 @@ import {
   PROFILE_COLLECTION,
   FIRSTGAME_COLLECTION,
   SECONDGAME_COLLECTION,
+  AGREEMENT_COLLECTION,
 } from "./dbConfig";
 const { MongoClient, ServerApiVersion } = require("mongodb");
 import { v4 as uuidv4 } from "uuid";
@@ -31,6 +33,7 @@ const userIdCollection = myDB.collection(ID_COLLECTION);
 const profileCollection = myDB.collection(PROFILE_COLLECTION);
 const firstGameCollection = myDB.collection(FIRSTGAME_COLLECTION);
 const secondGameCollection = myDB.collection(SECONDGAME_COLLECTION);
+const agreementCollection = myDB.collection(AGREEMENT_COLLECTION);
 
 //for checking the connection of db
 export function connectDB() {
@@ -131,18 +134,24 @@ export async function findSessionId(passedSessionID: string): Promise<boolean> {
 
 //for inserting form data
 export async function insertDoc(
-  formData: ProfileFormDataType | FirstFormDataType | SecondFormDataType
+  formData:
+    | ProfileFormDataType
+    | FirstFormDataType
+    | SecondFormDataType
+    | AgreementFormDataType
 ) {
   let insertResult: any;
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
-    if ("year" in formData) {
+    if ("old" in formData) {
       insertResult = await profileCollection.insertOne(formData);
     } else if ("firstGame" in formData) {
       insertResult = await firstGameCollection.insertOne(formData);
-    } else {
+    } else if ("secondGame" in formData) {
       insertResult = await secondGameCollection.insertOne(formData);
+    } else {
+      insertResult = await agreementCollection.insertOne(formData);
     }
   } catch (e) {
     console.dir(e);

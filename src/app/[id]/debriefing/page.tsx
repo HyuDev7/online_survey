@@ -1,3 +1,4 @@
+import AgreementForm from "@/components/AgreementForm";
 import { validateSessionID } from "@/lib/validateSessionId";
 import { notFound } from "next/navigation";
 
@@ -43,6 +44,7 @@ export default async function page({ params }: { params: { id: string } }) {
             確認番号の表示ボタンを押してください。ページを移動したのち、確認番号が画面に表示されます。
           </p>
         </div>
+        <AgreementForm id={sessionID} />
       </div>
     </div>
   );

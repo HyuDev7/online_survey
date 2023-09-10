@@ -30,3 +30,8 @@ export interface ProfileFormDataType {
   old: number | null;
   occupation: string | null;
 }
+
+export interface AgreementFormDataType {
+  sessionID: string;
+  agreementResult: string;
+}
