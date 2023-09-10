@@ -48,7 +48,7 @@ export default function page() {
 
   return (
     <div className="container mx-auto text-center">
-      <h1 className="my-3">応用経済分析研究室</h1>
+      <h1 className="my-3">実験のログイン</h1>
       <p className="max-w-md mx-auto">
         ランサーズの応募ページに記載のある、パスコードを入力してください(コピーアンドペーストで構いません)
       </p>

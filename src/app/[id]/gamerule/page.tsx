@@ -27,7 +27,7 @@ export default async function Home({ params }: { params: { id: string } }) {
         </div>
         <div className="textStyle">
           それでは、まずは以下のボタンから回答される方のご職業・ご年齢を入力ください。
-          その後、実験にお取り組みください。
+          その後、アンケートにお答えください。
         </div>
         <Link className="inputStyle" href={`/${sessionID}/profile`}>
           回答者情報の入力

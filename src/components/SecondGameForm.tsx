@@ -27,7 +27,7 @@ export default function SecondGameForm({
 
   return (
     <form>
-      <div className="textStyle mt-3">
+      <div className="textStyle my-3 text-lg">
         <p>次はあなたが1000円を分けることができます。</p>
         <p>ただし相手は先ほどあなたにお金を渡した人とは異なる人です。</p>
         <p>いくら相手にお金を渡しますか？</p>
