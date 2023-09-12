@@ -30,8 +30,6 @@ yarn-error.log*
 #workspace file
 online_survey.code-workspace
 
-# text file
-textlist.ts
 
 # vercel
 .vercel
