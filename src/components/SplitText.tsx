@@ -3,6 +3,7 @@ export default function SplitText(props: { text: any }): any {
 
   return textArray.map((line: string) => {
     // console.log(line.replace("¥n", ""));
-    return <div>{line.replace("¥n", "")}</div>;
+    let count=0;
+    return <div key={count+1}>{line.replace("¥n", "")}</div>;
   });
 }
