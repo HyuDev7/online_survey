@@ -75,8 +75,8 @@ export default function ProfileForm({
         formData={responseBody}
         grandParentPass={sessionId}
         parentpass={"1stgame"}
-        childpass1={"good"}
-        childpass2={"bad"}
+        childpass1={"cRAwf"}
+        childpass2={"wu89s"}
       />
     </form>
   );

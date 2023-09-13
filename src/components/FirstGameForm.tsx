@@ -66,8 +66,8 @@ export default function FirstGameForm({
           buttonWord="2回目のゲームを始める"
           grandParentPass={sessionId}
           parentpass={"2ndgame"}
-          childpass1={"enw"}
-          childpass2={"neunicto"}
+          childpass1={"nbXj6"}
+          childpass2={"sO852"}
         />
       </div>
     </form>

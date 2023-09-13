@@ -6,7 +6,6 @@ export interface ButtonPropType {
   childpass2: string;
   formData: FirstFormDataType | SecondFormDataType | ProfileFormDataType;
   //for checking whether number is enterd in second form
-  // isEntered?: number | string | null;
 }
 
 export interface FirstFormDataType {
