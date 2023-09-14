@@ -46,7 +46,6 @@ export default function AgreementForm({ id }: { id: string }) {
 
       const sessionID = id;
       router.push(`/${sessionID}/number`);
-
     } catch (e) {
       console.dir(e);
     }
@@ -70,13 +69,18 @@ export default function AgreementForm({ id }: { id: string }) {
           確認番号ページ
         </button>
       ) : (
-        <button
-          onClick={handleSubmission}
-          className="buttonStyle disabled:bg-gray-600 disabled:text-white"
-          disabled
-        >
-          確認番号ページ
-        </button>
+        <>
+          <button
+            onClick={handleSubmission}
+            className="buttonStyle disabled:bg-gray-600 disabled:text-white"
+            disabled
+          >
+            確認番号ページ
+          </button>
+          <p className="text-sm text-red-600">
+            番号を確認するためにはデータを提供するにチェックをつけてください。
+          </p>
+        </>
       )}
     </>
   );
