@@ -14,7 +14,7 @@ export default function ProfileForm({
     old: null,
     occupation: "学生",
   };
-
+  
   const text1 = `実験を開始する前に回答いただく方のご年齢とご職業を¥n
   お聞きかせいただきたいと考えております。¥n
   以下の入力欄にご年齢とご職業を入力してください`;

@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { useState } from "react";
 import { ButtonPropType } from "@/lib/formDataTypes";
 import { validateForm } from "@/lib/validateForm";
 import sendFormData from "@/lib/sendFormData";
@@ -15,6 +16,9 @@ export default function RandomNavigateButton(
 
   //select next child pass
   const childpass = selectChildPass(childpass1, childpass2);
+
+  //check fail or not, init state
+  const [isFail, setIsFail] = useState(false);
 
   //setting of router
   const router = useRouter();
@@ -41,6 +45,7 @@ export default function RandomNavigateButton(
     const validateResult = validateForm(formData);
     //if result is false block going to the next page
     if (!validateResult) {
+      setIsFail(true);
       return;
     }
 
@@ -52,11 +57,18 @@ export default function RandomNavigateButton(
   }
 
   return (
-    <button
-      onClick={handleClick}
-      className="my-2 rounded-lg border border-solid border-gray-500 p-1.5 max-w-fit"
-    >
-      {props.buttonWord}
-    </button>
+    <>
+      <button
+        onClick={handleClick}
+        className="my-2 rounded-lg border border-solid border-gray-500 p-1.5 max-w-fit"
+      >
+        {props.buttonWord}
+      </button>
+      {isFail && (
+        <p className="text-sm text-red-600">
+          入力内容に誤りがあるようです。もう一度お試しください
+        </p>
+      )}
+    </>
   );
 }

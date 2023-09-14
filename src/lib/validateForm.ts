@@ -18,10 +18,10 @@ export function validateForm(
     validationResult = validateSecondForm(formData as SecondFormDataType);
   }
 
-  console.log(formData);
-  if (!validationResult) {
-    window.alert("hi!");
-  }
+  // console.log(formData);
+  // if (!validationResult) {
+  //   window.alert("hi!");
+  // }
   return validationResult;
 }
 
