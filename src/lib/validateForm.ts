@@ -53,7 +53,7 @@ export function validateFirstForm(firstForm: FirstFormDataType) {
 export function validateSecondForm(secondForm: SecondFormDataType) {
   const { distribution } = secondForm;
 
-  //validation of distribution
+   //validation of distribution
   if (distribution === null) {
     return false;
   } else if (distribution > 1000 || distribution < 0) {
@@ -61,4 +61,5 @@ export function validateSecondForm(secondForm: SecondFormDataType) {
   } else {
     return true;
   }
+
 }
