@@ -8,9 +8,7 @@ import {
   B_text4,
   B_text5,
   B_text6,
-  B_text7,
 } from "@/lib/textlist";
-import FlowOfPage from "@/components/FlowOfPage";
 
 export default function Page() {
   // insertIDs()
@@ -34,14 +32,10 @@ export default function Page() {
         <div className="textStyle">
           <SplitText text={B_text5} />
         </div>
-        <div className="textStyle mb-0">
+        <div className="textStyle">
           <SplitText text={B_text6} />
         </div>
-        <FlowOfPage />
-        <div className="textStyle">
-          <SplitText text={B_text7} />
-        </div>
-        <Link className="inputStyle" href="/auth">
+        <Link className="inputStyle mt-3" href="/auth">
           実験のログイン
         </Link>
       </div>

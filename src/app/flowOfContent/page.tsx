@@ -1,4 +1,8 @@
-export default function FlowOfPage() {
+"use client";
+import { useRouter } from "next/navigation";
+
+export default function FlowOfContentPage() {
+  const router = useRouter();
   return (
     <div className="textStyle">
       実験を始めるにあたっての説明 → 実験のログイン → 実験の事前説明 →
@@ -25,6 +29,13 @@ export default function FlowOfPage() {
           実験にお答えいただいた方でも本番号がなければ謝礼をお渡しすることができません。必ずお控えをお取りいただきますようお願いいたします。
         </li>
       </ul>
+      <button
+        className="inputStyle my-5"
+        type="button"
+        onClick={() => router.back()}
+      >
+        前のページへ戻る
+      </button>
     </div>
   );
 }
