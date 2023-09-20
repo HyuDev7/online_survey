@@ -18,10 +18,6 @@ export function validateForm(
     validationResult = validateSecondForm(formData as SecondFormDataType);
   }
 
-  // console.log(formData);
-  // if (!validationResult) {
-  //   window.alert("hi!");
-  // }
   return validationResult;
 }
 
@@ -52,14 +48,27 @@ export function validateFirstForm(firstForm: FirstFormDataType) {
 
 export function validateSecondForm(secondForm: SecondFormDataType) {
   const { distribution } = secondForm;
+  //convert string distribution into number one
+  const numDistri=Number(distribution)
 
-   //validation of distribution
-  if (distribution === null) {
-    return false;
-  } else if (distribution > 1000 || distribution < 0) {
-    return false;
+  //variable for storing validation result
+  let valiRes = false;
+
+  //validation of distribution
+  if (numDistri === null) {
+    valiRes = false;
+  } else if (numDistri > 1000 || numDistri < 0) {
+    valiRes = false;
   } else {
-    return true;
+    valiRes = true;
   }
-
+  
+  //validation of integer
+  if (Number.isInteger(numDistri)) {
+    valiRes = true;
+  } else {
+    valiRes = false;
+  }
+  
+  return valiRes;
 }
