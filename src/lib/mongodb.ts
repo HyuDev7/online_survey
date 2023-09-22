@@ -91,7 +91,7 @@ export async function getSessionId(userIdBody: UserIdType) {
     // Ensures that the client will close when you finish/error
     await client.close();
     console.log("connection is closed");
-
+    // console.log(sessionIdResult);
     return sessionIdResult.value;
   }
 }
@@ -104,7 +104,7 @@ export async function findSessionId(passedSessionID: string): Promise<boolean> {
 
     //filter for finding document
     const filter = {
-      sessionId: passedSessionID,
+      sessionID: passedSessionID,
     };
 
     //options of returned document
@@ -172,7 +172,7 @@ export async function insertIDs() {
     let uniqueSessionId = uuidv4();
     idArray.push({
       passCode: uniquePassCode,
-      sessionId: uniqueSessionId,
+      sessionID: uniqueSessionId,
       isSent: false,
     });
   }

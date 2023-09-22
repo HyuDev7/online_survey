@@ -8,16 +8,16 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   //read sent form data
   const sentData = await request.json();
-  let sessionId = "";
+  let gotSessionID = "";
 
   if (sentData.hasOwnProperty("passCode")) {
     //get session id
     const res = await getSessionId(sentData);
-    sessionId = res.sessionId;
+    gotSessionID = res.sessionID;
   } else {
     //send form data to db and check the result
     const res = await insertDoc(sentData);
   }
 
-  return NextResponse.json({ test: "I got POST method", sessionID: sessionId });
+  return NextResponse.json({ test: "I got POST method", sessionID: gotSessionID });
 }

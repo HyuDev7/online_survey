@@ -1,5 +1,5 @@
 import Link from "next/link";
-// import { insertIDs } from "@/lib/mongodb";
+import { insertIDs } from "@/lib/mongodb";
 import SplitText from "@/components/SplitText";
 import { T_text } from "@/lib/textlist";
 
