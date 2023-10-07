@@ -8,13 +8,13 @@ export function validateForm(
   formData: FirstFormDataType | SecondFormDataType | ProfileFormDataType
 ) {
   //store the result of validation
-  let validationResult: boolean;
+  let validationResult = false;
 
   if (formData.hasOwnProperty("old")) {
     validationResult = validateProfileForm(formData as ProfileFormDataType);
   } else if (formData.hasOwnProperty("firstGame")) {
     validationResult = validateFirstForm(formData as FirstFormDataType);
-  } else {
+  } else if (formData.hasOwnProperty("distribution")) {
     validationResult = validateSecondForm(formData as SecondFormDataType);
   }
 
@@ -48,27 +48,28 @@ export function validateFirstForm(firstForm: FirstFormDataType) {
 
 export function validateSecondForm(secondForm: SecondFormDataType) {
   const { distribution } = secondForm;
-  //convert string distribution into number one
-  const numDistri=Number(distribution)
-
   //variable for storing validation result
   let valiRes = false;
+  console.log(distribution);
+  //validation of null
+  if (distribution === null || distribution.length === 0) {
+    return (valiRes = false);
+  }
 
-  //validation of distribution
-  if (numDistri === null) {
-    valiRes = false;
-  } else if (numDistri > 1000 || numDistri < 0) {
-    valiRes = false;
+  //convert string distribution into number one
+  const numDistri = Number(distribution);
+  //validation of over or under input
+  if (numDistri > 1000 || numDistri < 0) {
+    return (valiRes = false);
   } else {
     valiRes = true;
   }
-  
   //validation of integer
   if (Number.isInteger(numDistri)) {
     valiRes = true;
   } else {
     valiRes = false;
   }
-  
+
   return valiRes;
 }

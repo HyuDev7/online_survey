@@ -22,6 +22,7 @@ export default function AuthComp() {
   async function handleSubmission(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     setIsPending(true);
+    setIsFail(false);
 
     try {
       const response = await fetch("/api/passCode", {

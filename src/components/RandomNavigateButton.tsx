@@ -19,6 +19,7 @@ export default function RandomNavigateButton(
 
   //check fail or not, init state
   const [isFail, setIsFail] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
   //setting of router
   const router = useRouter();
@@ -40,11 +41,14 @@ export default function RandomNavigateButton(
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
+    setIsPending(true);
+    setIsFail(false);
 
     //validate formdata
     const validateResult = validateForm(formData);
     //if result is false block going to the next page
     if (!validateResult) {
+      setIsPending(false);
       setIsFail(true);
       return;
     }
@@ -64,6 +68,7 @@ export default function RandomNavigateButton(
       >
         {props.buttonWord}
       </button>
+      {isPending && <p className="text-sm">しばらくお待ちください...</p>}
       {isFail && (
         <p className="text-sm text-red-600">
           入力内容に誤りがあるようです。もう一度お試しください

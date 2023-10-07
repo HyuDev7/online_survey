@@ -17,7 +17,7 @@ export interface FirstFormDataType {
 export interface SecondFormDataType {
   sessionID: string;
   secondGame: string;
-  distribution: number | null;
+  distribution: string | null;
 }
 
 export interface UserIdType {
