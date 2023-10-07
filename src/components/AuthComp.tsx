@@ -22,7 +22,7 @@ export default function AuthComp() {
     event.preventDefault();
 
     try {
-      const response = await fetch("/api", {
+      const response = await fetch("/api/passCode", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

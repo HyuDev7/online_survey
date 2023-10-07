@@ -168,7 +168,7 @@ export async function insertIDs() {
   let idArray = [];
   let uniquePassCode = uuidv4();
 
-  for (let i = 0; i < 600; i++) {
+  for (let i = 0; i < 1000; i++) {
     let uniqueSessionId = uuidv4();
     idArray.push({
       passCode: uniquePassCode,
