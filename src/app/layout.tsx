@@ -27,7 +27,7 @@ export default function RootLayout({
                 </div>
                 <div>
                   <Link href="/flowOfContent">
-                    <h1 className="my-2">実験の流れ</h1>
+                    <h1 className="my-2 font-normal">実験の事前説明</h1>
                   </Link>
                 </div>
               </nav>

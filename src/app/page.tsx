@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { insertIDs } from "@/lib/mongodb";
 import SplitText from "@/components/SplitText";
-import { T_text } from "@/lib/textlist";
+import { T_text1 } from "@/lib/textlist";
 
 export default function Page() {
   // insertIDs()
@@ -11,11 +11,11 @@ export default function Page() {
       <div className="container mx-auto">
         <h1 className="my-3">金銭分配に関するアンケート調査</h1>
         <div className="textStyle">
-          <SplitText text={T_text} />
+          <SplitText text={T_text1} />
         </div>
 
-        <Link className="inputStyle" href="/briefing">
-          本実験の概要と流れについて
+        <Link className="inputStyle mt-3" href="/auth">
+          実験のログイン
         </Link>
       </div>
     </main>
