@@ -7,6 +7,7 @@ export default function AuthComp() {
   const router = useRouter();
   //check fail or not
   const [isFail, setIsFail] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
   const userId: UserIdType = { passCode: "" };
   const [userIdBody, setUserIdBody] = useState(userId);
@@ -20,6 +21,7 @@ export default function AuthComp() {
 
   async function handleSubmission(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
+    setIsPending(true);
 
     try {
       const response = await fetch("/api/passCode", {
@@ -33,6 +35,7 @@ export default function AuthComp() {
       if (!response.ok) {
         const message = `an error occurred : ${response.statusText}`;
         // console.log("your trial got failed");
+        setIsPending(false);
         setIsFail(true);
         return;
       }
@@ -73,6 +76,7 @@ export default function AuthComp() {
         </div>
 
         {/* if passcode validation fail, show warning text */}
+        {isPending && <p className="text-sm">しばらくお待ちください...</p>}
         {isFail && (
           <p className="text-sm text-red-600">
             パスコードが間違っています。もう一度お試しください
