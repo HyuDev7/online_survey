@@ -132,6 +132,37 @@ export async function findSessionId(passedSessionID: string): Promise<boolean> {
   }
 }
 
+export async function updateAgreement(
+  passedAgreementForm: AgreementFormDataType
+) {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+
+    //filter for finding document
+    const filter = {
+      sessionID: passedAgreementForm.sessionID,
+    };
+
+    console.log(passedAgreementForm.secondAgreement)
+    //indicating what is updated
+    const updateDocument = {
+      $set: { secondAgreement: passedAgreementForm.secondAgreement },
+    };
+
+    //get document
+    const updateRes = await agreementCollection.updateOne(filter, updateDocument);
+    console.log(updateRes)
+
+  } catch (e) {
+    console.dir(e);
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+    console.log("connection is closed");
+  }
+}
+
 //for inserting form data
 export async function insertDoc(
   formData:

@@ -32,5 +32,6 @@ export interface ProfileFormDataType {
 
 export interface AgreementFormDataType {
   sessionID: string;
-  agreementResult: string;
+  firstAgreement: string;
+  secondAgreement:string;
 }
