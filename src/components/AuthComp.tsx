@@ -119,7 +119,7 @@ export default function AuthComp() {
             onChange={handleChange}
             checked={isAgree}
           />
-          <label htmlFor="firstAgreement">事前説明の内容に同意する</label>
+          <label htmlFor="firstAgreement">事前説明の内容を理解し、それに同意する</label>
         </div>
 
         <div>

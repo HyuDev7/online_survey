@@ -23,9 +23,19 @@ export function validateForm(
 
 export function validateProfileForm(profileForm: ProfileFormDataType) {
   //   console.log(profileForm);
-  const { sessionID, old, occupation } = profileForm;
+  const { sessionID, old,sex, pref } = profileForm;
 
-  //validation of year
+  //validation of prefecture
+  if(pref===""){
+    return false;
+  }
+
+  //validation of sex
+  if(sex===""){
+    return false
+  }
+
+  //validation of old
   if (old === null) {
     return false;
   } else if (old < 18 || old > 100) {

@@ -15,18 +15,21 @@ export default async function Home({ params }: { params: { id: string } }) {
   return (
     <main>
       <div className="container mx-auto">
-        <h1 className="my-3">実験の説明</h1>
+        <h1 className="my-5">質問の事前説明</h1>
+        <h4>【質問の概要】</h4>
         <div className="textStyle">
           <SplitText text={G_text1} />
         </div>
+        <h4>【質問について】</h4>
         <div className="textStyle">
           <SplitText text={G_text2} />
         </div>
+        <h4>【回答上の注意】</h4>
         <div className="textStyle">
           <SplitText text={G_text3} />
         </div>
         <div className="textStyle">
-          それでは、まずは以下のボタンから回答される方のご職業・ご年齢を入力ください。
+          それでは、まずは以下のボタンから回答される方のご年齢・性別・現在住んでいる都道府県を入力してください。
           その後、アンケートにお答えください。
         </div>
         <Link className="inputStyle" href={`/${sessionID}/profile`}>

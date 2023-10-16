@@ -32,10 +32,11 @@ export default function FirstGameForm({
   return (
     <form>
       <div className="my-3 textStyle text-xl">
-        <p>あなたは1000円のうち{money}円もらえます。</p>
-        <p>この提案に合意しますか？</p>
+        <p>あなたは今回のゲームで「応答者」に選ばれました。</p>
+        <p>相手は1000円のうち、あなたの取り分として{money}円を提案しました。</p>
+        <p>この提案を受け入れますか？</p>
         <p>
-          もしするのであれば、下の合意ボタンを選択したのち、ボタンを押してください
+          以下の2つの選択肢から自身の考えに合うものを選び、「次のゲームを始める」ボタンを押してください。
         </p>
       </div>
 
@@ -49,7 +50,7 @@ export default function FirstGameForm({
             onChange={handleChange}
             required
           />
-          <label className="mr-3" htmlFor="acceptOffer">合意する</label>
+          <label className="mr-3" htmlFor="acceptOffer">受け入れる</label>
 
           <input
             type="radio"
@@ -63,7 +64,7 @@ export default function FirstGameForm({
 
         <RandomNavigateButton
           formData={responseBody}
-          buttonWord="2回目のゲームを始める"
+          buttonWord="次のゲームを始める"
           grandParentPass={sessionId}
           parentpass={"2ndgame"}
           childpass1={"nbXj6"}
