@@ -27,11 +27,12 @@ export interface UserIdType {
 export interface ProfileFormDataType {
   sessionID: string;
   old: number | null;
-  occupation: string | null;
+  sex: string;
+  pref: string | null;
 }
 
 export interface AgreementFormDataType {
   sessionID: string;
   firstAgreement: string;
-  secondAgreement:string;
+  secondAgreement: string;
 }
