@@ -21,13 +21,14 @@ export default function AgreementForm({ id }: { id: string }) {
 
     const agreementForm: AgreementFormDataType = {
       sessionID: id,
-      agreementResult: agreement.toString(),
+      firstAgreement:"",
+      secondAgreement: agreement.toString(),
     };
 
     console.log(agreementForm);
 
     try {
-      const response = await fetch("/api/agree", {
+      const response = await fetch("/api/secondagree", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +43,6 @@ export default function AgreementForm({ id }: { id: string }) {
       }
 
       const res = await response.json();
-      console.log(res.agreement);
 
       const sessionID = id;
       router.push(`/${sessionID}/number`);

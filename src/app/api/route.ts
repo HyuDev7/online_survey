@@ -8,7 +8,6 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   //read sent form data
   const sentData = await request.json();
-  let gotSessionID = "";
 
   //send form data to db and check the result
   const res = await insertDoc(sentData);
