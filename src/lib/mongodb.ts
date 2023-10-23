@@ -144,7 +144,6 @@ export async function updateAgreement(
       sessionID: passedAgreementForm.sessionID,
     };
 
-    console.log(passedAgreementForm.secondAgreement);
     //indicating what is updated
     const updateDocument = {
       $set: {
@@ -159,7 +158,7 @@ export async function updateAgreement(
       filter,
       updateDocument
     );
-    console.log(updateRes);
+    
   } catch (e) {
     console.dir(e);
   } finally {
