@@ -144,16 +144,22 @@ export async function updateAgreement(
       sessionID: passedAgreementForm.sessionID,
     };
 
-    console.log(passedAgreementForm.secondAgreement)
+    console.log(passedAgreementForm.secondAgreement);
     //indicating what is updated
     const updateDocument = {
-      $set: { secondAgreement: passedAgreementForm.secondAgreement },
+      $set: {
+        secondAgreement: passedAgreementForm.secondAgreement,
+        notice: passedAgreementForm.notice,
+        example: passedAgreementForm.example
+      },
     };
 
     //get document
-    const updateRes = await agreementCollection.updateOne(filter, updateDocument);
-    console.log(updateRes)
-
+    const updateRes = await agreementCollection.updateOne(
+      filter,
+      updateDocument
+    );
+    console.log(updateRes);
   } catch (e) {
     console.dir(e);
   } finally {

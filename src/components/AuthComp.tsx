@@ -12,7 +12,7 @@ export default function AuthComp() {
   const [isAgree, setIsAgree] = useState(false);
 
   const userId: UserIdType = { passCode: "" };
-  
+
   const [userIdBody, setUserIdBody] = useState(userId);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -60,7 +60,9 @@ export default function AuthComp() {
       const FirstAgreementContent: AgreementFormDataType = {
         sessionID: sessionId,
         firstAgreement: isAgree.toString(),
-        secondAgreement: "false"
+        secondAgreement: "false",
+        notice: "",
+        example: "",
       };
 
       const agreeRes = await fetch("/api/agree", {
@@ -78,10 +80,6 @@ export default function AuthComp() {
     } catch (e) {
       console.dir(e);
     }
-
-    
-
-
   }
 
   return (
@@ -119,7 +117,9 @@ export default function AuthComp() {
             onChange={handleChange}
             checked={isAgree}
           />
-          <label htmlFor="firstAgreement">事前説明の内容を理解し、それに同意する</label>
+          <label htmlFor="firstAgreement">
+            事前説明の内容を理解し、それに同意する
+          </label>
         </div>
 
         <div>

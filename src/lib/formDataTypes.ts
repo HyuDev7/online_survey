@@ -35,4 +35,6 @@ export interface AgreementFormDataType {
   sessionID: string;
   firstAgreement: string;
   secondAgreement: string;
+  notice:string;
+  example:string;
 }

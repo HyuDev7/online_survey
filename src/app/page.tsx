@@ -1,10 +1,8 @@
 import Link from "next/link";
-import { insertIDs } from "@/lib/mongodb";
 import SplitText from "@/components/SplitText";
 import { T_text1, T_text2 } from "@/lib/textlist";
 
 export default function Page() {
-  // insertIDs()
 
   return (
     <main>
