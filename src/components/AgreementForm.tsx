@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AgreementFormDataType } from "@/lib/formDataTypes";
 import SplitText from "./SplitText";
-import { D_text1, D_text2, D_text3 } from "@/lib/textlist";
+import { D_text1, D_text2, D_text3, D_text4 } from "@/lib/textlist";
 
 export default function AgreementForm({ id }: { id: string }) {
   const router = useRouter();
@@ -78,6 +78,10 @@ export default function AgreementForm({ id }: { id: string }) {
       </div>
 
       <div className="textStyle">
+        <SplitText text={D_text3} />
+      </div>
+
+      <div className="textStyle">
         また、上記の設定について調査中にお気づきになっていた際は、下の「気づいた」欄にチェックを入れ、どの部分でお気づきになられたかを
         お答えいただければ幸いです。
         <div className="my-3">
@@ -108,11 +112,8 @@ export default function AgreementForm({ id }: { id: string }) {
       </div>
 
       <h3>【データ提供の可否について】</h3>
-      <p>
-        以上のことを踏まえた上で再びデータ提供の可否についてお聞きしたいと思います。
-      </p>
       <div className="textStyle">
-        <SplitText text={D_text3} />
+        <SplitText text={D_text4} />
       </div>
 
       <div>
