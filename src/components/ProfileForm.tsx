@@ -34,7 +34,7 @@ export default function ProfileForm({
 
   return (
     <form>
-      <div className="my-2">
+      <div className="my-4">
         <SplitText text={text1} />
       </div>
 

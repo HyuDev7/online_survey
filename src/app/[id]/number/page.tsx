@@ -3,7 +3,7 @@ export default function Page() {
   return (
     <main>
       <div className="container mx-auto">
-        <h1 className="my-3">確認番号ページ</h1>
+        <h1 className="my-5">確認番号ページ</h1>
         <div className="textStyle">
           <p>以下が確認番号となります。</p>
           <p>

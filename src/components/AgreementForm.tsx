@@ -73,7 +73,7 @@ export default function AgreementForm({ id }: { id: string }) {
       </div>
 
       <div className="textStyle">
-        <h3>【実験の目的について】</h3>
+        <h3>【調査の目的について】</h3>
         <SplitText text={D_text2} />
       </div>
 
@@ -82,50 +82,17 @@ export default function AgreementForm({ id }: { id: string }) {
       </div>
 
       <div className="textStyle">
-        調査中、何か不審に思った点などがあれば、下の「違和感があった」欄にチェックを入れ、どの部分でそう感じられたかを
-        お答えいただければ幸いです。
-        <div className="my-3">
-          <input
-            type="checkbox"
-            id="notice"
-            name="notice"
-            onChange={handleChange}
-            value="notice"
-          />
-          <label htmlFor="notice">気づいた</label>
-        </div>
+        調査に関して何か不審に思った点があったりコメントなどがあれば下の欄にご記入ください。
         <div>
-          <label htmlFor="example">
-            どの部分で違和感を感じられたかご記入ください
-          </label>
+          <textarea
+            id="example"
+            name="example"
+            rows={5}
+            cols={40}
+            className="inputStyle"
+            onChange={handleChange}
+          ></textarea>
         </div>
-        {notice ? (
-          <div>
-            <textarea
-              id="example"
-              name="example"
-              rows={5}
-              cols={40}
-              className="inputStyle"
-              onChange={handleChange}
-            ></textarea>
-          </div>
-        ) : (
-          <div>
-            <textarea
-              disabled
-              id="example"
-              name="example"
-              rows={5}
-              cols={40}
-              className="inputStyle  disabled:bg-gray-500"
-              onChange={handleChange}
-            ></textarea>
-            <p className="text-sm text-red-600">
-            お気づきになられた点をお書きいただく際には、まず「違和感があった」欄にチェックをつけてください
-          </p>
-          </div>
-        )}
       </div>
 
       <h3>【データ提供の可否について】</h3>

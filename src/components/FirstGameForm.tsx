@@ -31,7 +31,7 @@ export default function FirstGameForm({
 
   return (
     <form>
-      <div className="my-3 textStyle text-xl">
+      <div className="my-5 textStyle text-xl">
         <p>あなたは今回のゲームで「応答者」に選ばれました。</p>
         <p>相手は1000円のうち、あなたの取り分として{money}円を提案しました。</p>
         <p>この提案を受け入れますか？</p>

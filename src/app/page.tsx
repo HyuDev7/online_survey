@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <main>
       <div className="container mx-auto">
-        <h1 className="my-3">金銭分配に関するアンケート調査</h1>
+        <h1 className="my-5">分配への考え方に関するアンケート調査</h1>
         <div className="textStyle">
           <SplitText text={T_text1} />
         </div>

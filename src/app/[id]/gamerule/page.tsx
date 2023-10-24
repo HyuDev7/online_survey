@@ -15,7 +15,7 @@ export default async function Home({ params }: { params: { id: string } }) {
   return (
     <main>
       <div className="container mx-auto">
-        <h1 className="my-5">質問の事前説明</h1>
+        <h1 className="my-5">調査の事前説明</h1>
         <h4>【質問の概要】</h4>
         <div className="textStyle">
           <SplitText text={G_text1} />

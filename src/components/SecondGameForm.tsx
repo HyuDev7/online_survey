@@ -29,10 +29,10 @@ export default function SecondGameForm({
 
   return (
     <form>
-      <div className="textStyle my-3 text-lg">
+      <div className="textStyle my-5 text-lg">
         <p>あなたは今回のゲームで「提案者」に選ばれました。</p>
         <p>あなたは1000円を、自身と相手でどのように分けるかを決めることができます。</p>
-        <p>ただし相手は先ほどあなたにお金を渡した人と{desc}人です。</p>
+        <p>{desc==="同じ"?null:"ただし"}相手は先ほどあなたにお金を渡した人と{desc}人です。</p>
         <p>いくら相手にお金を渡しますか？</p>
         <p>渡す金額を以下の入力欄に0以上、1000以下の整数を半角数字で入力してください。</p>
       </div>
