@@ -82,7 +82,7 @@ export default function AgreementForm({ id }: { id: string }) {
       </div>
 
       <div className="textStyle">
-        また、上記の設定について調査中にお気づきになっていた際は、下の「気づいた」欄にチェックを入れ、どの部分でお気づきになられたかを
+        調査中、何か不審に思った点などがあれば、下の「違和感があった」欄にチェックを入れ、どの部分でそう感じられたかを
         お答えいただければ幸いです。
         <div className="my-3">
           <input
@@ -96,19 +96,36 @@ export default function AgreementForm({ id }: { id: string }) {
         </div>
         <div>
           <label htmlFor="example">
-            どの部分でお気づきなられたかをご記入ください
+            どの部分で違和感を感じられたかご記入ください
           </label>
         </div>
-        <div>
-          <textarea
-            id="example"
-            name="example"
-            rows={5}
-            cols={40}
-            className="inputStyle"
-            onChange={handleChange}
-          ></textarea>
-        </div>
+        {notice ? (
+          <div>
+            <textarea
+              id="example"
+              name="example"
+              rows={5}
+              cols={40}
+              className="inputStyle"
+              onChange={handleChange}
+            ></textarea>
+          </div>
+        ) : (
+          <div>
+            <textarea
+              disabled
+              id="example"
+              name="example"
+              rows={5}
+              cols={40}
+              className="inputStyle  disabled:bg-gray-500"
+              onChange={handleChange}
+            ></textarea>
+            <p className="text-sm text-red-600">
+            お気づきになられた点をお書きいただく際には、まず「違和感があった」欄にチェックをつけてください
+          </p>
+          </div>
+        )}
       </div>
 
       <h3>【データ提供の可否について】</h3>
