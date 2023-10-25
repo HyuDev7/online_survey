@@ -12,7 +12,7 @@ export default async function page({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <h1 className="my-3">調査の事後説明</h1>
+      <h1 className="my-5">調査の事後説明</h1>
       <AgreementForm id={sessionID} />
     </div>
   );

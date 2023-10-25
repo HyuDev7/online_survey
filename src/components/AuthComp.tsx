@@ -61,7 +61,6 @@ export default function AuthComp() {
         sessionID: sessionId,
         firstAgreement: isAgree.toString(),
         secondAgreement: "false",
-        notice: "",
         example: "",
       };
 

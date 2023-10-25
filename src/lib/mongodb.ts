@@ -148,7 +148,6 @@ export async function updateAgreement(
     const updateDocument = {
       $set: {
         secondAgreement: passedAgreementForm.secondAgreement,
-        notice: passedAgreementForm.notice,
         example: passedAgreementForm.example
       },
     };

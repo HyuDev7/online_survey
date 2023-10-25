@@ -8,7 +8,6 @@ import { D_text1, D_text2, D_text3, D_text4 } from "@/lib/textlist";
 export default function AgreementForm({ id }: { id: string }) {
   const router = useRouter();
   const [agreement, setAgreement] = useState(false);
-  const [notice, setNotice] = useState(false);
   const [example, setExample] = useState("");
 
   function handleChange(
@@ -18,10 +17,6 @@ export default function AgreementForm({ id }: { id: string }) {
   ) {
     if (event.target.name === "agreement") {
       agreement ? setAgreement(false) : setAgreement(true);
-    }
-
-    if (event.target.name === "notice") {
-      notice ? setNotice(false) : setNotice(true);
     }
 
     if (event.target.name === "example") {
@@ -36,7 +31,6 @@ export default function AgreementForm({ id }: { id: string }) {
       sessionID: id,
       firstAgreement: "",
       secondAgreement: agreement.toString(),
-      notice: notice.toString(),
       example: example,
     };
 
@@ -82,7 +76,7 @@ export default function AgreementForm({ id }: { id: string }) {
       </div>
 
       <div className="textStyle">
-        調査に関して何か不審に思った点があったりコメントなどがあれば下の欄にご記入ください。
+        調査に関して何か不審に思った点や、コメントなどがあれば下の欄にご記入ください。
         <div>
           <textarea
             id="example"
