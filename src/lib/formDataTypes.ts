@@ -4,6 +4,7 @@ export interface ButtonPropType {
   parentpass: string;
   childpass1: string;
   childpass2: string;
+  childpass3?:string;
   formData: FirstFormDataType | SecondFormDataType | ProfileFormDataType;
   //for checking whether number is enterd in second form
 }

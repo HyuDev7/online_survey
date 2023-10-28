@@ -35,10 +35,15 @@ export function validateProfileForm(profileForm: ProfileFormDataType) {
     return false
   }
 
+  console.log(old)
+  console.log(typeof old)
+
+  const numOld=Number(old);
+
   //validation of old
   if (old === null) {
     return false;
-  } else if (old < 18 || old > 100) {
+  } else if (numOld < 18 || numOld > 100) {
     return false;
   } else {
     return true;

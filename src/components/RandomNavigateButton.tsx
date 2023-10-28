@@ -11,11 +11,11 @@ export default function RandomNavigateButton(
   props: ButtonPropType
 ): JSX.Element {
   //extract formData form props object
-  const { grandParentPass, parentpass, childpass1, childpass2, formData } =
+  const { grandParentPass, parentpass, childpass1, childpass2, formData,childpass3 } =
     props;
 
   //select next child pass
-  const childpass = selectChildPass(childpass1, childpass2);
+  const childpass = selectChildPass(childpass1, childpass2,childpass3);
 
   //check fail or not, init state
   const [isFail, setIsFail] = useState(false);
