@@ -12,7 +12,7 @@ export default function ProfileForm({
   const formData: ProfileFormDataType = {
     sessionID: sessionId,
     old: null,
-    sex:"",
+    sex: "",
     pref: "",
   };
 
@@ -29,7 +29,8 @@ export default function ProfileForm({
   ) {
     const { name, value } = e.target;
     setResponseBody({ ...responseBody, [name]: value });
-    console.log(responseBody)
+    // console.log(responseBody)
+    // console.log(typeof responseBody["old"])
   }
 
   return (
@@ -52,9 +53,7 @@ export default function ProfileForm({
       </div>
 
       <div className="my-2">
-        <label htmlFor="sex">
-          ご自身の性別を選んでください
-        </label>
+        <label htmlFor="sex">ご自身の性別を選んでください</label>
         <div>
           <select
             className="inputStyle max-w-md"
@@ -74,9 +73,7 @@ export default function ProfileForm({
       </div>
 
       <div className="my-2">
-        <label htmlFor="pref">
-          ご職業を以下の選択肢から1つ選んでください
-        </label>
+        <label htmlFor="pref">ご職業を以下の選択肢から1つ選んでください</label>
         <div>
           <select
             className="inputStyle max-w-md"
@@ -146,6 +143,7 @@ export default function ProfileForm({
         parentpass={"1stgame"}
         childpass1={"cRAwf"}
         childpass2={"wu89s"}
+        childpass3={"ral0P"}
       />
     </form>
   );

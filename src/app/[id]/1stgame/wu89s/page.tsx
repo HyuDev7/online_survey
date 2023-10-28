@@ -12,7 +12,7 @@ export default async function page({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <FirstGameForm sessionId={sessionID} condition="good" money="750" />
+      <FirstGameForm sessionId={sessionID} condition="happy" money="750" />
     </div>
   );
 }
