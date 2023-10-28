@@ -23,22 +23,22 @@ export function validateForm(
 
 export function validateProfileForm(profileForm: ProfileFormDataType) {
   //   console.log(profileForm);
-  const { sessionID, old,sex, pref } = profileForm;
+  const { sessionID, old, sex, pref } = profileForm;
 
   //validation of prefecture
-  if(pref===""){
+  if (pref === "") {
     return false;
   }
 
   //validation of sex
-  if(sex===""){
-    return false
+  if (sex === "") {
+    return false;
   }
 
-  console.log(old)
-  console.log(typeof old)
+  console.log(old);
+  console.log(typeof old);
 
-  const numOld=Number(old);
+  const numOld = Number(old);
 
   //validation of old
   if (old === null) {
@@ -51,21 +51,31 @@ export function validateProfileForm(profileForm: ProfileFormDataType) {
 }
 
 export function validateFirstForm(firstForm: FirstFormDataType) {
-  const { offer } = firstForm;
-
+  const { offer, assessment } = firstForm;
+  let res = false;
   //validation of offer
   if (offer === null) {
-    return false;
+    return(res = false);
   } else {
-    return true;
+    res = true;
   }
+
+  //validation of assessment
+  if (assessment === null) {
+    return(res= false);
+  } else {
+    res= true;
+  }
+  return res;
+
 }
 
 export function validateSecondForm(secondForm: SecondFormDataType) {
   const { distribution } = secondForm;
   //variable for storing validation result
   let valiRes = false;
-  console.log(distribution);
+  // console.log(distribution);
+
   //validation of null
   if (distribution === null || distribution.length === 0) {
     return (valiRes = false);

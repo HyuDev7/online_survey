@@ -13,6 +13,7 @@ export interface FirstFormDataType {
   sessionID: string;
   firstGame: string;
   offer: string | null;
+  assessment:string|null;
 }
 
 export interface SecondFormDataType {
