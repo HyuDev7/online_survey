@@ -34,7 +34,6 @@ export default function AgreementForm({ id }: { id: string }) {
       example: example,
     };
 
-    console.log(agreementForm);
 
     try {
       const response = await fetch("/api/secondagree", {

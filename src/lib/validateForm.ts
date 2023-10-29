@@ -22,7 +22,6 @@ export function validateForm(
 }
 
 export function validateProfileForm(profileForm: ProfileFormDataType) {
-  //   console.log(profileForm);
   const { sessionID, old, sex, pref } = profileForm;
 
   //validation of prefecture
@@ -34,9 +33,6 @@ export function validateProfileForm(profileForm: ProfileFormDataType) {
   if (sex === "") {
     return false;
   }
-
-  console.log(old);
-  console.log(typeof old);
 
   const numOld = Number(old);
 
@@ -74,7 +70,6 @@ export function validateSecondForm(secondForm: SecondFormDataType) {
   const { distribution } = secondForm;
   //variable for storing validation result
   let valiRes = false;
-  // console.log(distribution);
 
   //validation of null
   if (distribution === null || distribution.length === 0) {
