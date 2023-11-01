@@ -46,7 +46,6 @@ export default function AuthComp() {
 
       if (!response.ok) {
         const message = `an error occurred : ${response.statusText}`;
-        // console.log("your trial got failed");
         setIsPending(false);
         setIsFail(true);
         setIsAgree(false);
@@ -73,7 +72,6 @@ export default function AuthComp() {
       });
 
       if (sessionId) {
-        // console.log("you are authorised!");
         router.push(`/${sessionId}/gamerule`);
       }
     } catch (e) {

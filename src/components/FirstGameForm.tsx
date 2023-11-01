@@ -10,14 +10,14 @@ export default function FirstGameForm({
 }: {
   money: string;
   condition: string;
-  sessionId:string;
+  sessionId: string;
 }): JSX.Element {
-
   //initialise form data
   const formData: FirstFormDataType = {
     sessionID: sessionId,
     firstGame: condition,
     offer: null,
+    assessment: null,
   };
   const [responseBody, setResponseBody] = useState(formData);
 
@@ -27,17 +27,13 @@ export default function FirstGameForm({
     setResponseBody({ ...responseBody, [name]: value });
   }
 
-  
-
   return (
     <form>
-      <div className="my-5 textStyle text-xl">
+      <div className="mt-5 mb-4 textStyle text-xl">
         <p>あなたは今回のゲームで「応答者」に選ばれました。</p>
         <p>相手は1000円のうち、あなたの取り分として{money}円を提案しました。</p>
         <p>この提案を受け入れますか？</p>
-        <p>
-          以下の2つの選択肢から自身の考えに合うものを選び、「次のゲームを始める」ボタンを押してください。
-        </p>
+        <p>まず、以下の2つの選択肢から自身の考えに合うものを選んでください。</p>
       </div>
 
       <div className="flex flex-col">
@@ -50,7 +46,9 @@ export default function FirstGameForm({
             onChange={handleChange}
             required
           />
-          <label className="mr-3" htmlFor="acceptOffer">受け入れる</label>
+          <label className="mr-3" htmlFor="acceptOffer">
+            受け入れる
+          </label>
 
           <input
             type="radio"
@@ -62,9 +60,122 @@ export default function FirstGameForm({
           <label htmlFor="refuseOffer">断る</label>
         </div>
 
+        <div className="mt-7 mb-4 textStyle text-xl">
+          <p>
+            次にこの分け方についてどのように感じたか、最も当てはまるものを7つの選択肢の中から1つ選んでください。
+          </p>
+          <p>その後、「次へ進む」ボタンを押してください。</p>
+        </div>
+
+        <div className="mb-5 flex flex-row">
+          <div className="assessment_radio_button text-center mx-3">
+            <div>
+              <label htmlFor="1">1(相手にとても有利)</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="1"
+                name="assessment"
+                value="1"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="assessment_radio_button text-center mx-3">
+            <div>
+              <label htmlFor="2">2(相手に有利)</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="2"
+                name="assessment"
+                value="2"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="assessment_radio_button text-center mx-3">
+            <div>
+              <label htmlFor="3">3(相手に少し有利)</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="3"
+                name="assessment"
+                value="3"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="assessment_radio_button text-center mx-3">
+            <div>
+              <label htmlFor="4">4(公平)</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="4"
+                name="assessment"
+                value="4"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="assessment_radio_button text-center mx-3">
+            <div>
+              <label htmlFor="5">5(自分に少し有利)</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="5"
+                name="assessment"
+                value="5"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="assessment_radio_button text-center mx-3">
+            <div>
+              <label htmlFor="6">6(自分に有利)</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="6"
+                name="assessment"
+                value="6"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="assessment_radio_button text-center mx-3">
+            <div>
+              <label htmlFor="7">7(自分にとても有利)</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="7"
+                name="assessment"
+                value="7"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+        </div>
+
         <RandomNavigateButton
           formData={responseBody}
-          buttonWord="次のゲームを始める"
+          buttonWord="次のページへ進む"
           grandParentPass={sessionId}
           parentpass={"2ndgame"}
           childpass1={"nbXj6"}

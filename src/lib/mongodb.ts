@@ -84,14 +84,12 @@ export async function getSessionId(userIdBody: UserIdType) {
       options
     );
 
-    // console.log(sessionIdResult.value.sessionId);
   } catch (e) {
     console.dir(e);
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
-    console.log("connection is closed");
-    // console.log(sessionIdResult);
+    console.log("connection is closed from getSessionID!");
     return sessionIdResult.value;
   }
 }
@@ -115,14 +113,12 @@ export async function findSessionId(passedSessionID: string): Promise<boolean> {
     //get document
     validateSessionIdResult = await userIdCollection.findOne(filter, options);
 
-    // console.log(sessionIdResult.value.sessionId);
   } catch (e) {
     console.dir(e);
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
-    // console.log(validateSessionIdResult);
-    console.log("connection is closed");
+    console.log("connection is closed from findSessionID!");
 
     if (validateSessionIdResult === null) {
       return false;
@@ -148,7 +144,7 @@ export async function updateAgreement(
     const updateDocument = {
       $set: {
         secondAgreement: passedAgreementForm.secondAgreement,
-        example: passedAgreementForm.example
+        example: passedAgreementForm.example,
       },
     };
 
@@ -157,13 +153,43 @@ export async function updateAgreement(
       filter,
       updateDocument
     );
-    
   } catch (e) {
     console.dir(e);
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
     console.log("connection is closed");
+  }
+}
+
+async function findSessionIdInEachDoc(
+  passedSessionID: string,
+  docName: any
+): Promise<boolean> {
+  let validateSessionIdResult: any;
+  try {
+    //this function is called in another with connecting to db already
+
+    //filter for finding document
+    const filter = {
+      sessionID: passedSessionID,
+    };
+
+    //options of returned document
+    const options = {
+      projection: { _id: 0, passCode: 0, isSent: 0 },
+    };
+
+    //get document
+    validateSessionIdResult = await docName.findOne(filter, options);
+  } catch (e) {
+    console.dir(e);
+  } finally {
+    if (validateSessionIdResult === null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
 
@@ -175,27 +201,115 @@ export async function insertDoc(
     | SecondFormDataType
     | AgreementFormDataType
 ) {
-  let insertResult: any;
+  let res: any;
   try {
-    // Connect the client to the server	(optional starting in v4.7)
+    //connecting to db
     await client.connect();
+
     if ("old" in formData) {
-      insertResult = await profileCollection.insertOne(formData);
-    } else if ("firstGame" in formData) {
-      insertResult = await firstGameCollection.insertOne(formData);
-    } else if ("secondGame" in formData) {
-      insertResult = await secondGameCollection.insertOne(formData);
-    } else {
-      insertResult = await agreementCollection.insertOne(formData);
+      //check whether doc already exist
+      const flag = await findSessionIdInEachDoc(
+        formData.sessionID,
+        profileCollection
+      );
+      const filter = { sessionID: formData.sessionID };
+      const updateDocument = {
+        $set: {
+          old: formData.old,
+          sex: formData.sex,
+          pref: formData.pref,
+        },
+      };
+
+      //if there is doc already, update it
+      if (flag) {
+        res = await profileCollection.updateOne(filter, updateDocument);
+      } else {
+        //if there is no doc, insert new one
+        res = await profileCollection.insertOne(formData);
+      }
+    }
+
+    if ("firstGame" in formData) {
+      //check whether doc already exist
+      const flag = await findSessionIdInEachDoc(
+        formData.sessionID,
+        firstGameCollection
+      );
+      const filter = { sessionID: formData.sessionID };
+      const updateDocument = {
+        $set: {
+          firstGame: formData.firstGame,
+          offer: formData.offer,
+          assessment: formData.assessment,
+        },
+      };
+
+      //if there is doc already, update it
+      if (flag) {
+        res = await firstGameCollection.updateOne(filter, updateDocument);
+      } else {
+        //if there is no doc, insert new one
+        res = await firstGameCollection.insertOne(formData);
+      }
+    }
+
+    if ("secondGame" in formData) {
+      //check whether doc already exist
+      const flag = await findSessionIdInEachDoc(
+        formData.sessionID,
+        secondGameCollection
+      );
+      const filter = { sessionID: formData.sessionID };
+      const updateDocument = {
+        $set: {
+          secondGame: formData.secondGame,
+          distribution: formData.distribution,
+        },
+      };
+
+      //if there is doc already, update it
+      if (flag) {
+        res = await secondGameCollection.updateOne(filter, updateDocument);
+      } else {
+        //if there is no doc, insert new one
+        res = await secondGameCollection.insertOne(formData);
+      }
+
+    }
+
+    if ("firstAgreement" in formData) {
+      //check whether doc already exist
+      const flag = await findSessionIdInEachDoc(
+        formData.sessionID,
+        agreementCollection
+      );
+      const filter = { sessionID: formData.sessionID };
+
+      const updateDocument = {
+        $set: {
+          firstAgreement: formData.firstAgreement,
+          secondAgreement: formData.secondAgreement,
+          example:formData.example
+        },
+      };
+
+      //if there is doc already, update it
+      if (flag) {
+        res = await agreementCollection.updateOne(filter, updateDocument);
+      } else {
+        //if there is no doc, insert new one
+        res = await agreementCollection.insertOne(formData);
+      }
     }
   } catch (e) {
     console.dir(e);
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
-    console.log("connection is closed");
-    return insertResult;
   }
+  console.log("connection is closed!");
+  return res;
 }
 
 //used for put sessionID with Passcode
@@ -212,7 +326,6 @@ export async function insertIDs() {
     });
   }
 
-  console.log(idArray);
 
   try {
     await client.connect();

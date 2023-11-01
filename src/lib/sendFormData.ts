@@ -12,7 +12,7 @@ export default async function sendFormData(
     | undefined
 ) {
   try {
-    const response = await fetch("/api", {
+    const response = await fetch("/api/send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
