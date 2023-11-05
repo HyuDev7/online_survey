@@ -32,9 +32,10 @@ export default function DictatorGameForm({
       <div className="textStyle my-5 text-lg">
         <p>もう一度同じような状況下で提案者としてお金の分け方を提案してください。</p>
         <p>1000円を自身と相手でどのように分けるかを決めることができますが、
-            今回、応答者は提案者の提案を断ることができません。
+        今回、<span className="font-bold">応答者は提案者の提案を断ることができません。</span>
         </p>
-        <p>{desc==="同じ"?null:"ただし"}相手は先ほどあなたにお金を渡した人と{desc}人です。</p>
+        <p className="underline underline-offset-4">つまり、提案した分配金額がそのまま実現します。</p>
+        <p>相手は１回目の質問であなたにお金を渡した人と{desc}人です。</p>
         <p>いくら相手にお金を渡しますか？</p>
         <p>渡す金額を以下の入力欄に0以上、1000以下の整数を半角数字で入力してください。</p>
       </div>
