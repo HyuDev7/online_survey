@@ -4,4 +4,5 @@ export const DB_NAME = process.env.Db_Name,
   PROFILE_COLLECTION = process.env.Profile_Collection,
   FIRSTGAME_COLLECTION = process.env.FirstGame_Collection,
   SECONDGAME_COLLECTION = process.env.SecondGame_Collection,
+  THIRDGAME_COLLECTION=process.env.ThirdGame_Collection,
   AGREEMENT_COLLECTION = process.env.Agreement_Collection;

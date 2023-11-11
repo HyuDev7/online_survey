@@ -3,6 +3,7 @@ import {
   FirstFormDataType,
   ProfileFormDataType,
   SecondFormDataType,
+  ThirdFormDataType,
   UserIdType,
 } from "./formDataTypes";
 import {
@@ -11,6 +12,7 @@ import {
   PROFILE_COLLECTION,
   FIRSTGAME_COLLECTION,
   SECONDGAME_COLLECTION,
+  THIRDGAME_COLLECTION,
   AGREEMENT_COLLECTION,
 } from "./dbConfig";
 const { MongoClient, ServerApiVersion } = require("mongodb");
@@ -33,6 +35,7 @@ const userIdCollection = myDB.collection(ID_COLLECTION);
 const profileCollection = myDB.collection(PROFILE_COLLECTION);
 const firstGameCollection = myDB.collection(FIRSTGAME_COLLECTION);
 const secondGameCollection = myDB.collection(SECONDGAME_COLLECTION);
+const thirdGameCollection = myDB.collection(THIRDGAME_COLLECTION);
 const agreementCollection = myDB.collection(AGREEMENT_COLLECTION);
 
 //for checking the connection of db
@@ -83,7 +86,6 @@ export async function getSessionId(userIdBody: UserIdType) {
       updateDocument,
       options
     );
-
   } catch (e) {
     console.dir(e);
   } finally {
@@ -112,7 +114,6 @@ export async function findSessionId(passedSessionID: string): Promise<boolean> {
 
     //get document
     validateSessionIdResult = await userIdCollection.findOne(filter, options);
-
   } catch (e) {
     console.dir(e);
   } finally {
@@ -199,6 +200,7 @@ export async function insertDoc(
     | ProfileFormDataType
     | FirstFormDataType
     | SecondFormDataType
+    | ThirdFormDataType
     | AgreementFormDataType
 ) {
   let res: any;
@@ -275,7 +277,29 @@ export async function insertDoc(
         //if there is no doc, insert new one
         res = await secondGameCollection.insertOne(formData);
       }
+    }
 
+    if ("thirdCondition" in formData) {
+      //check whether doc already exist
+      const flag = await findSessionIdInEachDoc(
+        formData.sessionID,
+        thirdGameCollection
+      );
+      const filter = { sessionID: formData.sessionID };
+      const updateDocument = {
+        $set: {
+          thirdGameType: formData.thirdGameType,
+          thirdDistribution: formData.thirdDistribution,
+        },
+      };
+
+      //if there is doc already, update it
+      if (flag) {
+        res = await thirdGameCollection.updateOne(filter, updateDocument);
+      } else {
+        //if there is no doc, insert new one
+        res = await thirdGameCollection.insertOne(formData);
+      }
     }
 
     if ("firstAgreement" in formData) {
@@ -290,7 +314,7 @@ export async function insertDoc(
         $set: {
           firstAgreement: formData.firstAgreement,
           secondAgreement: formData.secondAgreement,
-          example:formData.example
+          example: formData.example,
         },
       };
 
@@ -325,7 +349,6 @@ export async function insertIDs() {
       isSent: false,
     });
   }
-
 
   try {
     await client.connect();

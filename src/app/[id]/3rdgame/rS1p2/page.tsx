@@ -1,4 +1,4 @@
-import DictatorGameForm from "@/components/DictatorForm";
+import ThirdGameForm from "@/components/ThirdGameForm";
 import { validateSessionID } from "@/lib/validateSessionId";
 import { notFound } from "next/navigation";
 
@@ -11,6 +11,11 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   return (
-    <DictatorGameForm sessionId={sessionID} desc="異なる" condition="new" />
+    <ThirdGameForm
+      sessionId={sessionID}
+      desc="異なる"
+      passedGameType="DG"
+      passedCondition="new"
+    />
   );
 }

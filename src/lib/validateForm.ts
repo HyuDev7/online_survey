@@ -2,10 +2,11 @@ import {
   ProfileFormDataType,
   FirstFormDataType,
   SecondFormDataType,
+  ThirdFormDataType
 } from "./formDataTypes";
 
 export function validateForm(
-  formData: FirstFormDataType | SecondFormDataType | ProfileFormDataType
+  formData: FirstFormDataType | SecondFormDataType |ThirdFormDataType| ProfileFormDataType
 ) {
   //store the result of validation
   let validationResult = false;
@@ -16,6 +17,8 @@ export function validateForm(
     validationResult = validateFirstForm(formData as FirstFormDataType);
   } else if (formData.hasOwnProperty("secondDistribution")) {
     validationResult = validateSecondForm(formData as SecondFormDataType);
+  }else if(formData.hasOwnProperty("thirdDistribution")){
+    validationResult=validateThirdForm(formData as ThirdFormDataType)
   }
 
   return validationResult;
@@ -78,6 +81,34 @@ export function validateSecondForm(secondForm: SecondFormDataType) {
 
   //convert string distribution into number one
   const numDistri = Number(secondDistribution);
+  //validation of over or under input
+  if (numDistri > 1000 || numDistri < 0) {
+    return (valiRes = false);
+  } else {
+    valiRes = true;
+  }
+  //validation of integer
+  if (Number.isInteger(numDistri)) {
+    valiRes = true;
+  } else {
+    valiRes = false;
+  }
+
+  return valiRes;
+}
+
+export function validateThirdForm(secondForm: ThirdFormDataType) {
+  const { thirdDistribution } = secondForm;
+  //variable for storing validation result
+  let valiRes = false;
+
+  //validation of null
+  if (thirdDistribution === null || thirdDistribution.length === 0) {
+    return (valiRes = false);
+  }
+
+  //convert string distribution into number one
+  const numDistri = Number(thirdDistribution);
   //validation of over or under input
   if (numDistri > 1000 || numDistri < 0) {
     return (valiRes = false);
