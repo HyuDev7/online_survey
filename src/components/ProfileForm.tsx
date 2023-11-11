@@ -29,8 +29,6 @@ export default function ProfileForm({
   ) {
     const { name, value } = e.target;
     setResponseBody({ ...responseBody, [name]: value });
-    // console.log(responseBody)
-    // console.log(typeof responseBody["old"])
   }
 
   return (
@@ -141,9 +139,7 @@ export default function ProfileForm({
         formData={responseBody}
         grandParentPass={sessionId}
         parentpass={"1stgame"}
-        childpass1={"cRAwf"}
-        childpass2={"wu89s"}
-        childpass3={"ral0P"}
+        nextNum={1}
       />
     </form>
   );

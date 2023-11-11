@@ -1,10 +1,8 @@
 export interface ButtonPropType {
   buttonWord: string;
+  nextNum?:number;
   grandParentPass?: string;
   parentpass: string;
-  childpass1: string;
-  childpass2: string;
-  childpass3?: string;
   formData:
     | FirstFormDataType
     | SecondFormDataType

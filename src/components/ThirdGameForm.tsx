@@ -72,9 +72,9 @@ export default function ThirdGameForm({
         <RandomNavigateButton
           formData={responseBody}
           buttonWord="実験の事後説明へ移る"
-          parentpass={sessionId}
-          childpass1={"debriefing"}
-          childpass2={"debriefing"}
+          nextNum={4}
+          grandParentPass={sessionId}
+          parentpass="skip"
         />
       </div>
     </form>

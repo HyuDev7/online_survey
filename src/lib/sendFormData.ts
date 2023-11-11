@@ -2,6 +2,7 @@ import {
   FirstFormDataType,
   SecondFormDataType,
   ProfileFormDataType,
+  ThirdFormDataType,
 } from "./formDataTypes";
 
 export default async function sendFormData(
@@ -9,6 +10,7 @@ export default async function sendFormData(
     | ProfileFormDataType
     | FirstFormDataType
     | SecondFormDataType
+    | ThirdFormDataType
     | undefined
 ) {
   try {

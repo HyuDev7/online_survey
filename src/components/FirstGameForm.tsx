@@ -178,8 +178,7 @@ export default function FirstGameForm({
           buttonWord="次のページへ進む"
           grandParentPass={sessionId}
           parentpass={"2ndgame"}
-          childpass1={"nbXj6"}
-          childpass2={"sO852"}
+          nextNum={2}
         />
       </div>
     </form>

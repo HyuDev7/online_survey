@@ -5,17 +5,12 @@ import { useState } from "react";
 import { ButtonPropType } from "@/lib/formDataTypes";
 import { validateForm } from "@/lib/validateForm";
 import sendFormData from "@/lib/sendFormData";
-import selectChildPass from "@/lib/selectChildPass";
 
 export default function RandomNavigateButton(
   props: ButtonPropType
-): JSX.Element {
+) {
   //extract formData form props object
-  const { grandParentPass, parentpass, childpass1, childpass2, formData,childpass3 } =
-    props;
-
-  //select next child pass
-  const childpass = selectChildPass(childpass1, childpass2,childpass3);
+  const { grandParentPass, parentpass, nextNum, formData } = props;
 
   //check fail or not, init state
   const [isFail, setIsFail] = useState(false);
@@ -23,23 +18,53 @@ export default function RandomNavigateButton(
 
   //setting of router
   const router = useRouter();
-  //navigate logic
-  function navigateToNextPage(
+
+  //navigate logics
+  async function navigateToNextPage(
+    //sessionID is passed as grand parent path
     parentpass: string,
-    childpass: string,
+    gameNum: number | undefined,
     grandParentPass?: string
   ) {
+    let childpass = "";
+    try {
+      const response = await fetch("/api/path", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ sessionID: grandParentPass }),
+      });
+      const res = await response.json();
+
+      //choose which pass is used
+      if (gameNum === 1) {
+        childpass = res.paths.firstroute;
+      } else if (gameNum === 2) {
+        childpass = res.paths.secondroute;
+      } else if (gameNum === 3) {
+        childpass = res.paths.thirdroute;
+      }else if(gameNum===4){
+        childpass=parentpass;
+      }
+    } catch (e) {
+      console.dir(e);
+    }
+
+    console.log(childpass);
+    //if 3rd route is "skip", navigate to debriefing page
     //navigate to next page
-    if (grandParentPass) {
-      router.prefetch(`/${grandParentPass}/${parentpass}/${childpass}`);
+    if (childpass !== "skip") {
+      // router.prefetch(`/${grandParentPass}/${parentpass}/${childpass}`);
       router.push(`/${grandParentPass}/${parentpass}/${childpass}`);
     } else {
-      router.prefetch(`/${parentpass}/${childpass}`);
-      router.push(`/${parentpass}/${childpass}`);
+      childpass = "debriefing";
+      // router.prefetch(`/${grandParentPass}/${childpass}`);
+      router.push(`/${grandParentPass}/${childpass}`);
     }
   }
 
-  function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
+  async function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     setIsPending(true);
     setIsFail(false);
@@ -54,10 +79,10 @@ export default function RandomNavigateButton(
     }
 
     //send formData to DB
-    const res = sendFormData(formData);
+    await sendFormData(formData);
 
     //navigate to next form
-    navigateToNextPage(parentpass, childpass, grandParentPass);
+    navigateToNextPage(parentpass, nextNum, grandParentPass);
   }
 
   return (

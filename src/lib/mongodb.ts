@@ -16,7 +16,6 @@ import {
   AGREEMENT_COLLECTION,
 } from "./dbConfig";
 const { MongoClient, ServerApiVersion } = require("mongodb");
-import { v4 as uuidv4 } from "uuid";
 
 const uri = process.env.DB_URL;
 
@@ -101,6 +100,7 @@ export async function findSessionId(passedSessionID: string): Promise<boolean> {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+    console.log("connected from find session id!")
 
     //filter for finding document
     const filter = {
@@ -119,7 +119,7 @@ export async function findSessionId(passedSessionID: string): Promise<boolean> {
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
-    console.log("connection is closed from findSessionID!");
+    console.log("connection is closed from find Session ID!");
 
     if (validateSessionIdResult === null) {
       return false;
@@ -159,7 +159,7 @@ export async function updateAgreement(
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
-    console.log("connection is closed");
+    console.log("connection is closed from update agreement");
   }
 }
 
@@ -207,6 +207,7 @@ export async function insertDoc(
   try {
     //connecting to db
     await client.connect();
+    console.log("connected from insert document!")
 
     if ("old" in formData) {
       //check whether doc already exist
@@ -332,32 +333,39 @@ export async function insertDoc(
     // Ensures that the client will close when you finish/error
     await client.close();
   }
-  console.log("connection is closed!");
+  console.log("connection is closed from insert document!");
   return res;
 }
 
-//used for put sessionID with Passcode
-export async function insertIDs() {
-  let idArray = [];
-  let uniquePassCode = uuidv4();
+export async function findPath(passedSessionID: string) {
+  async function run() {
+    let gotPath: any;
+    try {
+      // Connect the client to the server	(optional starting in v4.7)
+      await client.connect();
+      console.log("connected from find path!")
 
-  for (let i = 0; i < 1000; i++) {
-    let uniqueSessionId = uuidv4();
-    idArray.push({
-      passCode: uniquePassCode,
-      sessionID: uniqueSessionId,
-      isSent: false,
-    });
+      //filter for finding document
+      const filter = {
+        sessionID: passedSessionID,
+      };
+
+      //options of returned document
+      const options = {
+        projection: { _id: 0, passCode: 0, sessionID: 0, isSent: 0 },
+      };
+
+      //get document
+      gotPath = await userIdCollection.findOne(filter, options);
+    } catch (e) {
+      console.dir(e);
+    } finally {
+      console.log("connection is closed from find path!");
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+    return gotPath;
   }
-
-  try {
-    await client.connect();
-
-    await userIdCollection.insertMany(idArray);
-  } catch (e) {
-    console.dir(e);
-  } finally {
-    await client.close();
-    console.log("connection is closed");
-  }
+   const res = await run().catch(console.dir)
+   return res
 }

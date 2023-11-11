@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getSessionId, insertDoc } from "@/lib/mongodb";
+import { insertDoc } from "@/lib/mongodb";
 
 export async function GET(request: Request) {
   return NextResponse.json({ test: "I got get method" });

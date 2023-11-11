@@ -77,8 +77,7 @@ export default function SecondGameForm({
           buttonWord="次へ進む"
           grandParentPass={sessionId}
           parentpass={"3rdgame"}
-          childpass1={desc === "同じ" ? "e1TZi" : "rS1p2"}
-          childpass2={desc === "同じ" ? "e1TZi" : "rS1p2"}
+          nextNum={3}
         />
       </div>
     </form>
