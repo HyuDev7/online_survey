@@ -69,10 +69,7 @@ export default function FirstGameForm({
 
         <div className="mb-5 md:flex md:flex-row">
           <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
-            <div className="order-2 md:order-none">
-              <label htmlFor="1">1(相手にとても有利)</label>
-            </div>
-            <div className="order-1 mr-1 md:m-0 md:order-none">
+            <div className="mr-1">
               <input
                 type="radio"
                 id="1"
@@ -81,13 +78,13 @@ export default function FirstGameForm({
                 onChange={handleChange}
               />
             </div>
+            <div>
+              <label htmlFor="1">1(相手にとても有利)</label>
+            </div>
           </div>
 
           <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
-            <div className="order-2 md:order-none">
-              <label htmlFor="2">2(相手に有利)</label>
-            </div>
-            <div className="order-1 mr-1 md:m-0 md:order-none">
+            <div className="mr-1">
               <input
                 type="radio"
                 id="2"
@@ -96,13 +93,13 @@ export default function FirstGameForm({
                 onChange={handleChange}
               />
             </div>
+            <div>
+              <label htmlFor="2">2(相手に有利)</label>
+            </div>
           </div>
 
           <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
-            <div className="order-2 md:order-none">
-              <label htmlFor="3">3(相手に少し有利)</label>
-            </div>
-            <div className="order-1 mr-1 md:m-0 md:order-none">
+            <div className="mr-1">
               <input
                 type="radio"
                 id="3"
@@ -111,13 +108,13 @@ export default function FirstGameForm({
                 onChange={handleChange}
               />
             </div>
+            <div>
+              <label htmlFor="3">3(相手に少し有利)</label>
+            </div>
           </div>
 
           <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
-            <div className="order-2 md:order-none">
-              <label htmlFor="4">4(公平)</label>
-            </div>
-            <div className="order-1 mr-1 md:m-0 md:order-none">
+            <div className="mr-1">
               <input
                 type="radio"
                 id="4"
@@ -126,13 +123,13 @@ export default function FirstGameForm({
                 onChange={handleChange}
               />
             </div>
+            <div>
+              <label htmlFor="4">4(公平)</label>
+            </div>
           </div>
 
           <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
-            <div className="order-2 md:order-none">
-              <label htmlFor="5">5(自分に少し有利)</label>
-            </div>
-            <div className="order-1 mr-1 md:m-0 md:order-none">
+            <div className="mr-1">
               <input
                 type="radio"
                 id="5"
@@ -141,12 +138,12 @@ export default function FirstGameForm({
                 onChange={handleChange}
               />
             </div>
+            <div>
+              <label htmlFor="5">5(自分に少し有利)</label>
+            </div>
           </div>
           <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
-            <div className="order-2 md:order-none">
-              <label htmlFor="6">6(自分に有利)</label>
-            </div>
-            <div className="order-1 mr-1 md:m-0 md:order-none">
+            <div className="mr-1">
               <input
                 type="radio"
                 id="6"
@@ -155,13 +152,13 @@ export default function FirstGameForm({
                 onChange={handleChange}
               />
             </div>
+            <div>
+              <label htmlFor="6">6(自分に有利)</label>
+            </div>
           </div>
 
           <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
-            <div className="order-2 md:order-none">
-              <label htmlFor="7">7(自分にとても有利)</label>
-            </div>
-            <div className="order-1 mr-1 md:m-0 md:order-none">
+            <div className="mr-1">
               <input
                 type="radio"
                 id="7"
@@ -169,6 +166,9 @@ export default function FirstGameForm({
                 value="7"
                 onChange={handleChange}
               />
+            </div>
+            <div>
+              <label htmlFor="7">7(自分にとても有利)</label>
             </div>
           </div>
         </div>
