@@ -11,8 +11,11 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   return (
-    <>
-      <SecondGameForm sessionId={sessionID} desc={"異なる"} passedGameType="UG" passedCondition="new" />
-    </>
+    <SecondGameForm
+      sessionId={sessionID}
+      desc={"異なる"}
+      passedGameType="UG"
+      passedCondition="new"
+    />
   );
 }
