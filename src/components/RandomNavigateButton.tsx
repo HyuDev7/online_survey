@@ -51,7 +51,6 @@ export default function RandomNavigateButton(
       console.dir(e);
     }
 
-    console.log(childpass);
     //if 3rd route is "skip", navigate to debriefing page
     //navigate to next page
     if (childpass !== "skip") {
