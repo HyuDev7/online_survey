@@ -4,22 +4,33 @@ export interface ButtonPropType {
   parentpass: string;
   childpass1: string;
   childpass2: string;
-  childpass3?:string;
-  formData: FirstFormDataType | SecondFormDataType | ProfileFormDataType;
-  //for checking whether number is enterd in second form
+  childpass3?: string;
+  formData:
+    | FirstFormDataType
+    | SecondFormDataType
+    | ThirdFormDataType
+    | ProfileFormDataType;
 }
 
 export interface FirstFormDataType {
   sessionID: string;
   firstGame: string;
   offer: string | null;
-  assessment:string|null;
+  assessment: string | null;
 }
 
 export interface SecondFormDataType {
   sessionID: string;
-  secondGame: string;
-  distribution: string | null;
+  secondGameType: string;
+  secondCondition: string;
+  secondDistribution: string | null;
+}
+
+export interface ThirdFormDataType {
+  sessionID: string;
+  thirdGameType: string;
+  thirdCondition: string;
+  thirdDistribution: string | null;
 }
 
 export interface UserIdType {
@@ -37,5 +48,5 @@ export interface AgreementFormDataType {
   sessionID: string;
   firstAgreement: string;
   secondAgreement: string;
-  example:string;
+  example: string;
 }

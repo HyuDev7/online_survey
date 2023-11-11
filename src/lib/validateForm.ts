@@ -14,7 +14,7 @@ export function validateForm(
     validationResult = validateProfileForm(formData as ProfileFormDataType);
   } else if (formData.hasOwnProperty("firstGame")) {
     validationResult = validateFirstForm(formData as FirstFormDataType);
-  } else if (formData.hasOwnProperty("distribution")) {
+  } else if (formData.hasOwnProperty("secondDistribution")) {
     validationResult = validateSecondForm(formData as SecondFormDataType);
   }
 
@@ -67,17 +67,17 @@ export function validateFirstForm(firstForm: FirstFormDataType) {
 }
 
 export function validateSecondForm(secondForm: SecondFormDataType) {
-  const { distribution } = secondForm;
+  const { secondDistribution } = secondForm;
   //variable for storing validation result
   let valiRes = false;
 
   //validation of null
-  if (distribution === null || distribution.length === 0) {
+  if (secondDistribution === null || secondDistribution.length === 0) {
     return (valiRes = false);
   }
 
   //convert string distribution into number one
-  const numDistri = Number(distribution);
+  const numDistri = Number(secondDistribution);
   //validation of over or under input
   if (numDistri > 1000 || numDistri < 0) {
     return (valiRes = false);

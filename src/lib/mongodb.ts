@@ -254,7 +254,7 @@ export async function insertDoc(
       }
     }
 
-    if ("secondGame" in formData) {
+    if ("secondCondition" in formData) {
       //check whether doc already exist
       const flag = await findSessionIdInEachDoc(
         formData.sessionID,
@@ -263,8 +263,8 @@ export async function insertDoc(
       const filter = { sessionID: formData.sessionID };
       const updateDocument = {
         $set: {
-          secondGame: formData.secondGame,
-          distribution: formData.distribution,
+          secondGameType: formData.secondGameType,
+          secondDistribution: formData.secondDistribution,
         },
       };
 

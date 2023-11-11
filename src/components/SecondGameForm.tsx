@@ -4,20 +4,22 @@ import { SecondFormDataType } from "@/lib/formDataTypes";
 import { useState } from "react";
 
 export default function SecondGameForm({
-  condition,
+  passedCondition,
   sessionId,
+  passedGameType,
   desc,
 }: {
-  condition: string;
+  passedCondition: string;
   sessionId: string;
-  desc:string;
+  passedGameType: string;
+  desc: string;
 }): JSX.Element {
-  
   //initialise form data
   const formData: SecondFormDataType = {
     sessionID: sessionId,
-    secondGame: condition,
-    distribution: null,
+    secondCondition: passedCondition,
+    secondGameType: passedGameType,
+    secondDistribution: null,
   };
   const [responseBody, setResponseBody] = useState(formData);
 
@@ -32,19 +34,38 @@ export default function SecondGameForm({
       <div className="textStyle my-5 text-lg">
         <p>あなたは今回、「提案者」に選ばれました。</p>
         <p>1000円を、自身と相手でどのように分けるかを決めることができます。</p>
-        <p>{desc==="同じ"?null:"ただし"}相手は先ほどあなたにお金を渡した人と{desc}人です。</p>
+        {passedGameType === "UG" ? null : (
+          <>
+            <p>
+              ただし、
+              <span className="font-bold">
+                応答者は提案者の提案を断ることができません。
+              </span>
+            </p>
+            <p className="underline underline-offset-4 mb-3">
+              つまり、提案した分配金額がそのまま実現します。
+            </p>
+          </>
+        )}
+
+        <p>
+          {desc === "同じ" ? null : "ただし"}
+          相手は先ほどあなたにお金を渡した人と<span className="underline underline-offset-4">{desc}</span>人です。
+        </p>
         <p>いくら相手にお金を渡しますか？</p>
-        <p>渡す金額を以下の入力欄に0以上、1000以下の整数を半角数字で入力してください。</p>
+        <p>
+          渡す金額を以下の入力欄に0以上、1000以下の整数を半角数字で入力してください。
+        </p>
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="distribution">相手にいくら渡しますか？</label>
+        <label htmlFor="secondDistribution">相手にいくら渡しますか？</label>
         <div>
           <input
             className="inputStyle max-w-md"
             type="number"
-            name="distribution"
-            id="distribution"
+            name="secondDistribution"
+            id="secondDistribution"
             onChange={handleChange}
             required
           />
@@ -56,8 +77,8 @@ export default function SecondGameForm({
           buttonWord="次へ進む"
           grandParentPass={sessionId}
           parentpass={"3rdgame"}
-          childpass1={desc==="同じ"?"e1TZi":"rS1p2"}
-          childpass2={desc==="同じ"?"e1TZi":"rS1p2"}
+          childpass1={desc === "同じ" ? "e1TZi" : "rS1p2"}
+          childpass2={desc === "同じ" ? "e1TZi" : "rS1p2"}
         />
       </div>
     </form>
