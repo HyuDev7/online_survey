@@ -66,11 +66,16 @@ export default function SecondGameForm({
             type="number"
             name="secondDistribution"
             id="secondDistribution"
+            min={0}
+            max={1000}
             onChange={handleChange}
             required
           />
           円
         </div>
+
+        <div className="text-xl">自分が受け取る金額：</div>
+        <div className="text-xl">{1000-Number(responseBody.secondDistribution)}円</div>
 
         <RandomNavigateButton
           formData={responseBody}

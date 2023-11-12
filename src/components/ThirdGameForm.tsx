@@ -63,11 +63,16 @@ export default function ThirdGameForm({
             type="number"
             name="thirdDistribution"
             id="thirdDistribution"
+            min={0}
+            max={1000}
             onChange={handleChange}
             required
           />
           円
         </div>
+
+        <div className="text-xl">自分が受け取る金額：</div>
+        <div className="text-xl">{1000-Number(responseBody.thirdDistribution)}円</div>
 
         <RandomNavigateButton
           formData={responseBody}
