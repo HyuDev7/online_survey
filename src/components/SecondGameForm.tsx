@@ -50,7 +50,8 @@ export default function SecondGameForm({
 
         <p>
           {desc === "同じ" ? null : "ただし"}
-          相手は先ほどあなたにお金を渡した人と<span className="underline underline-offset-4">{desc}</span>人です。
+          相手は先ほどあなたにお金を渡した人と
+          <span className="underline underline-offset-4">{desc}</span>人です。
         </p>
         <p>いくら相手にお金を渡しますか？</p>
         <p>
@@ -59,18 +60,25 @@ export default function SecondGameForm({
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="secondDistribution">相手にいくら渡しますか？</label>
-        <div>
+        <label htmlFor="secondDistribution" className="text-xl">
+          相手にいくら渡しますか？
+        </label>
+        <div className="mb-3 text-xl">
           <input
             className="inputStyle max-w-md"
             type="number"
             name="secondDistribution"
             id="secondDistribution"
+            min={0}
+            max={1000}
             onChange={handleChange}
             required
           />
           円
         </div>
+
+        <div className="text-xl">自分が受け取る金額：</div>
+        <div className="text-xl">{1000-Number(responseBody.secondDistribution)}円</div>
 
         <RandomNavigateButton
           formData={responseBody}

@@ -2,6 +2,7 @@
 import RandomNavigateButton from "./RandomNavigateButton";
 import { FirstFormDataType } from "@/lib/formDataTypes";
 import { useState } from "react";
+import ShowMoney from "./ShowMoney";
 
 export default function FirstGameForm({
   money,
@@ -36,8 +37,10 @@ export default function FirstGameForm({
         <p>まず、以下の2つの選択肢から自身の考えに合うものを選んでください。</p>
       </div>
 
+      <ShowMoney distribution={Number(money)}/>
+
       <div className="flex flex-col">
-        <div>
+        <div className="text-xl">
           <input
             type="radio"
             name="offer"
@@ -67,7 +70,7 @@ export default function FirstGameForm({
           <p>その後、「次へ進む」ボタンを押してください。</p>
         </div>
 
-        <div className="mb-5 md:flex md:flex-row">
+        <div className="mb-5 md:flex md:flex-row text-xl">
           <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
             <div className="mr-1">
               <input
