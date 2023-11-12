@@ -72,7 +72,7 @@ export default function AuthComp() {
       });
 
       if (sessionId) {
-        router.push(`/${sessionId}/gamerule`);
+        router.push(`/${sessionId}/profile`);
       }
     } catch (e) {
       console.dir(e);
