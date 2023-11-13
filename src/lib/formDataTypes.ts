@@ -39,7 +39,6 @@ export interface ProfileFormDataType {
   sessionID: string;
   old: number | null;
   sex: string;
-  pref: string | null;
 }
 
 export interface AgreementFormDataType {

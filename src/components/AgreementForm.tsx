@@ -8,6 +8,10 @@ export default function AgreementForm({ id }: { id: string }) {
   const [agreement, setAgreement] = useState(false);
   const [example, setExample] = useState("");
 
+  //check fail or not, init state
+  const [isFail, setIsFail] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+
   function handleChange(
     event:
       | React.ChangeEvent<HTMLInputElement>
@@ -24,6 +28,8 @@ export default function AgreementForm({ id }: { id: string }) {
 
   async function handleSubmission(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
+    setIsPending(true);
+    setIsFail(false);
 
     const agreementForm: AgreementFormDataType = {
       sessionID: id,
@@ -44,6 +50,8 @@ export default function AgreementForm({ id }: { id: string }) {
       if (!response.ok) {
         const message = `an error occurred : ${response.statusText}`;
         window.alert(message);
+        setIsPending(false);
+        setIsFail(true);
         return;
       }
 
@@ -70,10 +78,10 @@ export default function AgreementForm({ id }: { id: string }) {
         <p>
           調査の事前説明でも述べたとおり、本アンケートの目的はお金の分配に関する調査を行うことです。
           ですが正確には初めに提示された金額がその後の分配行動にどのような影響を及ぼすかを調べることが本アンケートの主目的となります。
-          そのため、1回目の質問時には全ての参加者に応答役が割り当てられており、金額の異なる2通りの分配額が提示されていました。
+          そのため、1回目の質問時には全ての参加者に応答役が割り当てられており、金額の異なる3通りの分配額が提示されていました。
           また、2回目の質問ではその後の分配行動を調査するため、参加者全員が提案者役に割り当てられています。
           従って、実験の事前説明のうち「役割の振り分けは各ゲーム時にランダムに行われる」という点は実際とは異なる説明でした。
-          1回目のゲームで提示される金額は250円と500円、750円の2通りしかなく、調査実施者側で設定したものとなっております。
+          1回目のゲームで提示される金額は250円と500円、750円の3通りしかなく、調査実施者側で設定したものとなっております。
           こちらも実験の事前説明で説明したものとは異なっております。
         </p>
       </div>
@@ -123,9 +131,17 @@ export default function AgreementForm({ id }: { id: string }) {
       </div>
       {/* I want to rewrite this conditional rendering*/}
       {agreement ? (
-        <button onClick={handleSubmission} className="buttonStyle">
-          確認番号ページ
-        </button>
+        <>
+          <button onClick={handleSubmission} className="buttonStyle">
+            確認番号ページ
+          </button>
+          {isPending && <p className="text-sm">しばらくお待ちください...</p>}
+          {isFail && (
+            <p className="text-sm text-red-600">
+              予期せぬエラーが発生いたしました。もう一度お試しください
+            </p>
+          )}
+        </>
       ) : (
         <>
           <button

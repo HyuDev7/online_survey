@@ -25,12 +25,7 @@ export function validateForm(
 }
 
 export function validateProfileForm(profileForm: ProfileFormDataType) {
-  const { sessionID, old, sex, pref } = profileForm;
-
-  //validation of prefecture
-  if (pref === "") {
-    return false;
-  }
+  const { sessionID, old, sex } = profileForm;
 
   //validation of sex
   if (sex === "") {
