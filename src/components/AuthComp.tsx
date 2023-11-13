@@ -42,6 +42,7 @@ export default function AuthComp() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userIdBody),
+        cache: "no-store",
       });
 
       if (!response.ok) {

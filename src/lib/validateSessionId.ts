@@ -1,6 +1,7 @@
 export async function validateSessionID(sessionID: string) {
 
-  // console.log(process.env.NEXT_PUBLIC_Url);
+  console.log(process.env.NEXT_PUBLIC_Url);
+  
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_Url}/api/validate`, {
       method: "POST",

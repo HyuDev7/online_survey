@@ -26,7 +26,7 @@ export default function RootLayout({
                   <h1 className="text-lg sm:text-4xl my-3">応用経済分析研究室</h1>
                 </div>
                 <div>
-                  <Link href="/flowOfContent">
+                  <Link href="">
                     <h1 className="text-lg sm:text-4xl my-3 font-normal">実験の事前説明</h1>
                   </Link>
                 </div>
