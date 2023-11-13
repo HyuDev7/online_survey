@@ -83,7 +83,7 @@ export default function AuthComp() {
     <div className="container mx-auto text-center">
       <h1 className="my-5">実験のログイン</h1>
       <p className="max-w-md mx-auto text-lg">
-        ランサーズの応募ページに記載のある、パスコードを入力してください(コピーアンドペーストで構いません)
+        ランサーズの応募ページに記載のあるパスコードを入力してください
       </p>
       <form className="mt-3 flex flex-col">
         <div className="mb-1 mt-1">
