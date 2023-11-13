@@ -1,145 +1,80 @@
-"use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { AgreementFormDataType } from "@/lib/formDataTypes";
+export default async function AgreementForm({ id }: { id: string }) {
+  //get answers from db
+  let firstAnswers;
+  let secondAnswers;
 
-export default function AgreementForm({ id }: { id: string }) {
-  const router = useRouter();
-  const [agreement, setAgreement] = useState(false);
-  const [example, setExample] = useState("");
+  console.log(process.env.NEXT_PUBLIC_Url);
 
-  function handleChange(
-    event:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) {
-    if (event.target.name === "agreement") {
-      agreement ? setAgreement(false) : setAgreement(true);
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_Url}/api/answers`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ sessionID: id }),
+    });
+
+    if (!response.ok) {
+      const message = `an error occurred : ${response.statusText}`;
+      window.alert(message);
+      return;
     }
 
-    if (event.target.name === "example") {
-      setExample(event.target.value);
-    }
+    const res = await response.json();
+    const { first: f_answers, second: s_answers } = res.answers;
+    firstAnswers = f_answers;
+    secondAnswers = s_answers;
+  } catch (e) {
+    console.dir(e);
   }
 
-  async function handleSubmission(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
-
-    const agreementForm: AgreementFormDataType = {
-      sessionID: id,
-      firstAgreement: "",
-      secondAgreement: agreement.toString(),
-      example: example,
-    };
-
-    try {
-      const response = await fetch("/api/secondagree", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(agreementForm),
-      });
-
-      if (!response.ok) {
-        const message = `an error occurred : ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const res = await response.json();
-
-      const sessionID = id;
-      router.push(`/${sessionID}/number`);
-    } catch (e) {
-      console.dir(e);
-    }
+  //determin a distribution from offerer in 1st game
+  let offerMoney = 0;
+  if (firstAnswers.firstGame === "happy") {
+    offerMoney = 750;
+  } else if (firstAnswers.firstGame === "angry") {
+    offerMoney = 250;
   }
 
   return (
     <>
+      <h1 className="my-5">回答結果</h1>
       <div className="textStyle">
         <p>
-          ご協力いただきありがとうございました。本ページはアンケート調査の事後説明ページです。
-          改めて調査の目的を説明したのち、データの提供について同意するかをお答えいただければと思います。
+          ご協力いただきありがとうございました。このページでは回答結果を見ることができます。
         </p>
+        <p>以下が２回の質問における回答結果です。</p>
       </div>
 
-      <div className="textStyle">
-        <h3>【調査の目的について】</h3>
-        <p>
-          調査の事前説明でも述べたとおり、本アンケートの目的はお金の分配に関する調査を行うことです。
-          ですが正確には初めに提示された金額がその後の分配行動にどのような影響を及ぼすかを調べることが本アンケートの主目的となります。
-          そのため、1回目の質問時には全ての参加者に応答役が割り当てられており、金額の異なる2通りの分配額が提示されていました。
-          また、2回目の質問ではその後の分配行動を調査するため、参加者全員が提案者役に割り当てられています。
-          従って、実験の事前説明のうち「役割の振り分けは各ゲーム時にランダムに行われる」という点は実際とは異なる説明でした。
-          1回目のゲームで提示される金額は250円と500円、750円の2通りしかなく、調査実施者側で設定したものとなっております。
-          こちらも実験の事前説明で説明したものとは異なっております。
-        </p>
-      </div>
-
-      <div className="textStyle">
-        <p>
-          提示された金額の違いがその後の分配行動にどう影響するか、回答者の自然な反応を調査するために、
-          事実はと異なる説明を行いました。ご理解いただければ幸いです。
-        </p>
-      </div>
-
-      <div className="textStyle">
-        調査に関して何か不審に思った点や、コメントなどがあれば下の欄にご記入ください。
+      <div className="textStyle text-xl">
+        <h3 className="underline underline-offset-4">１回目の質問</h3>
+        <p>１回目の質問では相手は以下の分け方を提案しました。</p>
         <div>
-          <textarea
-            id="example"
-            name="example"
-            rows={5}
-            cols={40}
-            className="inputStyle"
-            onChange={handleChange}
-          ></textarea>
+          <p>相手の取り分 : {1000 - offerMoney}円</p>
+          <p>自分の取り分 : {offerMoney}円</p>
         </div>
-      </div>
-
-      <h3>【データ提供の可否について】</h3>
-      <div className="textStyle">
         <p>
-          以上の内容を踏まえた上で、データの提供について同意いただけるのであれば、下のチェックボックスをクリックし、
-          「確認番号表示」ボタンを押してください。ページを移動したのち、確認番号が画面に表示されます。
-          また、データの提供について同意いただけない際は、直接このページのタブを閉じていただいて構いません。
-          その場合、すでにアンケートに回答いただいている場合でも謝礼をお渡しすることはできず、お答えいただいた内容は削除されます。
-          ご理解いただければ幸いです。
-          改めまして、この度は調査にご参加いただきありがとうございました。
+          あなたはこの提案を
+          <span className="underline underline-offset-4">
+            {firstAnswers.offer === "accept" ? "受け入れ" : "断っ"}た
+          </span>
+          。
         </p>
       </div>
 
-      <div>
-        <input
-          type="checkbox"
-          id="agreement"
-          name="agreement"
-          onChange={handleChange}
-          value="agree"
-        />
-        <label htmlFor="agreement">データを提供する</label>
+      <div className="textStyle text-xl">
+        <h3 className="underline underline-offset-4">2回目の質問</h3>
+        <p>
+          1000円の分け方について、1回目と
+          {secondAnswers.secondCondition === "new" ? "異なる" : "同じ"}
+          相手に対して
+        </p>
+        <div>
+          <p>相手の取り分 : {secondAnswers.secondDistribution}円</p>
+          <p>自分の取り分 : {1000 - secondAnswers.secondDistribution}円</p>
+        </div>
+        を提案した。
       </div>
-      {/* I want to rewrite this conditional rendering*/}
-      {agreement ? (
-        <button onClick={handleSubmission} className="buttonStyle">
-          確認番号ページ
-        </button>
-      ) : (
-        <>
-          <button
-            onClick={handleSubmission}
-            className="buttonStyle disabled:bg-gray-600 disabled:text-white"
-            disabled
-          >
-            確認番号ページ
-          </button>
-          <p className="text-sm text-red-600">
-            番号を確認するためにはデータを提供するにチェックをつけてください。
-          </p>
-        </>
-      )}
     </>
   );
 }

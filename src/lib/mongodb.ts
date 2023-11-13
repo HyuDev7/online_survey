@@ -100,7 +100,7 @@ export async function findSessionId(passedSessionID: string): Promise<boolean> {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
-    console.log("connected from find session id!")
+    console.log("connected from find session id!");
 
     //filter for finding document
     const filter = {
@@ -207,7 +207,7 @@ export async function insertDoc(
   try {
     //connecting to db
     await client.connect();
-    console.log("connected from insert document!")
+    console.log("connected from insert document!");
 
     if ("old" in formData) {
       //check whether doc already exist
@@ -220,7 +220,6 @@ export async function insertDoc(
         $set: {
           old: formData.old,
           sex: formData.sex,
-          pref: formData.pref,
         },
       };
 
@@ -343,7 +342,7 @@ export async function findPath(passedSessionID: string) {
     try {
       // Connect the client to the server	(optional starting in v4.7)
       await client.connect();
-      console.log("connected from find path!")
+      console.log("connected from find path!");
 
       //filter for finding document
       const filter = {
@@ -366,6 +365,45 @@ export async function findPath(passedSessionID: string) {
     }
     return gotPath;
   }
-   const res = await run().catch(console.dir)
-   return res
+  const res = await run().catch(console.dir);
+  return res;
+}
+
+//for finding answers
+export async function findAnswers(passedSessionID: string) {
+  async function run() {
+    let firstAnswer: any;
+    let secondAnswer: any;
+    let answers: any;
+    try {
+      // Connect the client to the server	(optional starting in v4.7)
+      await client.connect();
+      console.log("connected from find answers!");
+
+      //filter for finding document
+      const filter = {
+        sessionID: passedSessionID,
+      };
+
+      //options of returned document
+      const options = {
+        projection: { _id: 0, sessionID: 0 },
+      };
+
+      //get document
+      firstAnswer = await firstGameCollection.findOne(filter, options);
+      secondAnswer = await secondGameCollection.findOne(filter,options);
+      answers = { first: firstAnswer, second: secondAnswer };
+
+    } catch (e) {
+      console.dir(e);
+    } finally {
+      console.log("connection is closed from find answers!");
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+    return answers;
+  }
+  const res = await run().catch(console.dir);
+  return res;
 }
