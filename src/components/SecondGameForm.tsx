@@ -59,10 +59,10 @@ export default function SecondGameForm({
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="secondDistribution">相手にいくら渡しますか？</label>
+        <label htmlFor="secondDistribution" className="text-xl">相手にいくら渡しますか？</label>
         <div>
           <input
-            className="inputStyle max-w-md"
+            className="inputStyle max-w-md text-xl"
             type="number"
             name="secondDistribution"
             id="secondDistribution"
@@ -74,7 +74,7 @@ export default function SecondGameForm({
           円
         </div>
 
-        <div className="text-xl">自分が受け取る金額：</div>
+        <div className="text-xl mt-3">自分が受け取る金額：</div>
         <div className="text-xl">{1000-Number(responseBody.secondDistribution)}円</div>
 
         <RandomNavigateButton

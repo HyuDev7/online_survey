@@ -36,6 +36,20 @@ export default function FirstGameForm({
         <p>まず、以下の2つの選択肢から自身の考えに合うものを選んでください。</p>
       </div>
 
+      <div className="flex mb-5 show-money">
+        <div>
+          <h3 className="underline underline-offset-4">もらえる金額</h3>
+        </div>
+        <div className="ml-5">
+          <div  className="text-2xl">
+            自分：{Number(money)}円
+          </div>
+          <div className="text-2xl mt-1">
+            相手：{1000-Number(money)}円
+          </div>
+        </div>
+      </div>
+
       <div className="flex flex-col">
         <div>
           <input

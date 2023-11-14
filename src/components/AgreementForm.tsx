@@ -39,21 +39,21 @@ export default async function AgreementForm({ id }: { id: string }) {
   return (
     <>
       <h1 className="my-5">回答結果</h1>
-      <div className="textStyle">
+      <div className="textStyle text-lg">
         <p>
-          ご協力いただきありがとうございました。このページでは回答結果を見ることができます。
+          ご協力いただきありがとうございました。
         </p>
-        <p>以下が２回の質問における回答結果です。</p>
+        <p>以下がご自身の回答です。</p>
       </div>
 
       <div className="textStyle text-xl">
-        <h3 className="underline underline-offset-4">１回目の質問</h3>
+        <h3 className="underline underline-offset-4 mb-3">１回目の質問</h3>
         <p>１回目の質問では相手は以下の分け方を提案しました。</p>
         <div>
           <p>相手の取り分 : {1000 - offerMoney}円</p>
           <p>自分の取り分 : {offerMoney}円</p>
         </div>
-        <p>
+        <p className="mt-1">
           あなたはこの提案を
           <span className="underline underline-offset-4">
             {firstAnswers.offer === "accept" ? "受け入れ" : "断っ"}た
@@ -63,7 +63,7 @@ export default async function AgreementForm({ id }: { id: string }) {
       </div>
 
       <div className="textStyle text-xl">
-        <h3 className="underline underline-offset-4">2回目の質問</h3>
+        <h3 className="underline underline-offset-4 mb-3">2回目の質問</h3>
         <p>
           1000円の分け方について、1回目と
           {secondAnswers.secondCondition === "new" ? "異なる" : "同じ"}
@@ -73,7 +73,7 @@ export default async function AgreementForm({ id }: { id: string }) {
           <p>相手の取り分 : {secondAnswers.secondDistribution}円</p>
           <p>自分の取り分 : {1000 - secondAnswers.secondDistribution}円</p>
         </div>
-        を提案した。
+        <div className="mt-1">を提案した。</div>
       </div>
     </>
   );
