@@ -77,7 +77,7 @@ export default function SecondGameForm({
           円
         </div>
 
-        <div className="text-xl">自分が受け取る金額：</div>
+        <div className="text-xl mt-3">自分が受け取る金額：</div>
         <div className="text-xl">{1000-Number(responseBody.secondDistribution)}円</div>
 
         <RandomNavigateButton

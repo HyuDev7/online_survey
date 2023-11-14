@@ -10,7 +10,7 @@ export default function ShowMoney({distribution}:{distribution:number}){
           <div  className="text-2xl">
             自分：{distribution}円
           </div>
-          <div className="text-2xl">
+          <div className="text-2xl mt-1">
             相手：{1000-distribution}円
           </div>
         </div>
