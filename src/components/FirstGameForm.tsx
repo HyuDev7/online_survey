@@ -30,17 +30,25 @@ export default function FirstGameForm({
 
   return (
     <form>
-      <div className="mt-5 mb-4 textStyle text-xl">
+      <div className="mt-5 mb-4 textStyle text-lg">
         <p>あなたは今回、「応答者」に選ばれました。</p>
+        <p>相手の提案を受け入れる、または拒否することができます。</p>
+        <p>
+          ただし、
+          <span className="underline underline-offset-4 mb-3">
+            提案を拒否すると自身も相手も何も得られません
+          </span>
+          。
+        </p>
         <p>相手は1000円のうち、あなたの取り分として{money}円を提案しました。</p>
         <p>この提案を受け入れますか？</p>
         <p>まず、以下の2つの選択肢から自身の考えに合うものを選んでください。</p>
       </div>
 
-      <ShowMoney distribution={Number(money)}/>
+      <ShowMoney distribution={Number(money)} />
 
       <div className="flex flex-col">
-        <div className="text-xl">
+        <div className="text-lg">
           <input
             type="radio"
             name="offer"
@@ -63,14 +71,14 @@ export default function FirstGameForm({
           <label htmlFor="refuseOffer">断る</label>
         </div>
 
-        <div className="mt-7 mb-4 textStyle text-xl">
+        <div className="mt-7 mb-4 textStyle text-lg">
           <p>
             次にこの分け方についてどのように感じたか、最も当てはまるものを7つの選択肢の中から1つ選んでください。
           </p>
           <p>その後、「次へ進む」ボタンを押してください。</p>
         </div>
 
-        <div className="mb-5 md:flex md:flex-row text-xl">
+        <div className="mb-5 md:flex md:flex-row text-lg">
           <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
             <div className="mr-1">
               <input

@@ -42,8 +42,8 @@ export default function ThirdGameForm({
             応答者は提案者の提案を断ることができません。
           </span>
         </p>
-        <p className="underline underline-offset-4">
-          つまり、提案した分配金額がそのまま実現します。
+        <p className="mb-3">
+          つまり、<span className="underline underline-offset-4">提案した分配金額がそのまま実現します</span>。
         </p>
         <p>
           {desc === "同じ" ? null : "ただし"}

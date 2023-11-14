@@ -33,8 +33,18 @@ export default function SecondGameForm({
     <form>
       <div className="textStyle my-5 text-lg">
         <p>あなたは今回、「提案者」に選ばれました。</p>
-        <p>1000円を、自身と相手でどのように分けるかを決めることができます。</p>
-        {passedGameType === "UG" ? null : (
+        <p>
+          1000円を、自身と相手でどのように分けるかを自由に決めることができます。
+        </p>
+        {passedGameType === "UG" ? (
+          <p>
+            ただし、
+            <span className="underline underline-offset-4">
+              提案が断られると自身も相手も何も得られません
+            </span>
+            。
+          </p>
+        ) : (
           <>
             <p>
               ただし、
@@ -48,10 +58,10 @@ export default function SecondGameForm({
           </>
         )}
 
-        <p>
-          {desc === "同じ" ? null : "ただし"}
+        <p className="mt-3">
+          {/* {desc === "同じ" ? null : "ただし"} */}
           相手は先ほどあなたにお金を渡した人と
-          <span className="underline underline-offset-4">{desc}</span>人です。
+          <span className="underline underline-offset-4 font-bold">{desc}</span>人です。
         </p>
         <p>いくら相手にお金を渡しますか？</p>
         <p>
@@ -78,7 +88,9 @@ export default function SecondGameForm({
         </div>
 
         <div className="text-xl mt-3">自分が受け取る金額：</div>
-        <div className="text-xl">{1000-Number(responseBody.secondDistribution)}円</div>
+        <div className="text-xl">
+          {1000 - Number(responseBody.secondDistribution)}円
+        </div>
 
         <RandomNavigateButton
           formData={responseBody}
