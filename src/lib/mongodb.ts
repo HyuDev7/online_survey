@@ -220,7 +220,6 @@ export async function insertDoc(
         $set: {
           old: formData.old,
           sex: formData.sex,
-          pref: formData.pref,
         },
       };
 
