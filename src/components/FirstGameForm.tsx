@@ -29,8 +29,16 @@ export default function FirstGameForm({
 
   return (
     <form>
-      <div className="mt-5 mb-4 textStyle text-xl">
+      <div className="mt-5 mb-4 textStyle text-lg">
         <p>あなたは今回、「応答者」に選ばれました。</p>
+        <p>相手の提案を受け入れる、または拒否することができます。</p>
+        <p className="mb-3">
+          ただし、
+          <span className="underline underline-offset-4">
+            提案を断ると自身も相手も何も得られません
+          </span>
+          。
+        </p>
         <p>相手は1000円のうち、あなたの取り分として{money}円を提案しました。</p>
         <p>この提案を受け入れますか？</p>
         <p>まず、以下の2つの選択肢から自身の考えに合うものを選んでください。</p>
@@ -41,12 +49,8 @@ export default function FirstGameForm({
           <h3 className="underline underline-offset-4">もらえる金額</h3>
         </div>
         <div className="ml-5">
-          <div  className="text-2xl">
-            自分：{Number(money)}円
-          </div>
-          <div className="text-2xl mt-1">
-            相手：{1000-Number(money)}円
-          </div>
+          <div className="text-2xl">自分：{Number(money)}円</div>
+          <div className="text-2xl mt-1">相手：{1000 - Number(money)}円</div>
         </div>
       </div>
 
