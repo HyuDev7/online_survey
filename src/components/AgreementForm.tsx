@@ -65,7 +65,7 @@ export default function AgreementForm({ id }: { id: string }) {
   }
 
   return (
-    <>
+    <div className="">
       <div className="textStyle">
         <p>
           ご協力いただきありがとうございました。本ページはアンケート調査の事後説明ページです。
@@ -74,14 +74,21 @@ export default function AgreementForm({ id }: { id: string }) {
       </div>
 
       <div className="textStyle">
-        <h3>【調査の目的について】</h3>
+        <h3 className="mb-1">【調査の目的について】</h3>
         <p>
           調査の事前説明でも述べたとおり、本アンケートの目的はお金の分配に関する調査を行うことです。
           ですが正確には初めに提示された金額がその後の分配行動にどのような影響を及ぼすかを調べることが本アンケートの主目的となります。
-          そのため、1回目の質問時には全ての参加者に応答役が割り当てられており、金額の異なる3通りの分配額が提示されていました。
-          また、2回目の質問ではその後の分配行動を調査するため、参加者全員が提案者役に割り当てられています。
-          従って、実験の事前説明のうち「役割の振り分けは各ゲーム時にランダムに行われる」という点は実際とは異なる説明でした。
-          1回目のゲームで提示される金額は250円と500円、750円の3通りしかなく、調査実施者側で設定したものとなっております。
+        </p>
+        <p>
+          そのため、1回目の質問時には全ての参加者に
+          <span className="font-bold">応答役</span>
+          が割り当てられており、
+          <span className="underline underline-offset-4">
+            250円と500円、750円の3通り
+          </span>
+          の分配額がランダムに提示されていました。
+          また2回目、回答者によっては3回目の質問ではその後の分配行動を調査するため、回答者全員が
+          <span className="font-bold">提案者</span>に割り当てられています。
           こちらも実験の事前説明で説明したものとは異なっております。
         </p>
       </div>
@@ -95,7 +102,7 @@ export default function AgreementForm({ id }: { id: string }) {
 
       <div className="textStyle">
         調査に関して何か不審に思った点や、コメントなどがあれば下の欄にご記入ください。
-        <div>
+        <div className="mt-1">
           <textarea
             id="example"
             name="example"
@@ -107,16 +114,27 @@ export default function AgreementForm({ id }: { id: string }) {
         </div>
       </div>
 
-      <h3>【データ提供の可否について】</h3>
+      <h3 className="mb-1">【データ提供の可否について】</h3>
       <div className="textStyle">
         <p>
           以上の内容を踏まえた上で、データの提供について同意いただけるのであれば、下のチェックボックスをクリックし、
-          「確認番号表示」ボタンを押してください。ページを移動したのち、確認番号が画面に表示されます。
-          また、データの提供について同意いただけない際は、直接このページのタブを閉じていただいて構いません。
-          その場合、すでにアンケートに回答いただいている場合でも謝礼をお渡しすることはできず、お答えいただいた内容は削除されます。
-          ご理解いただければ幸いです。
-          改めまして、この度は調査にご参加いただきありがとうございました。
+          <span className="underline underline-offset-4">
+            確認番号ページボタン
+          </span>
+          を押してください。ページを移動したのち、確認番号が画面に表示されます。
         </p>
+        <p>
+          また、
+          <span className="underline underline-offset-4">
+            データの提供について同意いただけない場合は、直接このページのタブを閉じていただいて構いません
+          </span>
+          。 その場合、すでにアンケートに回答いただいている場合でも
+          <span className="font-semibold">謝礼をお渡しすることはできず</span>
+          、お答えいただいた内容は
+          <span className="font-semibold">削除</span>されます。
+          ご理解いただければ幸いです。
+        </p>
+        <p>改めまして、この度は調査にご参加いただきありがとうございました。</p>
       </div>
 
       <div>
@@ -156,6 +174,6 @@ export default function AgreementForm({ id }: { id: string }) {
           </p>
         </>
       )}
-    </>
+    </div>
   );
 }
