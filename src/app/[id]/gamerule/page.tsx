@@ -15,18 +15,21 @@ export default async function Home({ params }: { params: { id: string } }) {
         <h1 className="text-3xl sm:text-4xl my-5">調査の事前説明</h1>
         <h4>【質問の概要】</h4>
         <div className="textStyle">
-          <p>1000円を2人で分けるゲームを行います。</p>
+          <p>1000円を2人で分ける状況を考えてもらいます。</p>
           <p className="mb-3">
-            2人の参加者は「提案者」と「応答者」に分けられ、以下のルールのゲームを進行します。
+            2人は<span className="underline underline-offset-4">提案者</span>
+            、もしくは
+            <span className="underline underline-offset-4">応答者</span>
+            として以下のルールに沿って分配額を決定します。
           </p>
           <ol className="list-decimal list-inside">
-            <li>提案者が応答者に対し1000円の分配額を提示する</li>
+            <li>提案者が応答者に対し1000円をどう分けるかの提案する。</li>
+            <li>応答者はその提案に対し、受け入れるか断るかを選択する。</li>
             <li>
-              応答者は提示された分配に対し,受け入れるか断るかを選択する．
-            </li>
-            <li>
-              応答者が掲示を受け入れた場合はその金額による分配が行われ，
-              <span className="font-bold">断った場合は提案者と応答者は共にお金を受け取ることはできない．</span>
+              応答者が提案を受け入れた場合はその金額による分配が行われ，
+              <span className="font-bold underline underline-offset-4">
+                断った場合は提案者と応答者は共にお金を受け取ることはできない．
+              </span>
             </li>
           </ol>
         </div>
