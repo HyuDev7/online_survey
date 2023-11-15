@@ -84,7 +84,7 @@ export default function SecondGameForm({
         </p>
 
         {/* make find offer logic */}
-        <p>またその際、あなたに{prevOffer}円を渡すことを提案していました。</p>
+        <p>またその際、あなたに<span className="font-semibold">{prevOffer}円</span>渡すことを提案していました。</p>
 
         <p className="mt-3">いくら相手にお金を渡しますか？</p>
         <p>
