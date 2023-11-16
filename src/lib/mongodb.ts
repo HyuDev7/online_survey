@@ -100,7 +100,7 @@ export async function findSessionId(passedSessionID: string): Promise<boolean> {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
-    console.log("connected from find session id!")
+    console.log("connected from find session id!");
 
     //filter for finding document
     const filter = {
@@ -207,7 +207,7 @@ export async function insertDoc(
   try {
     //connecting to db
     await client.connect();
-    console.log("connected from insert document!")
+    console.log("connected from insert document!");
 
     if ("old" in formData) {
       //check whether doc already exist
@@ -342,7 +342,7 @@ export async function findPath(passedSessionID: string) {
     try {
       // Connect the client to the server	(optional starting in v4.7)
       await client.connect();
-      console.log("connected from find path!")
+      console.log("connected from find path!");
 
       //filter for finding document
       const filter = {
@@ -365,9 +365,47 @@ export async function findPath(passedSessionID: string) {
     }
     return gotPath;
   }
-   const res = await run().catch(console.dir)
-   return res
+  const res = await run().catch(console.dir);
+  return res;
 }
 
+export async function findOrderCondition(passedSessionID: string) {
+  async function run() {
+    let gotAssessCond: any;
+    try {
+      // Connect the client to the server	(optional starting in v4.7)
+      await client.connect();
+      console.log("connected from find order condition!");
 
+      //filter for finding document
+      const filter = {
+        sessionID: passedSessionID,
+      };
 
+      //options of returned document
+      const options = {
+        projection: {
+          _id: 0,
+          passCode: 0,
+          sessionID: 0,
+          firstroute: 0,
+          secondroute: 0,
+          thirdroute: 0,
+          isSent: 0,
+        },
+      };
+
+      //get document
+      gotAssessCond = await userIdCollection.findOne(filter, options);
+    } catch (e) {
+      console.dir(e);
+    } finally {
+      console.log("connection is closed from find order condition!");
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+    return gotAssessCond;
+  }
+  const res = await run().catch(console.dir);
+  return res;
+}
