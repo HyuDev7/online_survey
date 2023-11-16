@@ -409,3 +409,71 @@ export async function findOrderCondition(passedSessionID: string) {
   const res = await run().catch(console.dir);
   return res;
 }
+
+export async function findFirstGame(passedSessionID: string) {
+  async function run() {
+    let firstGame: any;
+    try {
+      // Connect the client to the server	(optional starting in v4.7)
+      await client.connect();
+      console.log("connected from find path!");
+
+      //filter for finding document
+      const filter = {
+        sessionID: passedSessionID,
+      };
+
+      //options of returned document
+      const options = {
+        projection: { _id: 0 },
+      };
+
+      //get document
+      firstGame = await firstGameCollection.findOne(filter, options);
+    } catch (e) {
+      console.dir(e);
+    } finally {
+      console.log("connection is closed from find path!");
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+    return firstGame;
+  }
+  const res = await run().catch(console.dir);
+  return res;
+}
+
+export async function findSecondGame(passedSessionID: string) {
+  async function run() {
+    let secondGame: any;
+    try {
+      // Connect the client to the server	(optional starting in v4.7)
+      await client.connect();
+      console.log("connected from find path!");
+
+      //filter for finding document
+      const filter = {
+        sessionID: passedSessionID,
+      };
+
+      //options of returned document
+      const options = {
+        projection: { _id: 0 },
+      };
+
+      //get document
+      secondGame = await secondGameCollection.findOne(filter, options);
+    } catch (e) {
+      console.dir(e);
+    } finally {
+      console.log("connection is closed from find path!");
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+
+    return secondGame;
+    
+  }
+  const res = await run().catch(console.dir);
+  return res;
+}

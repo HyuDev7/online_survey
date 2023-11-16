@@ -13,7 +13,7 @@ export default function FirstGameForm({
   money: string;
   condition: string;
   sessionId: string;
-  assess_cond: number;
+  assess_cond: boolean;
 }): JSX.Element {
   //initialise form data
   const formData: FirstFormDataType = {
@@ -31,7 +31,8 @@ export default function FirstGameForm({
   }
 
   return (
-    <div className="">
+    <main >
+      <h2 className="text-3xl my-5">１回目の質問</h2>
       <form>
         <div className="mt-5 mb-4 textStyle">
           <p>
@@ -55,7 +56,7 @@ export default function FirstGameForm({
             <span className="font-bold">あなたの取り分として{money}円</span>
             を提案しました。
           </p>
-          <p>この提案を受け入れますか？</p>
+          <p className="mt-3">この提案を受け入れますか？</p>
           <p>
             まず、以下の2つの選択肢から自身の考えに合うものを選んでください。
           </p>
@@ -91,14 +92,14 @@ export default function FirstGameForm({
 
           <div className="mt-7 mb-4 textStyle ">
             <p>
-              次にこの分け方についてどのように感じたか、最も当てはまるものを7つの選択肢の中から1つ選んでください。
+              次にこの分け方についてどのように感じたか、最も当てはまるものを選んでください。
             </p>
-            <p>その後、「次へ進む」ボタンを押してください。</p>
+            <p>その後、次へ進むボタンを押してください。</p>
           </div>
 
           <div
             className={
-              "mb-5 flex" + !assess_cond ? "flex-col" : "flex-col-reverse"
+              "mb-5 flex " + (assess_cond ? "flex-col" : "flex-col-reverse")
             }
           >
             <div className="assessment_radio_button flex mb-1">
@@ -215,6 +216,6 @@ export default function FirstGameForm({
           />
         </div>
       </form>
-    </div>
+    </main>
   );
 }

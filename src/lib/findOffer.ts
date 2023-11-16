@@ -17,7 +17,8 @@ export default async function findOffer(id: string) {
     }
 
     const res = await response.json();
-    firstOffer = res.firstroute;
+    // console.log(res.firstCond)
+    firstOffer = res.firstCond;
 
   } catch (e) {
     console.dir(e);

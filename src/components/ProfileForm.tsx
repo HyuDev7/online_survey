@@ -2,7 +2,6 @@
 import RandomNavigateButton from "./RandomNavigateButton";
 import { ProfileFormDataType } from "@/lib/formDataTypes";
 import { useState } from "react";
-import SplitText from "./SplitText";
 
 export default function ProfileForm({
   sessionId,
@@ -15,8 +14,8 @@ export default function ProfileForm({
     sex: "",
   };
 
-  const text1 = `実験を開始する前に回答いただく方のご年齢と性別を¥n
-  以下の入力欄にご年齢と生物学的性別を入力してください`;
+  // const text1 = `実験を開始する前に回答いただく方のご年齢と性別を¥n
+  // 以下の入力欄にご年齢と生物学的性別を入力してください`;
 
   const [responseBody, setResponseBody] = useState(formData);
 
@@ -30,22 +29,25 @@ export default function ProfileForm({
   }
 
   return (
-    <form>
-      <div className="my-4">
+    <main>
+      <h1 className="text-3xl my-5">ご年齢・性別の回答</h1>
+      <form>
+      {/* <div className="my-4">
         <SplitText text={text1} />
-      </div>
-
-      <label htmlFor="old">ご年齢を入力してください</label>
-      <div>
-        <input
-          className="inputStyle max-w-md"
-          type="number"
-          name="old"
-          id="old"
-          onChange={handleChange}
-          required
-        />
-        歳
+      </div> */}
+      <div className="mt-5">
+        <label htmlFor="old">ご年齢を整数(半角数字)で入力してください</label>
+        <div>
+          <input
+            className="inputStyle max-w-md"
+            type="number"
+            name="old"
+            id="old"
+            onChange={handleChange}
+            required
+          />
+          歳
+        </div>
       </div>
 
       <div className="my-2">
@@ -76,5 +78,7 @@ export default function ProfileForm({
         nextNum={1}
       />
     </form>
+    </main>
+    
   );
 }

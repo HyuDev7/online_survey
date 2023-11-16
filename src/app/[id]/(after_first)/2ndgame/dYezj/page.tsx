@@ -2,6 +2,7 @@ import SecondGameForm from "@/components/SecondGameForm";
 import { validateSessionID } from "@/lib/validateSessionId";
 import { notFound } from "next/navigation";
 import findOffer from "@/lib/findOffer";
+import findFirstReaction from "@/lib/findFirstReaction";
 
 export default async function Page({ params }: { params: { id: string } }) {
   //read sessionId in url and validate it
@@ -12,14 +13,19 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   const firstOffer = await findOffer(params.id);
+  // console.log(firstOffer)
+
+  const firstreaction =await findFirstReaction(params.id);
+  // console.log(firstreaction)
 
   return (
     <SecondGameForm
       sessionId={sessionID}
-      desc="異なる"
+      desc="同じ"
       passedGameType="DG"
-      passedCondition="new"
+      passedCondition="continue"
       prevCondition={firstOffer}
+      firstGame={firstreaction}
     />
   );
 }

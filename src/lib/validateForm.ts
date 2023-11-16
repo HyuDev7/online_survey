@@ -2,11 +2,15 @@ import {
   ProfileFormDataType,
   FirstFormDataType,
   SecondFormDataType,
-  ThirdFormDataType
+  ThirdFormDataType,
 } from "./formDataTypes";
 
 export function validateForm(
-  formData: FirstFormDataType | SecondFormDataType |ThirdFormDataType| ProfileFormDataType
+  formData:
+    | FirstFormDataType
+    | SecondFormDataType
+    | ThirdFormDataType
+    | ProfileFormDataType
 ) {
   //store the result of validation
   let validationResult = false;
@@ -17,31 +21,47 @@ export function validateForm(
     validationResult = validateFirstForm(formData as FirstFormDataType);
   } else if (formData.hasOwnProperty("secondDistribution")) {
     validationResult = validateSecondForm(formData as SecondFormDataType);
-  }else if(formData.hasOwnProperty("thirdDistribution")){
-    validationResult=validateThirdForm(formData as ThirdFormDataType)
+  } else if (formData.hasOwnProperty("thirdDistribution")) {
+    validationResult = validateThirdForm(formData as ThirdFormDataType);
   }
 
   return validationResult;
 }
 
 export function validateProfileForm(profileForm: ProfileFormDataType) {
-  const { sessionID, old, sex } = profileForm;
+  const { old, sex } = profileForm;
 
   //validation of sex
   if (sex === "") {
     return false;
   }
 
+  //storing a result of validation
+  let valiRes: boolean;
+
+  //convert string old into number old
   const numOld = Number(old);
 
   //validation of old
-  if (old === null) {
-    return false;
-  } else if (numOld < 18 || numOld > 100) {
-    return false;
-  } else {
-    return true;
+  if (old === null || old.length === 0) {
+    return (valiRes = false);
   }
+
+  //validation of over or under input
+  if (numOld < 18 || numOld > 100) {
+    return (valiRes = false);
+  } else {
+    valiRes = true;
+  }
+
+  //validation of integer
+  if (Number.isInteger(numOld)) {
+    valiRes = true;
+  } else {
+    valiRes = false;
+  }
+
+  return valiRes;
 }
 
 export function validateFirstForm(firstForm: FirstFormDataType) {
@@ -49,19 +69,18 @@ export function validateFirstForm(firstForm: FirstFormDataType) {
   let res = false;
   //validation of offer
   if (offer === null) {
-    return(res = false);
+    return (res = false);
   } else {
     res = true;
   }
 
   //validation of assessment
   if (assessment === null) {
-    return(res= false);
+    return (res = false);
   } else {
-    res= true;
+    res = true;
   }
   return res;
-
 }
 
 export function validateSecondForm(secondForm: SecondFormDataType) {
@@ -76,6 +95,7 @@ export function validateSecondForm(secondForm: SecondFormDataType) {
 
   //convert string distribution into number one
   const numDistri = Number(secondDistribution);
+
   //validation of over or under input
   if (numDistri > 1000 || numDistri < 0) {
     return (valiRes = false);

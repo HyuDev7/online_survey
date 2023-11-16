@@ -37,7 +37,7 @@ export interface UserIdType {
 
 export interface ProfileFormDataType {
   sessionID: string;
-  old: number | null;
+  old: string | null;
   sex: string;
 }
 

@@ -1,15 +1,15 @@
-export default async function findOrder(id: string) {
-  let assessOrder: any;
+export default async function findFirstReaction(sessionId: string) {
+  let firstGame: any;
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_Url}/api/findorder`,
+      `${process.env.NEXT_PUBLIC_Url}/api/findfirstreaction`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(id),
+        body: JSON.stringify(sessionId),
       }
     );
 
@@ -20,11 +20,10 @@ export default async function findOrder(id: string) {
     }
 
     const res = await response.json();
-    assessOrder = res.assessCond;
-    // console.log(assessOrder);
+    // console.log(res.firstCond)
+    firstGame = res.firstGame;
   } catch (e) {
     console.dir(e);
   }
-
-  return assessOrder;
+  return firstGame;
 }
