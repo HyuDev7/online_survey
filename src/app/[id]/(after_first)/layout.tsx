@@ -25,7 +25,7 @@ export default function RootLayout({
         <div className="flex flex-col min-h-screen">
           <header className="border-b-2 border-black font-bold tracking-tight w-full">
             <div className="mx-3 sm:container sm:mx-auto">
-              <nav className="flex justify-between items-center">
+              <nav className="flex justify-between items-end">
                 <div>
                   <h1 className="text-lg sm:text-4xl my-3">
                     応用経済分析研究室
@@ -35,7 +35,7 @@ export default function RootLayout({
                 <div className="buttons flex">
                   <div className="text-center mx-1">
                     <Link
-                      href={`/description`}
+                      href={`/${params.id}/check`}
                       target="_blank"
                       rel="noreferrer noopener"
                       className="buttonStyle mb-0 min-w-full text-xl p-0.5 font-normal"
