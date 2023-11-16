@@ -39,9 +39,7 @@ export default async function Home({ params }: { params: { id: string } }) {
           <ol className="list-decimal list-inside">
             <li>
               提案者が応答者に対し、
-              <span className="font-semibold">
-                自身に700円、相手に300円
-              </span>
+              <span className="font-semibold">自身に700円、相手に300円</span>
               を渡す提案をする。
             </li>
             <li>
@@ -95,6 +93,7 @@ export default async function Home({ params }: { params: { id: string } }) {
           それでは、まずは以下のボタンから回答される方のご年齢・性別を入力してください。
           その後、アンケートにお答えください。
         </div>
+
         <Link className="inputStyle" href={`/${sessionID}/profile`}>
           回答者情報の入力
         </Link>
