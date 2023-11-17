@@ -85,11 +85,6 @@ export default function RandomNavigateButton(props: ButtonPropType) {
     }
 
     //add clicked time to passed form data
-    const keyIndex = Object.keys(formData);
-    const lastElement = keyIndex.slice(-1);
-    const lastElementName = lastElement[0];
-    console.log(formData);
-    console.log(lastElementName);
     if ("old" in formData) {
       (formData as ProfileFormDataType)["profileCreatedAt"] = new Date();
     } else if ("firstCondition" in formData) {
@@ -101,8 +96,6 @@ export default function RandomNavigateButton(props: ButtonPropType) {
     } else if ("compAssessment" in formData) {
       (formData as AssessmentFormDataType)["assessmentCreatedAt"] = new Date();
     }
-
-    console.log(formData);
 
     //send formData to DB
     await sendFormData(formData);
