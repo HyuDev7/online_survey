@@ -38,7 +38,7 @@ export default function RootLayout({
                       href={`/${params.id}/check`}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="buttonStyle mb-0 min-w-full text-xl p-0.5 font-normal"
+                      className="buttonStyle mb-0 min-w-full text-sm sm:text-xl p-0.5 font-normal"
                     >
                       回答の確認
                     </Link>
@@ -52,7 +52,7 @@ export default function RootLayout({
                       href={`/description`}
                       target="_blank"
                       rel="noreferrer noopener"
-                      className="buttonStyle mb-0 min-w-full text-xl p-0.5 font-normal"
+                      className="buttonStyle mb-0 min-w-full text-sm sm:text-xl p-0.5 font-normal"
                     >
                       質問の事前説明
                     </Link>
