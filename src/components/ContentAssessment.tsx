@@ -14,6 +14,7 @@ export default function ContentAssessment({
   const formData: AssessmentFormDataType = {
     sessionID: sessionId,
     compAssessment:null,
+    assessmentCreatedAt:null
   };
   const [responseBody, setResponseBody] = useState(formData);
 

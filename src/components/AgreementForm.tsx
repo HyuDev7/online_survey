@@ -36,6 +36,8 @@ export default function AgreementForm({ id }: { id: string }) {
       firstAgreement: "",
       secondAgreement: agreement.toString(),
       example: example,
+      firstCreatedAt: null,
+      secondCreatedAt: new Date(),
     };
 
     try {

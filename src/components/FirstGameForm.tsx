@@ -18,9 +18,10 @@ export default function FirstGameForm({
   //initialise form data
   const formData: FirstFormDataType = {
     sessionID: sessionId,
-    firstGame: condition,
+    firstCondition: condition,
     offer: null,
     assessment: null,
+    firstGameCreatedAt:null,
   };
   const [responseBody, setResponseBody] = useState(formData);
 

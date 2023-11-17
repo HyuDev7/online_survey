@@ -12,6 +12,7 @@ export default function ProfileForm({
     sessionID: sessionId,
     old: null,
     sex: "",
+    profileCreatedAt:null,
   };
 
   // const text1 = `実験を開始する前に回答いただく方のご年齢と性別を¥n

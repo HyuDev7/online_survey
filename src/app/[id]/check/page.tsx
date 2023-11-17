@@ -10,9 +10,9 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   //determin a distribution from offerer in 1st game
   let offerMoney: number;
-  if (firstGame.firstGame === "happy") {
+  if (firstGame.firstCondition === "happy") {
     offerMoney = 750;
-  } else if (firstGame.firstGame === "angry") {
+  } else if (firstGame.firstCondition === "angry") {
     offerMoney = 250;
   } else {
     offerMoney = 500;

@@ -19,7 +19,7 @@ export function validateForm(
 
   if (formData.hasOwnProperty("old")) {
     validationResult = validateProfileForm(formData as ProfileFormDataType);
-  } else if (formData.hasOwnProperty("firstGame")) {
+  } else if (formData.hasOwnProperty("firstCondition")) {
     validationResult = validateFirstForm(formData as FirstFormDataType);
   } else if (formData.hasOwnProperty("secondDistribution")) {
     validationResult = validateSecondForm(formData as SecondFormDataType);

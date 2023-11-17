@@ -27,6 +27,7 @@ export default function ThirdGameForm({
     thirdCondition: passedCondition,
     thirdGameType: passedGameType,
     thirdDistribution: null,
+    thirdGameCreatedAt: null,
   };
   const [responseBody, setResponseBody] = useState(formData);
 
@@ -86,7 +87,7 @@ export default function ThirdGameForm({
 
           <p className="mt-3">いくら相手にお金を渡しますか？</p>
           <p>
-          渡す金額を以下の欄に整数(0以上1000以下の半角数字)で入力してください。
+            渡す金額を以下の欄に整数(0以上1000以下の半角数字)で入力してください。
           </p>
         </div>
 

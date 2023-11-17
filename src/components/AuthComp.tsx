@@ -61,6 +61,8 @@ export default function AuthComp() {
         firstAgreement: isAgree.toString(),
         secondAgreement: "false",
         example: "",
+        firstCreatedAt: new Date(),
+        secondCreatedAt: null,
       };
 
       const agreeRes = await fetch("/api/agree", {

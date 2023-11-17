@@ -2,7 +2,14 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useState } from "react";
-import { ButtonPropType } from "@/lib/formDataTypes";
+import {
+  ButtonPropType,
+  ProfileFormDataType,
+  FirstFormDataType,
+  SecondFormDataType,
+  ThirdFormDataType,
+  AssessmentFormDataType,
+} from "@/lib/formDataTypes";
 import { validateForm } from "@/lib/validateForm";
 import sendFormData from "@/lib/sendFormData";
 
@@ -54,15 +61,12 @@ export default function RandomNavigateButton(props: ButtonPropType) {
       childpass = "contentAssess";
       // router.prefetch(`/${grandParentPass}/${childpass}`);
       router.push(`/${grandParentPass}/${childpass}`);
-
     } else if (childpass === "fin") {
       childpass = "debriefing";
       router.push(`/${grandParentPass}/${childpass}`);
-
     } else {
       // router.prefetch(`/${grandParentPass}/${parentpass}/${childpass}`);
       router.push(`/${grandParentPass}/${parentpass}/${childpass}`);
-
     }
   }
 
@@ -79,6 +83,26 @@ export default function RandomNavigateButton(props: ButtonPropType) {
       setIsFail(true);
       return;
     }
+
+    //add clicked time to passed form data
+    const keyIndex = Object.keys(formData);
+    const lastElement = keyIndex.slice(-1);
+    const lastElementName = lastElement[0];
+    console.log(formData);
+    console.log(lastElementName);
+    if ("old" in formData) {
+      (formData as ProfileFormDataType)["profileCreatedAt"] = new Date();
+    } else if ("firstCondition" in formData) {
+      (formData as FirstFormDataType)["firstGameCreatedAt"] = new Date();
+    } else if ("secondCondition" in formData) {
+      (formData as SecondFormDataType)["secondGameCreatedAt"] = new Date();
+    } else if ("thirdCondition" in formData) {
+      (formData as ThirdFormDataType)["thirdGameCreatedAt"] = new Date();
+    } else if ("compAssessment" in formData) {
+      (formData as AssessmentFormDataType)["assessmentCreatedAt"] = new Date();
+    }
+
+    console.log(formData);
 
     //send formData to DB
     await sendFormData(formData);

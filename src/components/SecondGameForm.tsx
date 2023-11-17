@@ -27,6 +27,7 @@ export default function SecondGameForm({
     secondCondition: passedCondition,
     secondGameType: passedGameType,
     secondDistribution: null,
+    secondGameCreatedAt: null,
   };
 
   const [responseBody, setResponseBody] = useState(formData);

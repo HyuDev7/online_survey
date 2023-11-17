@@ -148,6 +148,7 @@ export async function updateAgreement(
       $set: {
         secondAgreement: passedAgreementForm.secondAgreement,
         example: passedAgreementForm.example,
+        secondCreatedAt:passedAgreementForm.secondCreatedAt
       },
     };
 
@@ -235,7 +236,7 @@ export async function insertDoc(
       }
     }
 
-    if ("firstGame" in formData) {
+    if ("firstCondition" in formData) {
       //check whether doc already exist
       const flag = await findSessionIdInEachDoc(
         formData.sessionID,
@@ -244,7 +245,7 @@ export async function insertDoc(
       const filter = { sessionID: formData.sessionID };
       const updateDocument = {
         $set: {
-          firstGame: formData.firstGame,
+          firstCondition: formData.firstCondition,
           offer: formData.offer,
           assessment: formData.assessment,
         },
