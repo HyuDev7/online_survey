@@ -118,7 +118,7 @@ export default function ThirdGameForm({
             buttonWord="実験の事後説明へ移る"
             nextNum={4}
             grandParentPass={sessionId}
-            parentpass="skip"
+            parentpass="assessment"
           />
         </div>
       </form>

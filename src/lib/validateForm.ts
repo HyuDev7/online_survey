@@ -3,6 +3,7 @@ import {
   FirstFormDataType,
   SecondFormDataType,
   ThirdFormDataType,
+  AssessmentFormDataType,
 } from "./formDataTypes";
 
 export function validateForm(
@@ -11,6 +12,7 @@ export function validateForm(
     | SecondFormDataType
     | ThirdFormDataType
     | ProfileFormDataType
+    | AssessmentFormDataType
 ) {
   //store the result of validation
   let validationResult = false;
@@ -23,6 +25,8 @@ export function validateForm(
     validationResult = validateSecondForm(formData as SecondFormDataType);
   } else if (formData.hasOwnProperty("thirdDistribution")) {
     validationResult = validateThirdForm(formData as ThirdFormDataType);
+  } else if (formData.hasOwnProperty("compAssessment")) {
+    validationResult = validateAssessForm(formData as AssessmentFormDataType);
   }
 
   return validationResult;
@@ -138,4 +142,17 @@ export function validateThirdForm(secondForm: ThirdFormDataType) {
   }
 
   return valiRes;
+}
+
+export function validateAssessForm(assessForm: AssessmentFormDataType) {
+  const { compAssessment } = assessForm;
+  let res = false;
+
+  //validation of assessment
+  if (compAssessment === null) {
+    return (res = false);
+  } else {
+    res = true;
+  }
+  return res;
 }

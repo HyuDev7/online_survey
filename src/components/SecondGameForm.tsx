@@ -9,7 +9,6 @@ export default function SecondGameForm({
   passedGameType,
   desc,
   prevCondition,
-  firstGame,
 }: {
   passedCondition: string;
   sessionId: string;
@@ -20,12 +19,6 @@ export default function SecondGameForm({
     secondroute: string;
     thirdroute: string;
     assessmentOrder: boolean;
-  };
-  firstGame: {
-    sessionID: string;
-    firstGame: string;
-    offer: string;
-    assessment: string;
   };
 }): JSX.Element {
   //initialise form data
@@ -54,15 +47,6 @@ export default function SecondGameForm({
   } else {
     prevOffer = 750;
   }
-
-  // const firstReaction = firstGame.offer;
-  // let firstOffer: string;
-  // if (firstReaction === "accept") {
-  //   firstOffer = "受け入れ";
-  // } else {
-  //   firstOffer = "拒否し";
-  // }
-  // // console.log(firstReaction);
 
   return (
     <main>

@@ -13,10 +13,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   const firstOffer = await findOffer(params.id);
-  // console.log(firstOffer)
-
-  const firstreaction =await findFirstReaction(params.id);
-  // console.log(firstreaction)
 
   return (
     <SecondGameForm
@@ -25,7 +21,6 @@ export default async function Page({ params }: { params: { id: string } }) {
       passedGameType="DG"
       passedCondition="continue"
       prevCondition={firstOffer}
-      firstGame={firstreaction}
     />
   );
 }

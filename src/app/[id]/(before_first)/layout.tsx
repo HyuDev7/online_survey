@@ -39,7 +39,7 @@ export default function RootLayout({
                       rel="noreferrer noopener"
                       className="buttonStyle mb-0 min-w-full text-xl p-0.5 font-normal"
                     >
-                      調査の事前説明
+                      質問の事前説明
                     </Link>
                     <p className="text-sm font-normal">
                       ※事前説明が別タブで開きます

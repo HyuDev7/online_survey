@@ -12,11 +12,14 @@ export default async function Home({ params }: { params: { id: string } }) {
   return (
     <main>
       <div className="container mx-auto">
-        <h1 className="text-3xl sm:text-4xl my-5">調査の事前説明</h1>
+        <h1 className="text-3xl sm:text-4xl my-5">質問の事前説明</h1>
         <h4>【質問の概要】</h4>
         <div className="textStyle">
           <p>
             1000円を提案者と応答者の2人で、以下のルールに沿って分けるゲームを考えてもらいます。
+          </p>
+          <p className="text-sm text-red-600">
+            ※ここでいうゲームとはルールに則った交渉のことを指します。
           </p>
           
           <ol className="list-decimal list-inside mt-3">
@@ -71,13 +74,13 @@ export default async function Home({ params }: { params: { id: string } }) {
 
         <h4>【回答上の注意】</h4>
         <div className="textStyle">
-          <p>
-            <span className="underline underline-offset-4">
-              一度送信した内容はその後、修正することはできません
+          <p>一度送信した内容はその後、
+            <span className="font-semibold">
+              修正することはできません
             </span>
-            。 また、実験開始から終了までの間、
-            <span className="underline underline-offset-4">
-              ブラウザの戻るボタンはご使用にならないでください
+            。 また、実験開始から終了までの間、ブラウザの戻るボタンは
+            <span className="font-semibold">
+              ご使用にならないでください
             </span>
             。 データが正常に送信・処理されない可能性があります。
             本調査は完全にオンライン上で行われており、参加者の匿名性は確保されています。

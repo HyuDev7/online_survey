@@ -1,11 +1,12 @@
 import findFirstReaction from "@/lib/findFirstReaction";
 import findSecondReaction from "@/lib/findSecondReaction";
+import { findThirdGame } from "@/lib/mongodb";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  console.log(params.id);
   //get answers from db
   let firstGame = await findFirstReaction(params.id);
   let secondGame = await findSecondReaction(params.id);
+  let thirdGame = await findThirdGame(params.id);
 
   //determin a distribution from offerer in 1st game
   let offerMoney: number;
@@ -19,10 +20,10 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <h1 className="my-5">回答結果</h1>
+      <h1 className="my-5">これまでの回答</h1>
       <div className="textStyle">
-        <p>ご協力いただきありがとうございました。</p>
         <p>以下がご自身の回答です。</p>
+        <p className="text-sm mt-1 text-red-600">※このページには戻るボタンがありません。確認が終わり次第タブを閉じていただいて構いません。</p>
       </div>
 
       <div className="textStyle text-xl">
@@ -35,7 +36,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <p className="mt-1">
           あなたはこの提案を
           <span className="underline underline-offset-4">
-            {firstGame.offer === "accept" ? "受け入れ" : "断っ"}た
+            {firstGame.offer === "accept" ? "受け入れ" : "断り"}ました
           </span>
           。
         </p>
@@ -45,15 +46,35 @@ export default async function Page({ params }: { params: { id: string } }) {
         <div className="textStyle text-xl">
           <h3 className="underline underline-offset-4 mb-3">2回目の質問</h3>
           <p>
-            1000円の分け方について、1回目と
-            {secondGame.secondCondition === "new" ? "異なる" : "同じ"}
-            相手に対して
+            1000円の分け方について、1回目の相手と
+            <span className="font-semibold">
+              {secondGame.secondCondition === "new" ? "異なる" : "同じ"}
+            </span>
+            人に対して
           </p>
           <div>
             <p>相手の取り分 : {secondGame.secondDistribution}円</p>
-            <p>自分の取り分 : {1000-secondGame.secondDistribution}円</p>
+            <p>自分の取り分 : {1000 - secondGame.secondDistribution}円</p>
           </div>
-          <div className="mt-1">を提案した。</div>
+          <div className="mt-1">を提案しました。</div>
+        </div>
+      )}
+
+      {thirdGame === null ? null : (
+        <div className="textStyle text-xl">
+          <h3 className="underline underline-offset-4 mb-3">3回目の質問</h3>
+          <p>
+            1000円の分け方について、1回目の相手と
+            <span className="font-semibold">
+              {thirdGame.thirdCondition === "new" ? "異なる" : "同じ"}
+            </span>
+            人に対して
+          </p>
+          <div>
+            <p>相手の取り分 : {thirdGame.thirdDistribution}円</p>
+            <p>自分の取り分 : {1000 - thirdGame.thirdDistribution}円</p>
+          </div>
+          <div className="mt-1">を提案しました。</div>
         </div>
       )}
     </>

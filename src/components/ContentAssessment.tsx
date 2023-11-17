@@ -1,125 +1,114 @@
-<main>
-<div className="container mx-auto">
-  <h1 className="text-3xl sm:text-4xl my-5">質問の理解度確認</h1>
-  <div className="textStyle">
-    <p>
-     これまでの質問についてどのくらい理解しているか、ご自身の感覚に最も近い選択を以下から選んでください。
-    </p>s
-  </div>
+"use client";
+import RandomNavigateButton from "./RandomNavigateButton";
+import { AssessmentFormDataType } from "@/lib/formDataTypes";
+import { useState } from "react";
 
-  <div
-      className={
-        "mb-5 flex " + (assess_cond ? "flex-col" : "flex-col-reverse")
-      }
-    >
-      <div className="assessment_radio_button flex mb-1">
-        <div className="mr-1">
-          <input
-            type="radio"
-            id="1"
-            name="assessment"
-            value="1"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="1">1(相手にとても有利)</label>
-        </div>
-      </div>
+export default function ContentAssessment({
+  sessionId,
+  assess_cond,
+}: {
+  sessionId: string;
+  assess_cond: boolean;
+}): JSX.Element {
+  //initialise form data
+  const formData: AssessmentFormDataType = {
+    sessionID: sessionId,
+    compAssessment:null,
+  };
+  const [responseBody, setResponseBody] = useState(formData);
 
-      <div className="assessment_radio_button flex mb-1">
-        <div className="mr-1">
-          <input
-            type="radio"
-            id="2"
-            name="assessment"
-            value="2"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="2">2(相手に有利)</label>
-        </div>
-      </div>
+  //function for handling input changes
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setResponseBody({ ...responseBody, [name]: value });
+  }
 
-      <div className="assessment_radio_button flex mb-1">
-        <div className="mr-1">
-          <input
-            type="radio"
-            id="3"
-            name="assessment"
-            value="3"
-            onChange={handleChange}
-          />
+  return (
+    <main>
+      <h1 className="text-3xl my-5">これまでの質問について</h1>
+      <form>
+        <div className="mt-5 mb-4 textStyle">
+          <p>質問へのご回答、お疲れ様でした。</p>
+          <p>最後に質問の理解度についてお答えください。</p>
+          <p className="mb-3">
+            ご自身の質問の理解度について最も当てはまるものを以下の選択肢からお選びください。
+          </p>
         </div>
-        <div>
-          <label htmlFor="3">3(相手に少し有利)</label>
-        </div>
-      </div>
 
-      <div className="assessment_radio_button flex mb-1">
-        <div className="mr-1">
-          <input
-            type="radio"
-            id="4"
-            name="assessment"
-            value="4"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="4">4(公平)</label>
-        </div>
-      </div>
+        <div
+          className={
+            "mb-5 flex " + (assess_cond ? "flex-col" : "flex-col-reverse")
+          }
+        >
+          <div className="assessment_radio_button flex mb-1">
+            <div className="mr-1">
+              <input
+                type="radio"
+                id="1"
+                name="compAssessment"
+                value="1"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="1">1(完全に理解している)</label>
+            </div>
+          </div>
 
-      <div className="assessment_radio_button flex mb-1">
-        <div className="mr-1">
-          <input
-            type="radio"
-            id="5"
-            name="assessment"
-            value="5"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="5">5(自分に少し有利)</label>
-        </div>
-      </div>
-      <div className="assessment_radio_button flex mb-1">
-        <div className="mr-1">
-          <input
-            type="radio"
-            id="6"
-            name="assessment"
-            value="6"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="6">6(自分に有利)</label>
-        </div>
-      </div>
+          <div className="assessment_radio_button flex mb-1">
+            <div className="mr-1">
+              <input
+                type="radio"
+                id="2"
+                name="compAssessment"
+                value="2"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="2">2(まぁまぁ理解している)</label>
+            </div>
+          </div>
 
-      <div className="assessment_radio_button flex mb-1">
-        <div className="mr-1">
-          <input
-            type="radio"
-            id="7"
-            name="assessment"
-            value="7"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="7">7(自分にとても有利)</label>
-        </div>
-      </div>
-    </div>
+          <div className="assessment_radio_button flex mb-1">
+            <div className="mr-1">
+              <input
+                type="radio"
+                id="3"
+                name="compAssessment"
+                value="3"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="3">3(あまり理解していない)</label>
+            </div>
+          </div>
 
-  <Link className="inputStyle" href={`/${sessionID}/profile`}>
-    回答者情報の入力
-  </Link>
+          <div className="assessment_radio_button flex mb-1">
+            <div className="mr-1">
+              <input
+                type="radio"
+                id="4"
+                name="compAssessment"
+                value="4"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="4">4(全く理解していない)</label>
+            </div>
+          </div>
+        </div>
 
-</div>
-</main>
+        <RandomNavigateButton
+          formData={responseBody}
+          buttonWord="次のページへ進む"
+          grandParentPass={sessionId}
+          parentpass={"fin"}
+          nextNum={4}
+        />
+      </form>
+    </main>
+  );
+}

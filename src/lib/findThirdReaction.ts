@@ -1,9 +1,9 @@
 export default async function findSecondReaction(sessionId: string) {
-    let secondGame: any;
+    let thirdGame: any;
   
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_Url}/api/findsecondreaction`,
+        `${process.env.NEXT_PUBLIC_Url}/api/findthirdreaction`,
         {
           method: "POST",
           headers: {
@@ -21,11 +21,11 @@ export default async function findSecondReaction(sessionId: string) {
       }
   
       const res = await response.json();
-      secondGame = res.secondGame;
-
+      thirdGame = res.thirdGame;
+      
     } catch (e) {
       console.dir(e);
     }
-    return secondGame;
+    return thirdGame;
   }
   

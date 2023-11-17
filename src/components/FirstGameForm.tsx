@@ -32,7 +32,7 @@ export default function FirstGameForm({
 
   return (
     <main >
-      <h2 className="text-3xl my-5">１回目の質問</h2>
+      <h1 className="text-3xl my-5">１回目の質問</h1>
       <form>
         <div className="mt-5 mb-4 textStyle">
           <p>

@@ -1,6 +1,7 @@
 import { validateSessionID } from "@/lib/validateSessionId";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import ContentAssessment from "@/components/ContentAssessment";
+import findOrder from "@/lib/findOrder";
 
 export default async function Home({ params }: { params: { id: string } }) {
   const sessionID = params.id;
@@ -9,5 +10,11 @@ export default async function Home({ params }: { params: { id: string } }) {
     notFound();
   }
 
-  return ;
+  const assessCond = await findOrder(sessionID);
+
+  return (
+    <div>
+      <ContentAssessment sessionId={sessionID} assess_cond={assessCond} />
+    </div>
+  );
 }

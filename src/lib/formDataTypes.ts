@@ -1,13 +1,14 @@
 export interface ButtonPropType {
   buttonWord: string;
-  nextNum?:number;
+  nextNum?: number;
   grandParentPass?: string;
   parentpass: string;
   formData:
     | FirstFormDataType
     | SecondFormDataType
     | ThirdFormDataType
-    | ProfileFormDataType;
+    | ProfileFormDataType
+    | AssessmentFormDataType;
 }
 
 export interface FirstFormDataType {
@@ -29,6 +30,11 @@ export interface ThirdFormDataType {
   thirdGameType: string;
   thirdCondition: string;
   thirdDistribution: string | null;
+}
+
+export interface AssessmentFormDataType {
+  sessionID: string;
+  compAssessment: string | null;
 }
 
 export interface UserIdType {

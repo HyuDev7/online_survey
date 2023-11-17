@@ -1,16 +1,21 @@
-
 export default function Page() {
-
   return (
     <main>
       <div className="container mx-auto">
-        <h1 className="text-3xl sm:text-4xl my-5">調査の事前説明</h1>
+        <h1 className="text-3xl sm:text-4xl my-5">質問の事前説明</h1>
+        <div className="textStyle">
+          <p>本ページは質問の事前説明ページです。</p>
+          <p className="text-sm mt-1 text-red-600">
+            ※このページには戻るボタンがありません。確認が終わり次第タブを閉じていただいて構いません。
+          </p>
+        </div>
+
         <h4>【質問の概要】</h4>
         <div className="textStyle">
           <p>
             1000円を提案者と応答者の2人で、以下のルールに沿って分けるゲームを考えてもらいます。
           </p>
-          
+
           <ol className="list-decimal list-inside mt-3">
             <li>提案者が応答者に対して1000円をどう分けるかを提案する。</li>
             <li>応答者はその提案に対して受け入れるか断るかを選択する。</li>
@@ -22,7 +27,6 @@ export default function Page() {
             </li>
           </ol>
         </div>
-
 
         <h4>【質問について】</h4>
         <div className="textStyle">
@@ -50,7 +54,6 @@ export default function Page() {
             回答について、特定の正解などはありません。ご自身の考えに最も近い回答をしてください。
           </p>
         </div>
-        
       </div>
     </main>
   );
