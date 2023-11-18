@@ -16,7 +16,7 @@ export default async function findSecondReaction(sessionId: string) {
   
       if (!response.ok) {
         const message = `an error occurred : ${response.statusText}`;
-        window.alert(message);
+        // window.alert(message);
         return;
       }
   

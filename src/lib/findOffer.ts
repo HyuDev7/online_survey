@@ -12,7 +12,7 @@ export default async function findOffer(id: string) {
 
     if (!response.ok) {
       const message = `an error occurred : ${response.statusText}`;
-      window.alert(message);
+      // window.alert(message);
       return;
     }
 

@@ -51,7 +51,7 @@ export default function AgreementForm({ id }: { id: string }) {
 
       if (!response.ok) {
         const message = `an error occurred : ${response.statusText}`;
-        window.alert(message);
+        // window.alert(message);
         setIsPending(false);
         setIsFail(true);
         return;
