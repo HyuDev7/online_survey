@@ -13,8 +13,8 @@ export default function ContentAssessment({
   //initialise form data
   const formData: AssessmentFormDataType = {
     sessionID: sessionId,
-    compAssessment:null,
-    assessmentCreatedAt:null
+    compAssessment: null,
+    assessmentCreatedAt: null,
   };
   const [responseBody, setResponseBody] = useState(formData);
 
@@ -30,9 +30,8 @@ export default function ContentAssessment({
       <form>
         <div className="mt-5 mb-4 textStyle">
           <p>質問へのご回答、お疲れ様でした。</p>
-          <p>最後に質問の理解度についてお答えください。</p>
           <p className="mb-3">
-            ご自身の質問の理解度について最も当てはまるものを以下の選択肢からお選びください。
+            最後に、これまでの質問についてのあなたの理解度について、以下の選択肢からお選びください。
           </p>
         </div>
 
@@ -67,7 +66,7 @@ export default function ContentAssessment({
               />
             </div>
             <div>
-              <label htmlFor="2">2(まぁまぁ理解している)</label>
+              <label htmlFor="2">2(まあまあ理解している)</label>
             </div>
           </div>
 

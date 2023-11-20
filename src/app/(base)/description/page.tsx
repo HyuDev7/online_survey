@@ -20,7 +20,7 @@ export default function Page() {
             <li>提案者が応答者に対して1000円をどう分けるかを提案する。</li>
             <li>応答者はその提案に対して受け入れるか断るかを選択する。</li>
             <li>
-              応答者が提案を受け入れた場合はその金額による分配が行われ，
+              応答者が提案を受け入れた場合はその金額による分配が行われ、
               <span className="font-bold underline underline-offset-4">
                 断った場合は提案者と応答者は共にお金を受け取ることはできない．
               </span>

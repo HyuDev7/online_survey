@@ -98,7 +98,7 @@ export default function AgreementForm({ id }: { id: string }) {
       <div className="textStyle">
         <p>
           提示された金額の違いがその後の分配行動にどう影響するか、回答者の自然な反応を調査するために、
-          事実はと異なる説明を行いました。ご理解いただければ幸いです。
+          事実と異なる内容を事前説明ではお伝えしました。ご理解いただければ幸いです。
         </p>
       </div>
 
