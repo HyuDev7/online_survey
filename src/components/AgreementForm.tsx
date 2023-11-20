@@ -36,6 +36,8 @@ export default function AgreementForm({ id }: { id: string }) {
       firstAgreement: "",
       secondAgreement: agreement.toString(),
       example: example,
+      firstCreatedAt: null,
+      secondCreatedAt: new Date(),
     };
 
     try {
@@ -49,7 +51,7 @@ export default function AgreementForm({ id }: { id: string }) {
 
       if (!response.ok) {
         const message = `an error occurred : ${response.statusText}`;
-        window.alert(message);
+        // window.alert(message);
         setIsPending(false);
         setIsFail(true);
         return;
@@ -69,7 +71,7 @@ export default function AgreementForm({ id }: { id: string }) {
       <div className="textStyle">
         <p>
           ご協力いただきありがとうございました。本ページはアンケート調査の事後説明ページです。
-          改めて調査の目的を説明したのち、データの提供について同意するかをお答えいただければと思います。
+          改めて調査の目的を説明したのち、データ提供の同意についてお答えいただければと思います。
         </p>
       </div>
 
@@ -77,7 +79,7 @@ export default function AgreementForm({ id }: { id: string }) {
         <h3 className="mb-1">【調査の目的について】</h3>
         <p>
           調査の事前説明でも述べたとおり、本アンケートの目的はお金の分配に関する調査を行うことです。
-          ですが正確には初めに提示された金額がその後の分配行動にどのような影響を及ぼすかを調べることが本アンケートの主目的となります。
+          正確には初めに提示された金額がその後の分配行動にどのような影響を及ぼすかを調べることが本アンケートの主目的となります。
         </p>
         <p>
           そのため、1回目の質問時には全ての参加者に
@@ -89,7 +91,7 @@ export default function AgreementForm({ id }: { id: string }) {
           の分配額がランダムに提示されていました。
           また2回目、回答者によっては3回目の質問ではその後の分配行動を調査するため、回答者全員が
           <span className="font-bold">提案者</span>に割り当てられています。
-          こちらも実験の事前説明で説明したものとは異なっております。
+          これらは実験の事前説明で説明したものとは異なっております。
         </p>
       </div>
 
@@ -101,7 +103,7 @@ export default function AgreementForm({ id }: { id: string }) {
       </div>
 
       <div className="textStyle">
-        調査に関して何か不審に思った点や、コメントなどがあれば下の欄にご記入ください。
+        調査に関してコメントや、不審に思った点などがあれば下の欄にご記入ください。
         <div className="mt-1">
           <textarea
             id="example"
@@ -117,7 +119,7 @@ export default function AgreementForm({ id }: { id: string }) {
       <h3 className="mb-1">【データ提供の可否について】</h3>
       <div className="textStyle">
         <p>
-          以上の内容を踏まえた上で、データの提供について同意いただけるのであれば、下のチェックボックスをクリックし、
+          以上を踏まえた上で、データの提供に同意していただけるのであれば、
           <span className="underline underline-offset-4">
             確認番号ページボタン
           </span>
@@ -126,7 +128,7 @@ export default function AgreementForm({ id }: { id: string }) {
         <p>
           また、
           <span className="underline underline-offset-4">
-            データの提供について同意いただけない場合は、直接このページのタブを閉じていただいて構いません
+            データの提供に同意していただけない場合は、ページのタブを閉じていただいて構いません
           </span>
           。 その場合、すでにアンケートに回答いただいている場合でも
           <span className="font-semibold">謝礼をお渡しすることはできず</span>

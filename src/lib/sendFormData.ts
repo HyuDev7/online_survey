@@ -3,6 +3,7 @@ import {
   SecondFormDataType,
   ProfileFormDataType,
   ThirdFormDataType,
+  AssessmentFormDataType,
 } from "./formDataTypes";
 
 export default async function sendFormData(
@@ -11,6 +12,7 @@ export default async function sendFormData(
     | FirstFormDataType
     | SecondFormDataType
     | ThirdFormDataType
+    | AssessmentFormDataType
     | undefined
 ) {
   try {
@@ -24,7 +26,7 @@ export default async function sendFormData(
 
     if (!response.ok) {
       const message = `an error occurred : ${response.statusText}`;
-      window.alert(message);
+      // window.alert(message);
       return;
     }
 

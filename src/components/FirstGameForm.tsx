@@ -8,17 +8,20 @@ export default function FirstGameForm({
   money,
   condition,
   sessionId,
+  assess_cond,
 }: {
   money: string;
   condition: string;
   sessionId: string;
+  assess_cond: boolean;
 }): JSX.Element {
   //initialise form data
   const formData: FirstFormDataType = {
     sessionID: sessionId,
-    firstGame: condition,
+    firstCondition: condition,
     offer: null,
     assessment: null,
+    firstGameCreatedAt:null,
   };
   const [responseBody, setResponseBody] = useState(formData);
 
@@ -29,10 +32,14 @@ export default function FirstGameForm({
   }
 
   return (
-    <div className="">
+    <main >
+      <h1 className="text-3xl my-5">１回目の質問</h1>
       <form>
         <div className="mt-5 mb-4 textStyle">
-          <p>あなたは今回、<span className="font-bold">応答者</span>に選ばれました。</p>
+          <p>
+            あなたは今回、<span className="font-bold">応答者</span>
+            に選ばれました。
+          </p>
           <p>相手の提案を受け入れる、または拒否することができます。</p>
           <p className="mb-3">
             ただし、
@@ -42,11 +49,15 @@ export default function FirstGameForm({
             。
           </p>
 
-          <p>相手はあなたの知らない<span className="">匿名</span>の方です。</p>
           <p>
-            相手は1000円のうち、<span className="font-bold">あなたの取り分として{money}円</span>を提案しました。
+            相手はあなたの知らない<span className="">匿名</span>の方です。
           </p>
-          <p>この提案を受け入れますか？</p>
+          <p>
+            相手は1000円のうち、
+            <span className="font-bold">あなたの取り分として{money}円</span>
+            を提案しました。
+          </p>
+          <p className="mt-3">この提案を受け入れますか？</p>
           <p>
             まず、以下の2つの選択肢から自身の考えに合うものを選んでください。
           </p>
@@ -82,13 +93,17 @@ export default function FirstGameForm({
 
           <div className="mt-7 mb-4 textStyle ">
             <p>
-              次にこの分け方についてどのように感じたか、最も当てはまるものを7つの選択肢の中から1つ選んでください。
+              次にこの分け方についてどのように感じたか、最も当てはまるものを選んでください。
             </p>
-            <p>その後、「次へ進む」ボタンを押してください。</p>
+            <p>その後、次へ進むボタンを押してください。</p>
           </div>
 
-          <div className="mb-5 md:flex md:flex-row ">
-            <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
+          <div
+            className={
+              "mb-5 flex " + (assess_cond ? "flex-col" : "flex-col-reverse")
+            }
+          >
+            <div className="assessment_radio_button flex mb-1">
               <div className="mr-1">
                 <input
                   type="radio"
@@ -103,7 +118,7 @@ export default function FirstGameForm({
               </div>
             </div>
 
-            <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
+            <div className="assessment_radio_button flex mb-1">
               <div className="mr-1">
                 <input
                   type="radio"
@@ -118,7 +133,7 @@ export default function FirstGameForm({
               </div>
             </div>
 
-            <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
+            <div className="assessment_radio_button flex mb-1">
               <div className="mr-1">
                 <input
                   type="radio"
@@ -133,7 +148,7 @@ export default function FirstGameForm({
               </div>
             </div>
 
-            <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
+            <div className="assessment_radio_button flex mb-1">
               <div className="mr-1">
                 <input
                   type="radio"
@@ -148,7 +163,7 @@ export default function FirstGameForm({
               </div>
             </div>
 
-            <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
+            <div className="assessment_radio_button flex mb-1">
               <div className="mr-1">
                 <input
                   type="radio"
@@ -162,7 +177,7 @@ export default function FirstGameForm({
                 <label htmlFor="5">5(自分に少し有利)</label>
               </div>
             </div>
-            <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
+            <div className="assessment_radio_button flex mb-1">
               <div className="mr-1">
                 <input
                   type="radio"
@@ -177,7 +192,7 @@ export default function FirstGameForm({
               </div>
             </div>
 
-            <div className="assessment_radio_button flex md:flex-none text-left md:text-center mx-3">
+            <div className="assessment_radio_button flex mb-1">
               <div className="mr-1">
                 <input
                   type="radio"
@@ -202,6 +217,6 @@ export default function FirstGameForm({
           />
         </div>
       </form>
-    </div>
+    </main>
   );
 }

@@ -12,13 +12,14 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   const firstOffer = await findOffer(params.id);
+  // console.log(firstOffer)
 
   return (
     <SecondGameForm
       sessionId={sessionID}
-      desc="同じ"
+      desc="異なる"
       passedGameType="DG"
-      passedCondition="continue"
+      passedCondition="new"
       prevCondition={firstOffer}
     />
   );

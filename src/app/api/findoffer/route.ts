@@ -6,7 +6,7 @@ export async function POST(request: Request) {
   const sentData = await request.json();
   const res = await findPath(sentData);
 
-//   console.log(res)
+  // console.log(res)
   
-  return NextResponse.json({ test: "I got POST method", firstroute: res.firstroute });
+  return NextResponse.json({ test: "I got POST method", firstCond: res });
 }

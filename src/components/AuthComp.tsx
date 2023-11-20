@@ -61,6 +61,8 @@ export default function AuthComp() {
         firstAgreement: isAgree.toString(),
         secondAgreement: "false",
         example: "",
+        firstCreatedAt: new Date(),
+        secondCreatedAt: null,
       };
 
       const agreeRes = await fetch("/api/agree", {
@@ -115,7 +117,7 @@ export default function AuthComp() {
             checked={isAgree}
           />
           <label htmlFor="firstAgreement">
-            事前説明の内容を理解し、それに同意する
+            募集ページの内容を理解し、それに同意する
           </label>
         </div>
 

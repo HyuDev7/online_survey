@@ -12,12 +12,13 @@ export default async function findOffer(id: string) {
 
     if (!response.ok) {
       const message = `an error occurred : ${response.statusText}`;
-      window.alert(message);
+      // window.alert(message);
       return;
     }
 
     const res = await response.json();
-    firstOffer = res.firstroute;
+    // console.log(res.firstCond)
+    firstOffer = res.firstCond;
 
   } catch (e) {
     console.dir(e);

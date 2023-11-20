@@ -2,46 +2,70 @@ import {
   ProfileFormDataType,
   FirstFormDataType,
   SecondFormDataType,
-  ThirdFormDataType
+  ThirdFormDataType,
+  AssessmentFormDataType,
 } from "./formDataTypes";
 
 export function validateForm(
-  formData: FirstFormDataType | SecondFormDataType |ThirdFormDataType| ProfileFormDataType
+  formData:
+    | FirstFormDataType
+    | SecondFormDataType
+    | ThirdFormDataType
+    | ProfileFormDataType
+    | AssessmentFormDataType
 ) {
   //store the result of validation
   let validationResult = false;
 
   if (formData.hasOwnProperty("old")) {
     validationResult = validateProfileForm(formData as ProfileFormDataType);
-  } else if (formData.hasOwnProperty("firstGame")) {
+  } else if (formData.hasOwnProperty("firstCondition")) {
     validationResult = validateFirstForm(formData as FirstFormDataType);
   } else if (formData.hasOwnProperty("secondDistribution")) {
     validationResult = validateSecondForm(formData as SecondFormDataType);
-  }else if(formData.hasOwnProperty("thirdDistribution")){
-    validationResult=validateThirdForm(formData as ThirdFormDataType)
+  } else if (formData.hasOwnProperty("thirdDistribution")) {
+    validationResult = validateThirdForm(formData as ThirdFormDataType);
+  } else if (formData.hasOwnProperty("compAssessment")) {
+    validationResult = validateAssessForm(formData as AssessmentFormDataType);
   }
 
   return validationResult;
 }
 
 export function validateProfileForm(profileForm: ProfileFormDataType) {
-  const { sessionID, old, sex } = profileForm;
+  const { old, sex } = profileForm;
 
   //validation of sex
   if (sex === "") {
     return false;
   }
 
+  //storing a result of validation
+  let valiRes: boolean;
+
+  //convert string old into number old
   const numOld = Number(old);
 
   //validation of old
-  if (old === null) {
-    return false;
-  } else if (numOld < 18 || numOld > 100) {
-    return false;
-  } else {
-    return true;
+  if (old === null || old.length === 0) {
+    return (valiRes = false);
   }
+
+  //validation of over or under input
+  if (numOld < 18 || numOld > 100) {
+    return (valiRes = false);
+  } else {
+    valiRes = true;
+  }
+
+  //validation of integer
+  if (Number.isInteger(numOld)) {
+    valiRes = true;
+  } else {
+    valiRes = false;
+  }
+
+  return valiRes;
 }
 
 export function validateFirstForm(firstForm: FirstFormDataType) {
@@ -49,19 +73,18 @@ export function validateFirstForm(firstForm: FirstFormDataType) {
   let res = false;
   //validation of offer
   if (offer === null) {
-    return(res = false);
+    return (res = false);
   } else {
     res = true;
   }
 
   //validation of assessment
   if (assessment === null) {
-    return(res= false);
+    return (res = false);
   } else {
-    res= true;
+    res = true;
   }
   return res;
-
 }
 
 export function validateSecondForm(secondForm: SecondFormDataType) {
@@ -76,6 +99,7 @@ export function validateSecondForm(secondForm: SecondFormDataType) {
 
   //convert string distribution into number one
   const numDistri = Number(secondDistribution);
+
   //validation of over or under input
   if (numDistri > 1000 || numDistri < 0) {
     return (valiRes = false);
@@ -118,4 +142,17 @@ export function validateThirdForm(secondForm: ThirdFormDataType) {
   }
 
   return valiRes;
+}
+
+export function validateAssessForm(assessForm: AssessmentFormDataType) {
+  const { compAssessment } = assessForm;
+  let res = false;
+
+  //validation of assessment
+  if (compAssessment === null) {
+    return (res = false);
+  } else {
+    res = true;
+  }
+  return res;
 }

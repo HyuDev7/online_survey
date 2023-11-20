@@ -13,7 +13,7 @@ export async function validateSessionID(sessionID: string) {
 
     if (!response.ok) {
       const message = `here is validateSessionID.ts. an error occurred : ${response.statusText}`;
-      window.alert(message);
+      // window.alert(message);
       return;
     }
 

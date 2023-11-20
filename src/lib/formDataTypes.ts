@@ -1,20 +1,22 @@
 export interface ButtonPropType {
   buttonWord: string;
-  nextNum?:number;
+  nextNum?: number;
   grandParentPass?: string;
   parentpass: string;
   formData:
     | FirstFormDataType
     | SecondFormDataType
     | ThirdFormDataType
-    | ProfileFormDataType;
+    | ProfileFormDataType
+    | AssessmentFormDataType;
 }
 
 export interface FirstFormDataType {
   sessionID: string;
-  firstGame: string;
+  firstCondition: string;
   offer: string | null;
   assessment: string | null;
+  firstGameCreatedAt: Date | null;
 }
 
 export interface SecondFormDataType {
@@ -22,6 +24,7 @@ export interface SecondFormDataType {
   secondGameType: string;
   secondCondition: string;
   secondDistribution: string | null;
+  secondGameCreatedAt: Date | null;
 }
 
 export interface ThirdFormDataType {
@@ -29,6 +32,13 @@ export interface ThirdFormDataType {
   thirdGameType: string;
   thirdCondition: string;
   thirdDistribution: string | null;
+  thirdGameCreatedAt: Date | null;
+}
+
+export interface AssessmentFormDataType {
+  sessionID: string;
+  compAssessment: string | null;
+  assessmentCreatedAt: Date | null;
 }
 
 export interface UserIdType {
@@ -37,8 +47,9 @@ export interface UserIdType {
 
 export interface ProfileFormDataType {
   sessionID: string;
-  old: number | null;
+  old: string | null;
   sex: string;
+  profileCreatedAt: Date | null;
 }
 
 export interface AgreementFormDataType {
@@ -46,4 +57,6 @@ export interface AgreementFormDataType {
   firstAgreement: string;
   secondAgreement: string;
   example: string;
+  firstCreatedAt: Date | null;
+  secondCreatedAt: Date | null;
 }

@@ -1,5 +1,6 @@
 import {
   AgreementFormDataType,
+  AssessmentFormDataType,
   FirstFormDataType,
   ProfileFormDataType,
   SecondFormDataType,
@@ -36,6 +37,7 @@ const firstGameCollection = myDB.collection(FIRSTGAME_COLLECTION);
 const secondGameCollection = myDB.collection(SECONDGAME_COLLECTION);
 const thirdGameCollection = myDB.collection(THIRDGAME_COLLECTION);
 const agreementCollection = myDB.collection(AGREEMENT_COLLECTION);
+const assessmentCollection = myDB.collection("assessment");
 
 //for checking the connection of db
 export function connectDB() {
@@ -100,7 +102,7 @@ export async function findSessionId(passedSessionID: string): Promise<boolean> {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
-    console.log("connected from find session id!")
+    console.log("connected from find session id!");
 
     //filter for finding document
     const filter = {
@@ -146,6 +148,7 @@ export async function updateAgreement(
       $set: {
         secondAgreement: passedAgreementForm.secondAgreement,
         example: passedAgreementForm.example,
+        secondCreatedAt:passedAgreementForm.secondCreatedAt
       },
     };
 
@@ -202,12 +205,13 @@ export async function insertDoc(
     | SecondFormDataType
     | ThirdFormDataType
     | AgreementFormDataType
+    | AssessmentFormDataType
 ) {
   let res: any;
   try {
     //connecting to db
     await client.connect();
-    console.log("connected from insert document!")
+    console.log("connected from insert document!");
 
     if ("old" in formData) {
       //check whether doc already exist
@@ -232,7 +236,7 @@ export async function insertDoc(
       }
     }
 
-    if ("firstGame" in formData) {
+    if ("firstCondition" in formData) {
       //check whether doc already exist
       const flag = await findSessionIdInEachDoc(
         formData.sessionID,
@@ -241,7 +245,7 @@ export async function insertDoc(
       const filter = { sessionID: formData.sessionID };
       const updateDocument = {
         $set: {
-          firstGame: formData.firstGame,
+          firstCondition: formData.firstCondition,
           offer: formData.offer,
           assessment: formData.assessment,
         },
@@ -326,6 +330,28 @@ export async function insertDoc(
         res = await agreementCollection.insertOne(formData);
       }
     }
+
+    if ("compAssessment" in formData) {
+      //check whether doc already exist
+      const flag = await findSessionIdInEachDoc(
+        formData.sessionID,
+        assessmentCollection
+      );
+      const filter = { sessionID: formData.sessionID };
+      const updateDocument = {
+        $set: {
+          compAssessment:formData.compAssessment
+        },
+      };
+
+      //if there is doc already, update it
+      if (flag) {
+        res = await assessmentCollection.updateOne(filter, updateDocument);
+      } else {
+        //if there is no doc, insert new one
+        res = await assessmentCollection.insertOne(formData);
+      }
+    }
   } catch (e) {
     console.dir(e);
   } finally {
@@ -342,7 +368,7 @@ export async function findPath(passedSessionID: string) {
     try {
       // Connect the client to the server	(optional starting in v4.7)
       await client.connect();
-      console.log("connected from find path!")
+      console.log("connected from find path!");
 
       //filter for finding document
       const filter = {
@@ -365,9 +391,150 @@ export async function findPath(passedSessionID: string) {
     }
     return gotPath;
   }
-   const res = await run().catch(console.dir)
-   return res
+  const res = await run().catch(console.dir);
+  return res;
 }
 
+export async function findOrderCondition(passedSessionID: string) {
+  async function run() {
+    let gotAssessCond: any;
+    try {
+      // Connect the client to the server	(optional starting in v4.7)
+      await client.connect();
+      console.log("connected from find order condition!");
 
+      //filter for finding document
+      const filter = {
+        sessionID: passedSessionID,
+      };
 
+      //options of returned document
+      const options = {
+        projection: {
+          _id: 0,
+          passCode: 0,
+          sessionID: 0,
+          firstroute: 0,
+          secondroute: 0,
+          thirdroute: 0,
+          isSent: 0,
+        },
+      };
+
+      //get document
+      gotAssessCond = await userIdCollection.findOne(filter, options);
+    } catch (e) {
+      console.dir(e);
+    } finally {
+      console.log("connection is closed from find order condition!");
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+    return gotAssessCond;
+  }
+  const res = await run().catch(console.dir);
+  return res;
+}
+
+export async function findFirstGame(passedSessionID: string) {
+  async function run() {
+    let firstGame: any;
+    try {
+      // Connect the client to the server	(optional starting in v4.7)
+      await client.connect();
+      console.log("connected from find first game reaction!");
+
+      //filter for finding document
+      const filter = {
+        sessionID: passedSessionID,
+      };
+
+      //options of returned document
+      const options = {
+        projection: { _id: 0 },
+      };
+
+      //get document
+      firstGame = await firstGameCollection.findOne(filter, options);
+    } catch (e) {
+      console.dir(e);
+    } finally {
+      console.log("connection is closed from find first game reaction!");
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+    return firstGame;
+  }
+  const res = await run().catch(console.dir);
+  return res;
+}
+
+export async function findSecondGame(passedSessionID: string) {
+  async function run() {
+    let secondGame: any;
+    try {
+      // Connect the client to the server	(optional starting in v4.7)
+      await client.connect();
+      console.log("connected from find secon game reaction!");
+
+      //filter for finding document
+      const filter = {
+        sessionID: passedSessionID,
+      };
+
+      //options of returned document
+      const options = {
+        projection: { _id: 0 },
+      };
+
+      //get document
+      secondGame = await secondGameCollection.findOne(filter, options);
+    } catch (e) {
+      console.dir(e);
+    } finally {
+      console.log("connection is closed from find second game reaction!");
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+
+    return secondGame;
+  }
+  
+  const res = await run().catch(console.dir);
+  return res;
+}
+
+export async function findThirdGame(passedSessionID: string) {
+  async function run() {
+    let thirdGame: any;
+    try {
+      // Connect the client to the server	(optional starting in v4.7)
+      await client.connect();
+      console.log("connected from find third game reaction!");
+
+      //filter for finding document
+      const filter = {
+        sessionID: passedSessionID,
+      };
+
+      //options of returned document
+      const options = {
+        projection: { _id: 0 },
+      };
+
+      //get document
+      thirdGame = await thirdGameCollection.findOne(filter, options);
+    } catch (e) {
+      console.dir(e);
+    } finally {
+      console.log("connection is closed from find third game reaction!");
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+
+    return thirdGame;
+  }
+  
+  const res = await run().catch(console.dir);
+  return res;
+}
