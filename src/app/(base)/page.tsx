@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 
 export default function Page() {
   useEffect(() => {
-    console.dir(typeof window.onload);
+    console.log(typeof window);
 
     window.addEventListener("beforeunload", (e: BeforeUnloadEvent) => {
       e.preventDefault();
