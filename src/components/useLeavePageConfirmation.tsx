@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 
-export async function useLeavePageConfirmation(sessionID: string, loc: string) {
+export function useLeavePageConfirmation(sessionID: string, loc: string) {
   useEffect(() => {
     window.addEventListener("visibilitychange", (e: BeforeUnloadEvent) => {
       e.preventDefault();

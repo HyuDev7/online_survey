@@ -20,8 +20,9 @@ export default function RootLayout({
   };
 }) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body className={inter.className}>
+
         <div className="flex flex-col min-h-screen">
           <header className="border-b-2 border-black font-bold tracking-tight w-full">
             <div className="mx-3 sm:container sm:mx-auto">
@@ -45,11 +46,12 @@ export default function RootLayout({
                       ※事前説明が別タブで開きます
                     </p>
                   </div>
+
               </nav>
             </div>
           </header>
 
-          <div className="mx-3 sm:container sm:mx-auto flex-1">{children}</div>
+          <main className="mx-3 sm:container sm:mx-auto flex-1">{children}</main>
 
           <footer className="mt-12 border-t-2 border-black w-full">
             <div className="mx-3 sm:container sm:mx-auto my-3">
@@ -60,7 +62,9 @@ export default function RootLayout({
               </div>
             </div>
           </footer>
+
         </div>
+
       </body>
     </html>
   );
