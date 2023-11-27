@@ -1,24 +1,37 @@
-import { useEffect } from 'react';
-import Router from 'next/router';
-import { useBeforeUnload } from 'react-use';
+"use client";
+import { useEffect } from "react";
 
-export const useLeavePageConfirmation = (
-  showAlert = true,
-  message = '入力した内容がキャンセルされますがよろしいでしょうか？',
-) => {
-  useBeforeUnload(showAlert, message);
-
+export async function useLeavePageConfirmation(sessionID: string, loc: string) {
   useEffect(() => {
-    const handler = () => {
-      if (showAlert && !window.confirm(message)) {
-        throw 'キャンセル';
-      }
-    };
+    window.addEventListener("visibilitychange", (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+      fetch("/api/sendClose", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: sessionID, location: loc }),
+      });
 
-    Router.events.on('routeChangeStart', handler);
+      // try {
+      // const response = await fetch("/api/sendClose", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ id: sessionID, location: loc }),
+      // });
 
-    return () => {
-      Router.events.off('routeChangeStart', handler);
-    };
-  }, [showAlert, message]);
-};
+      //   if (!response.ok) {
+      //     const message = `an error occurred : ${response.statusText}`;
+
+      //     return;
+      //   }
+      // } catch (e) {
+      //   console.dir;
+      // }
+      return;
+    });
+  },[]);
+}

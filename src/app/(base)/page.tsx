@@ -1,24 +1,9 @@
-"use client";
 import Link from "next/link";
 import SplitText from "@/components/SplitText";
 import { T_text1, T_text2 } from "@/lib/textlist";
-import { useEffect,useState } from "react";
-import { useLeavePageConfirmation } from "@/components/useLeavePageConfirmation";
-import { usePathname } from "next/navigation";
-
 
 export default function Page() {
-  useEffect(() => {
-    console.log(typeof window);
-
-    window.addEventListener("beforeunload", (e: BeforeUnloadEvent) => {
-      e.preventDefault();
-      e.returnValue="";
-      alert("hi!")
-      return;
-    });
-  }, []);
-
+  
 
   return (
     <main id="main">

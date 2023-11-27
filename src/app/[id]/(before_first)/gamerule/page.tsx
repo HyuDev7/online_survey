@@ -21,7 +21,7 @@ export default async function Home({ params }: { params: { id: string } }) {
           <p className="text-sm text-red-600">
             ※ここでいうゲームとはルールに則った交渉のことを指します。
           </p>
-          
+
           <ol className="list-decimal list-inside mt-3">
             <li>提案者が応答者に対して1000円をどう分けるかを提案する。</li>
             <li>応答者はその提案に対して受け入れるか断るかを選択する。</li>
@@ -74,15 +74,12 @@ export default async function Home({ params }: { params: { id: string } }) {
 
         <h4>【回答上の注意】</h4>
         <div className="textStyle">
-          <p>一度送信した内容はその後、
-            <span className="font-semibold">
-              修正することはできません
-            </span>
-            。 また、実験開始から終了までの間、ブラウザの戻るボタンは
-            <span className="font-semibold">
-              ご使用にならないでください
-            </span>
-            。 データが正常に送信・処理されない可能性があります。
+          <p>
+            一度送信した内容はその後、
+            <span className="font-semibold">修正することはできません</span>。
+            また、実験開始から終了までの間、ブラウザの戻るボタンは
+            <span className="font-semibold">ご使用にならないでください</span>。
+            データが正常に送信・処理されない可能性があります。
             本調査は完全にオンライン上で行われており、参加者の匿名性は確保されています。
           </p>
           <p>
