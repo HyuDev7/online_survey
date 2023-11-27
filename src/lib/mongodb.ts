@@ -538,24 +538,3 @@ export async function findThirdGame(passedSessionID: string) {
   const res = await run().catch(console.dir);
   return res;
 }
-
-export async function sendClosed(passedSessionID: string, location: string) {
-  async function run() {
-    try {
-      // Connect the client to the server	(optional starting in v4.7)
-      await client.connect();
-      // Send a ping to confirm a successful connection
-      console.log("connected from send closed!");
-      await myDB.collection("closedLog").insertOne({
-        id: passedSessionID,
-        page: location,
-        closedAt: new Date(),
-      });
-    } finally {
-      // Ensures that the client will close when you finish/error
-      console.log("disconnected from send closed!");
-      await client.close();
-    }
-  }
-  run().catch(console.dir);
-}

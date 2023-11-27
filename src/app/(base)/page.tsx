@@ -3,8 +3,6 @@ import SplitText from "@/components/SplitText";
 import { T_text1, T_text2 } from "@/lib/textlist";
 
 export default function Page() {
-  
-
   return (
     <main id="main">
       <div className="container mx-auto">
