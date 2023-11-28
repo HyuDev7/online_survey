@@ -19,7 +19,6 @@ export default function RootLayout({
     id: string;
   };
 }) {
-  console.log(params.id);
   return (
     <html lang="en">
       <body className={inter.className}>
