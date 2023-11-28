@@ -14,13 +14,11 @@ export default async function page({ params }: { params: { id: string } }) {
   const assessCond = await findOrder(sessionID);
 
   return (
-    <div>
-      <FirstGameForm
-        sessionId={sessionID}
-        condition="happy"
-        money="750"
-        assess_cond={assessCond}
-      />
-    </div>
+    <FirstGameForm
+      sessionId={sessionID}
+      condition="happy"
+      money="750"
+      assess_cond={assessCond}
+    />
   );
 }
