@@ -45,13 +45,13 @@ export default function RootLayout({
                     <p className="text-sm font-normal">
                       ※事前説明が別タブで開きます
                     </p>
-                  </div>
+                  </div> 
 
               </nav>
             </div>
           </header>
 
-          <main className="mx-3 sm:container sm:mx-auto flex-1">{children}</main>
+          <div className="mx-3 sm:container sm:mx-auto flex-1">{children}</div>
 
           <footer className="mt-12 border-t-2 border-black w-full">
             <div className="mx-3 sm:container sm:mx-auto my-3">

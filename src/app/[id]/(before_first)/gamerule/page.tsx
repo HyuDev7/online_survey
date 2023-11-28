@@ -31,6 +31,7 @@ export default async function Home({ params }: { params: { id: string } }) {
             </span>
           </li>
         </ol>
+        
       </div>
 
       <h4>【質問について】</h4>
