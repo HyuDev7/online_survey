@@ -451,7 +451,7 @@ export async function findFirstGame(passedSessionID: string) {
 
       //options of returned document
       const options = {
-        projection: { _id: 0 },
+        projection: { _id: 0, sessionID: 0, firstGameCreatedAt: 0 },
       };
 
       //get document
@@ -475,7 +475,7 @@ export async function findSecondGame(passedSessionID: string) {
     try {
       // Connect the client to the server	(optional starting in v4.7)
       await client.connect();
-      console.log("connected from find secon game reaction!");
+      console.log("connected from find second game reaction!");
 
       //filter for finding document
       const filter = {
@@ -484,7 +484,7 @@ export async function findSecondGame(passedSessionID: string) {
 
       //options of returned document
       const options = {
-        projection: { _id: 0 },
+        projection: { _id: 0, sessionID: 0, secondGameCreatedAt: 0 },
       };
 
       //get document

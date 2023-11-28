@@ -1,13 +1,12 @@
 import findFirstReaction from "@/lib/findFirstReaction";
 import findSecondReaction from "@/lib/findSecondReaction";
-import { findThirdGame } from "@/lib/mongodb";
-import Link from "next/link";
+import findThirdReaction from "@/lib/findThirdReaction";
 
 export default async function Page({ params }: { params: { id: string } }) {
   //get answers from db
   let firstGame = await findFirstReaction(params.id);
   let secondGame = await findSecondReaction(params.id);
-  let thirdGame = await findThirdGame(params.id);
+  let thirdGame = await findThirdReaction(params.id);
 
   //determin a distribution from offerer in 1st game
   let offerMoney: number;
