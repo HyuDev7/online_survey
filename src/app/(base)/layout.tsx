@@ -30,17 +30,6 @@ export default function RootLayout({
                     応用経済分析研究室
                   </h1>
                 </div>
-
-                {/* <Link href="/flowOfContent">
-                    <h1 className="text-lg sm:text-4xl my-3 font-normal">調査の事前説明</h1>
-                  </Link> */}
-                {/* <div>
-                    <Link href="/flowOfContent" target="_blank" rel="noreferrer noopener">
-                      <button className="buttonStyle mb-0 min-w-full text-xl p-0.5 font-normal">調査の事前説明</button>
-                    </Link>
-                    <p className="text-sm font-normal">※事前説明が別タブで開きます</p>
-                  </div> */}
-
               </nav>
             </div>
           </header>
