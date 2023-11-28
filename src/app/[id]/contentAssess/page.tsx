@@ -12,9 +12,5 @@ export default async function Home({ params }: { params: { id: string } }) {
 
   const assessCond = await findOrder(sessionID);
 
-  return (
-    <div>
-      <ContentAssessment sessionId={sessionID} assess_cond={assessCond} />
-    </div>
-  );
+  return <ContentAssessment sessionId={sessionID} assess_cond={assessCond} />;
 }

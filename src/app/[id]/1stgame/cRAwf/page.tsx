@@ -1,4 +1,5 @@
-import AgreementForm from "@/components/AgreementForm";
+import FirstGameForm from "@/components/FirstGameForm";
+import findOrder from "@/lib/findOrder";
 import { validateSessionID } from "@/lib/validateSessionId";
 import { notFound } from "next/navigation";
 
@@ -10,10 +11,14 @@ export default async function page({ params }: { params: { id: string } }) {
     notFound();
   }
 
+  const assessCond = await findOrder(sessionID);
+
   return (
-    <div>
-      <h1 className="my-5">調査の事後説明</h1>
-      <AgreementForm id={sessionID} />
-    </div>
+    <FirstGameForm
+      sessionId={sessionID}
+      condition="angry"
+      money={"250"}
+      assess_cond={assessCond}
+    />
   );
 }

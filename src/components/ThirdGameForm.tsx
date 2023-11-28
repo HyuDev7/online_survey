@@ -2,6 +2,7 @@
 import RandomNavigateButton from "./RandomNavigateButton";
 import { ThirdFormDataType } from "@/lib/formDataTypes";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function ThirdGameForm({
   passedCondition,
@@ -49,80 +50,125 @@ export default function ThirdGameForm({
   }
 
   return (
-    <main>
-      <h1 className="text-3xl my-5">３回目の質問</h1>
-      <form>
-        <div className="textStyle my-5">
-          <p>
-            もう一度<span className="font-bold">提案者</span>
-            としてお金の分け方を提案してください。
-          </p>
-          <p>1000円を自身と相手でどのように分けるかを決めることができます</p>
-          <p>
-            ただ、今回は
-            <span className="underline underline-offset-4">
-              応答者は提案者の
-              <span className="font-bold">提案を断ることができません</span>
-            </span>
-            。
-          </p>
-          <p className="mb-3">
-            つまり、提案した分配金額が
-            <span className="font-semibold">そのまま実現します</span>。
-          </p>
-          <p>
-            相手は１回目、２回目の質問であなたにお金を渡した人と
-            <span className="underline underline-offset-4 font-bold">
-              {desc}
-            </span>
-            人です。
-          </p>
+    <>
+      <header className="border-b-2 border-black font-bold tracking-tight w-full">
+        <div className="mx-3 sm:container sm:mx-auto">
+          <nav className="flex justify-between items-center">
+            <div>
+              <h1 className="text-lg sm:text-4xl my-3">応用経済分析研究室</h1>
+            </div>
+            <div className="buttons flex">
+                  <div className="text-center mx-1">
+                    <Link
+                      href={`/${sessionId}/check`}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="buttonStyle mb-0 min-w-full text-sm sm:text-xl p-0.5 font-normal"
+                    >
+                      回答の確認
+                    </Link>
+                    <p className="text-xs font-normal">
+                      ※今までの回答が別タブで開きます
+                    </p>
+                  </div>
 
-          {/* make find offer logic */}
-          <p>
-            1回目のゲームの相手はあなたに
-            <span className="font-semibold">{prevOffer}円</span>
-            渡すことを提案していました。
-          </p>
-
-          <p className="mt-3">いくら相手にお金を渡しますか？</p>
-          <p>
-            渡す金額を以下の欄に整数(0以上1000以下の半角数字)で入力してください。
-          </p>
+                  <div className="text-center mx-1">
+                    <Link
+                      href={`/description`}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="buttonStyle mb-0 min-w-full text-sm sm:text-xl p-0.5 font-normal"
+                    >
+                      質問の事前説明
+                    </Link>
+                    <p className="text-xs font-normal">
+                      ※事前説明が別タブで開きます
+                    </p>
+                  </div>
+                </div>
+          </nav>
         </div>
+      </header>
 
-        <div className="flex flex-col">
-          <label htmlFor="thirdDistribution" className="text-xl">
-            相手にいくら渡しますか？
-          </label>
-          <div>
-            <input
-              className="inputStyle max-w-md text-xl"
-              type="number"
-              name="thirdDistribution"
-              id="thirdDistribution"
-              min={0}
-              max={1000}
-              onChange={handleChange}
-              required
-            />
-            円
-          </div>
+      <main className="mx-3 sm:container sm:mx-auto flex-1">
+        <div className="container mx-auto">
+          <h1 className="text-3xl my-5">３回目の質問</h1>
+          <form>
+            <div className="textStyle my-5">
+              <p>
+                もう一度<span className="font-bold">提案者</span>
+                としてお金の分け方を提案してください。
+              </p>
+              <p>
+                1000円を自身と相手でどのように分けるかを決めることができます
+              </p>
+              <p>
+                ただ、今回は
+                <span className="underline underline-offset-4">
+                  応答者は提案者の
+                  <span className="font-bold">提案を断ることができません</span>
+                </span>
+                。
+              </p>
+              <p className="mb-3">
+                つまり、提案した分配金額が
+                <span className="font-semibold">そのまま実現します</span>。
+              </p>
+              <p>
+                相手は１回目、２回目の質問であなたにお金を渡した人と
+                <span className="underline underline-offset-4 font-bold">
+                  {desc}
+                </span>
+                人です。
+              </p>
 
-          <div className="text-xl mt-3">自分が受け取る金額：</div>
-          <div className="text-xl">
-            {1000 - Number(responseBody.thirdDistribution)}円
-          </div>
+              {/* make find offer logic */}
+              <p>
+                1回目のゲームの相手はあなたに
+                <span className="font-semibold">{prevOffer}円</span>
+                渡すことを提案していました。
+              </p>
 
-          <RandomNavigateButton
-            formData={responseBody}
-            buttonWord="実験の事後説明へ移る"
-            nextNum={4}
-            grandParentPass={sessionId}
-            parentpass="assessment"
-          />
+              <p className="mt-3">いくら相手にお金を渡しますか？</p>
+              <p>
+                渡す金額を以下の欄に整数(0以上1000以下の半角数字)で入力してください。
+              </p>
+            </div>
+
+            <div className="flex flex-col">
+              <label htmlFor="thirdDistribution" className="text-xl">
+                相手にいくら渡しますか？
+              </label>
+              <div>
+                <input
+                  className="inputStyle max-w-md text-xl"
+                  type="number"
+                  name="thirdDistribution"
+                  id="thirdDistribution"
+                  min={0}
+                  max={1000}
+                  onChange={handleChange}
+                  required
+                />
+                円
+              </div>
+
+              <div className="text-xl mt-3">自分が受け取る金額：</div>
+              <div className="text-xl">
+                {1000 - Number(responseBody.thirdDistribution)}円
+              </div>
+
+              <RandomNavigateButton
+                formData={responseBody}
+                buttonWord="実験の事後説明へ移る"
+                nextNum={4}
+                grandParentPass={sessionId}
+                parentpass="assessment"
+              />
+            </div>
+          </form>
         </div>
-      </form>
-    </main>
+      </main>
+    </>
   );
 }

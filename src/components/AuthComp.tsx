@@ -82,66 +82,68 @@ export default function AuthComp() {
   }
 
   return (
-    <div className="container mx-auto text-center">
-      <h1 className="my-5">実験のログイン</h1>
-      <p className="max-w-md mx-auto text-lg">
-        ランサーズの応募ページに記載のあるパスコードを入力してください
-      </p>
-      <form className="mt-3 flex flex-col">
-        <div className="mb-1 mt-1">
-          <label htmlFor="passCode">パスコード: </label>
-          <input
-            type="text"
-            className="inputStyle"
-            name="passCode"
-            placeholder="パスコードを入力してください"
-            id="passCode"
-            onChange={handleChange}
-          />
-        </div>
+    <main className="mx-3 sm:container sm:mx-auto flex-1">
+      <div className="container mx-auto text-center">
+        <h1 className="my-5">実験のログイン</h1>
+        <p className="max-w-md mx-auto text-lg">
+          ランサーズの応募ページに記載のあるパスコードを入力してください
+        </p>
+        <form className="mt-3 flex flex-col">
+          <div className="mb-1 mt-1">
+            <label htmlFor="passCode">パスコード: </label>
+            <input
+              type="text"
+              className="inputStyle"
+              name="passCode"
+              placeholder="パスコードを入力してください"
+              id="passCode"
+              onChange={handleChange}
+            />
+          </div>
 
-        {/* if passcode validation fail, show warning text */}
-        {isPending && <p className="text-sm">しばらくお待ちください...</p>}
-        {isFail && (
-          <p className="text-sm text-red-600">
-            パスコードが間違っています。もう一度お試しください
-          </p>
-        )}
+          {/* if passcode validation fail, show warning text */}
+          {isPending && <p className="text-sm">しばらくお待ちください...</p>}
+          {isFail && (
+            <p className="text-sm text-red-600">
+              パスコードが間違っています。もう一度お試しください
+            </p>
+          )}
 
-        <div className="mt-3">
-          <input
-            type="checkbox"
-            id="firstAgreement"
-            name="firstAgreement"
-            onChange={handleChange}
-            checked={isAgree}
-          />
-          <label htmlFor="firstAgreement">
-            募集ページの内容を理解し、それに同意する
-          </label>
-        </div>
+          <div className="mt-3">
+            <input
+              type="checkbox"
+              id="firstAgreement"
+              name="firstAgreement"
+              onChange={handleChange}
+              checked={isAgree}
+            />
+            <label htmlFor="firstAgreement">
+              募集ページの内容を理解し、それに同意する
+            </label>
+          </div>
 
-        <div>
-          {isAgree ? (
-            <button onClick={handleSubmission} className="buttonStyle">
-              送信
-            </button>
-          ) : (
-            <>
-              <button
-                onClick={handleSubmission}
-                className="buttonStyle disabled:bg-gray-600 disabled:text-white"
-                disabled
-              >
+          <div>
+            {isAgree ? (
+              <button onClick={handleSubmission} className="buttonStyle">
                 送信
               </button>
-              <p className="text-sm text-red-600">
-                ログインするためには同意ボタンにチェックをつけてください。
-              </p>
-            </>
-          )}
-        </div>
-      </form>
-    </div>
+            ) : (
+              <>
+                <button
+                  onClick={handleSubmission}
+                  className="buttonStyle disabled:bg-gray-600 disabled:text-white"
+                  disabled
+                >
+                  送信
+                </button>
+                <p className="text-sm text-red-600">
+                  ログインするためには同意ボタンにチェックをつけてください。
+                </p>
+              </>
+            )}
+          </div>
+        </form>
+      </div>
+    </main>
   );
 }
