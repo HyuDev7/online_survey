@@ -10,6 +10,9 @@ export default function AuthComp() {
   const [isFail, setIsFail] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [isAgree, setIsAgree] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(
+    "パスコードが間違っています。もう一度お試しください"
+  );
 
   const userId: UserIdType = { passCode: "" };
 
@@ -54,6 +57,15 @@ export default function AuthComp() {
 
       const res = await response.json();
       const sessionId = res.sessionID;
+      if (sessionId === "over") {
+        setErrorMessage(
+          "現在は実験にご参加いただくことができません。申し訳ございません。"
+        );
+        setIsPending(false);
+        setIsFail(true);
+        setIsAgree(false);
+        return;
+      }
 
       //make first agreement body, and send it
       const FirstAgreementContent: AgreementFormDataType = {
@@ -103,11 +115,7 @@ export default function AuthComp() {
 
           {/* if passcode validation fail, show warning text */}
           {isPending && <p className="text-sm">しばらくお待ちください...</p>}
-          {isFail && (
-            <p className="text-sm text-red-600">
-              パスコードが間違っています。もう一度お試しください
-            </p>
-          )}
+          {isFail && <p className="text-sm text-red-600">{errorMessage}</p>}
 
           <div className="mt-3">
             <input

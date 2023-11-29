@@ -16,6 +16,7 @@ import {
   THIRDGAME_COLLECTION,
   AGREEMENT_COLLECTION,
 } from "./dbConfig";
+import { list } from "postcss";
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const uri = process.env.DB_URL;
@@ -65,46 +66,104 @@ export async function getSessionId(userIdBody: UserIdType) {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
-
-    //filter for finding document
-    const find_filter = {
-      passCode: userIdBody.passCode,
-      isSent: false,
-    };
-
-    //options of returned document
-    const find_options = {
-      projection: { _id: 0, passCode: 0, isSent: 0 },
-    };
-
-    //indicating what is updated
-    const find_updateDocument = {
-      $set: { isSent: true },
-    };
-
-    //get and update document
-    sessionIdResult = await userIdCollection.findOneAndUpdate(
-      find_filter,
-      find_updateDocument,
-      find_options
+    //find a document
+    sessionIdResult = await userIdCollection.findOne(
+      {
+        passCode: userIdBody.passCode,
+        isSent: false,
+      },
+      {
+        projection: { _id: 0, passCode: 0, isSent: 0 },
+      }
     );
-
+    console.log("this is first found id ");
     console.log(sessionIdResult);
-    // //update condition count
-    // const count_filter={
-    //   title:"condition_counter"
-    // }
-    // const count_updateDocument={
 
-    // }
-    // await counterCollectioin.updateOne
+    //check condition count
+    let condition_number: string = sessionIdResult.cond_num;
+    //get a list of counter
+    const counterRes = await counterCollectioin.findOne(
+      {
+        title: "condition_counter",
+      },
+      { projection: { _id: 0, title: 0 } }
+    );
+    const targetVal = counterRes[condition_number];
+    console.log("this is target value type" + typeof targetVal);
+    const { total, ...counterlist } = counterRes;
+    console.log("this is counter list");
+    console.log(counterlist);
+    console.log("original condition number is " + condition_number);
+    console.log("this is total count");
+    console.log(counterRes.total);
+
+    if (total >= 1200) {
+      return (sessionIdResult["sessionID"] = "over");
+    }
+
+    //when target value is more than 100, try to give other condition number havnig minimal count
+    if (targetVal >= 100) {
+      //get a list of value of counter list
+      const numArr: Array<number> = Object.values(counterlist);
+      //find minimal value in counter list
+      const minVal = Math.min(...numArr);
+      console.log("this is min val " + minVal);
+      //find a field having minimal value
+      for (const [key, value] of Object.entries(counterlist)) {
+        if (value === minVal) {
+          //get a name having minimal count
+          condition_number = key;
+          break;
+        }
+      }
+      //id with condition, the number of it is over 100 should be updated(isSent : true)
+      await userIdCollection.updateOne(
+        { sessionID: sessionIdResult.sessionID },
+        {
+          $set: { isSent: true },
+        }
+      );
+
+      console.log("new condition number is " + condition_number);
+      //find a new id with the condition
+      sessionIdResult = await userIdCollection.findOne(
+        {
+          passCode: userIdBody.passCode,
+          isSent: false,
+          cond_num: condition_number,
+        },
+        {
+          projection: { _id: 0, passCode: 0, isSent: 0 },
+        }
+      );
+    }
+
+    console.log("current condition number is " + condition_number);
+
+    //indicating what is and how incremented
+    let count_updateDocument: any = {
+      $inc: {},
+    };
+    count_updateDocument.$inc[condition_number] = 1;
+    count_updateDocument.$inc["total"] = 1;
+    //update counter doc and isSent field of sent id document
+    await userIdCollection.updateOne(
+      { sessionID: sessionIdResult.sessionID },
+      {
+        $set: { isSent: true },
+      }
+    );
+    await counterCollectioin.updateOne(
+      { title: "condition_counter" },
+      count_updateDocument
+    );
   } catch (e) {
     console.dir(e);
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
     console.log("connection is closed from getSessionID!");
-    return sessionIdResult.value;
+    return sessionIdResult;
   }
 }
 
