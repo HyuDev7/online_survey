@@ -38,6 +38,7 @@ const secondGameCollection = myDB.collection(SECONDGAME_COLLECTION);
 const thirdGameCollection = myDB.collection(THIRDGAME_COLLECTION);
 const agreementCollection = myDB.collection(AGREEMENT_COLLECTION);
 const assessmentCollection = myDB.collection("assessment");
+const counterCollectioin = myDB.collection("counter");
 
 //for checking the connection of db
 export function connectDB() {
@@ -66,27 +67,37 @@ export async function getSessionId(userIdBody: UserIdType) {
     await client.connect();
 
     //filter for finding document
-    const filter = {
+    const find_filter = {
       passCode: userIdBody.passCode,
       isSent: false,
     };
 
     //options of returned document
-    const options = {
+    const find_options = {
       projection: { _id: 0, passCode: 0, isSent: 0 },
     };
 
     //indicating what is updated
-    const updateDocument = {
+    const find_updateDocument = {
       $set: { isSent: true },
     };
 
-    //get document
+    //get and update document
     sessionIdResult = await userIdCollection.findOneAndUpdate(
-      filter,
-      updateDocument,
-      options
+      find_filter,
+      find_updateDocument,
+      find_options
     );
+
+    console.log(sessionIdResult);
+    // //update condition count
+    // const count_filter={
+    //   title:"condition_counter"
+    // }
+    // const count_updateDocument={
+
+    // }
+    // await counterCollectioin.updateOne
   } catch (e) {
     console.dir(e);
   } finally {
