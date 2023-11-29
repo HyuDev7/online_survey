@@ -58,7 +58,7 @@ export default function RandomNavigateButton(props: ButtonPropType) {
 
     //if 3rd route is "skip", navigate to contentAssess page
     if (childpass === "assessment") {
-      childpass = "contentAssess";
+      childpass = "contentassess";
       // router.prefetch(`/${grandParentPass}/${childpass}`);
       router.push(`/${grandParentPass}/${childpass}`);
     } else if (childpass === "fin") {
