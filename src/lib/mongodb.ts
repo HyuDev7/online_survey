@@ -114,6 +114,7 @@ export async function getSessionId(userIdBody: UserIdType) {
       }
     );
     console.log("this is first found id ");
+    sessionIdResult=sessionIdResult.value
     console.log(sessionIdResult);
 
     //if total count is over 1,200 and, there is no id whose sentAt is less than 3h and fin is false
