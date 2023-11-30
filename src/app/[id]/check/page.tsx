@@ -78,7 +78,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             <div className="textStyle text-xl">
               <h3 className="underline underline-offset-4 mb-3">3回目の質問</h3>
               <p>
-                1000円の分け方について、1回目の相手と
+                1000円の分け方について1回目、2回目の相手と
                 <span className="font-semibold">
                   {thirdGame.thirdCondition === "new" ? "異なる" : "同じ"}
                 </span>

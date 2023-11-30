@@ -185,27 +185,50 @@ export default function ThirdGameForm({
               )}
 
               <p className="mt-3">
-                {/* {desc === "同じ" ? null : "ただし"} */}
-                相手は1回目、2回目の質問時とは
+                相手は1回目、2回目の質問時と
                 <span className="underline underline-offset-4 font-bold">
                   {desc}
                 </span>
                 人です。
               </p>
 
-              {/* make find offer logic */}
-              <p className="mt-3">
-                1回目の相手はあなたに
-                <span className="font-semibold">{prevOffer}円</span>
-                渡すことを提案しており、あなたはこの提案を
-                <span className="font-semibold">{prevReact}</span>
-                ました。
-              </p>
-              <p>
-                また、あなたは2回目の相手に
-                <span className="font-semibold">{secondGame.secondDistribution}円</span>
-                渡すことを提案しました。
-              </p>
+              {passedGameType === "UG" ? (
+                <>
+                  {/* for ug  */}
+                  <p className="mt-3">
+                    1回目には相手はあなたに
+                    <span className="font-semibold">{prevOffer}円</span>
+                    渡すことを提案しており、あなたはこの提案を
+                    <span className="font-semibold">{prevReact}</span>
+                    ました。
+                  </p>
+                  <p>
+                    また、2回目にはあなたは相手に
+                    <span className="font-semibold">
+                      {secondGame.secondDistribution}円
+                    </span>
+                    渡すことを提案しました。
+                  </p>
+                </>
+              ) : (
+                <>
+                  {/* for dg */}
+                  <p className="mt-3">
+                    1回目の相手はあなたに
+                    <span className="font-semibold">{prevOffer}円</span>
+                    渡すことを提案しており、あなたはこの提案を
+                    <span className="font-semibold">{prevReact}</span>
+                    ました。
+                  </p>
+                  <p>
+                    また、あなたは2回目の相手に
+                    <span className="font-semibold">
+                      {secondGame.secondDistribution}円
+                    </span>
+                    渡すことを提案しました。
+                  </p>
+                </>
+              )}
 
               <p className="mt-3">いくら相手にお金を渡しますか？</p>
               <p>
