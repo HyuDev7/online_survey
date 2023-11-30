@@ -95,7 +95,6 @@ export default function SecondGameForm({
         <div className="container mx-auto">
           <h1 className="text-3xl my-5">２回目の質問</h1>
           <form>
-            
             <div className="textStyle my-5">
               <p>
                 あなたは今回、<span className="font-bold">提案者</span>
@@ -140,7 +139,7 @@ export default function SecondGameForm({
               </p>
 
               <p>
-                先ほど相手はあなたに
+                先ほど{desc === "同じ" ? null : "の"}相手はあなたに
                 <span className="font-semibold">{prevOffer}円</span>
                 渡すことを提案していました。
               </p>

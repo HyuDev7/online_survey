@@ -114,7 +114,7 @@ export default function FirstGameForm({
                 <label htmlFor="refuseOffer">断る</label>
               </div>
 
-              <div className="mt-7 mb-4 textStyle ">
+              <div className="mt-11 mb-4 textStyle ">
                 <p>
                   次にこの分け方についてどのように感じたか、最も当てはまるものを選んでください。
                 </p>
