@@ -81,11 +81,6 @@ export async function getSessionId(userIdBody: UserIdType) {
     console.log("this is total count");
     console.log(total);
 
-    //if total is over 1200, send message about it's over
-    if (total >= 1200) {
-      return (sessionIdResult["sessionID"] = "over");
-    }
-
     //acceptable condition list array
     let acceptablecCondArr = [];
     for (const property in counterlist) {
@@ -106,7 +101,7 @@ export async function getSessionId(userIdBody: UserIdType) {
     sessionIdResult = await userIdCollection.findOne(
       {
         passCode: userIdBody.passCode,
-        isSent: false,
+        // isSent: false,
         cond_num: { $in: acceptablecCondArr },
         fin: false,
         sentAt: { $lt: new Date(targetTime.toISOString()) },
@@ -117,6 +112,16 @@ export async function getSessionId(userIdBody: UserIdType) {
     );
     console.log("this is first found id ");
     console.log(sessionIdResult);
+
+    //if total count is over 1,200 and, there is no id whose sentAt is less than 3h and fin is false
+    // findOne function returns null
+    if (sessionIdResult === null) {
+      //if total is over 1200, send message about it's over
+      if (total >= 1200) {
+        sessionIdResult = { sessionID: "over" };
+        return sessionIdResult;
+      }
+    }
 
     //check condition count
     let condition_number: string = sessionIdResult.cond_num;
@@ -184,7 +189,6 @@ export async function getSessionId(userIdBody: UserIdType) {
         $set: { isSent: true, sentAt: new Date() },
       }
     );
-
   } catch (e) {
     console.dir(e);
   } finally {

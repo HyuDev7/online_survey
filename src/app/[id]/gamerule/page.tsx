@@ -51,7 +51,7 @@ export default async function Home({ params }: { params: { id: string } }) {
       </header>
       <main className="mx-3 sm:container sm:mx-auto flex-1">
         <div className="container mx-auto">
-          <h1 className="text-3xl sm:text-4xl my-5">質問の事前説明</h1>
+          <h1 className="text-3xl my-5">質問の事前説明</h1>
           <h4>【質問の概要】</h4>
           <div className="textStyle">
             <p>

@@ -93,7 +93,7 @@ export default function SecondGameForm({
 
       <main className="mx-3 sm:container sm:mx-auto flex-1">
         <div className="container mx-auto">
-          <h1 className="text-3xl sm:text-4xl my-5">２回目の質問</h1>
+          <h1 className="text-3xl my-5">２回目の質問</h1>
           <form>
             
             <div className="textStyle my-5">

@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
       <main className="mx-3 sm:container sm:mx-auto flex-1">
         <div className="container mx-auto">
-          <h1 className="my-5">これまでの回答</h1>
+          <h1 className="text-3xl my-5">これまでの回答</h1>
           <div className="textStyle">
             <p>以下がご自身の回答です。</p>
             <p className="text-sm mt-1 text-red-600">
