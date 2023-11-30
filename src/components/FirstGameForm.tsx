@@ -67,7 +67,7 @@ export default function FirstGameForm({
               <p className="mb-3">
                 ただし、
                 <span className="underline underline-offset-4">
-                  提案を拒否すると自身も相手も何も得られません
+                  提案を拒否するとあなたも相手も何も得られません
                 </span>
                 。
               </p>

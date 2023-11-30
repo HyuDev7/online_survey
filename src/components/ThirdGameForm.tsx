@@ -109,59 +109,19 @@ export default function ThirdGameForm({
         <div className="container mx-auto">
           <h1 className="text-3xl my-5">３回目の質問</h1>
           <form>
-            {/* <div className="textStyle my-5">
-              <p>
-                もう一度<span className="font-bold">提案者</span>
-                としてお金の分け方を提案してください。
-              </p>
-              <p>
-                1000円を自身と相手でどのように分けるかを決めることができます
-              </p>
-              <p>
-                ただ、今回は
-                <span className="underline underline-offset-4">
-                  応答者は提案者の
-                  <span className="font-bold">提案を断ることができません</span>
-                </span>
-                。
-              </p>
-              <p className="mb-3">
-                つまり、提案した分配金額が
-                <span className="font-semibold">そのまま実現します</span>。
-              </p>
-              <p>
-                相手は１回目、２回目の質問であなたにお金を渡した人と
-                <span className="underline underline-offset-4 font-bold">
-                  {desc}
-                </span>
-                人です。
-              </p>
-
-              <p>
-                1回目のゲームの相手はあなたに
-                <span className="font-semibold">{prevOffer}円</span>
-                渡すことを提案していました。
-              </p>
-
-              <p className="mt-3">いくら相手にお金を渡しますか？</p>
-              <p>
-                渡す金額を以下の欄に整数(0以上1000以下の半角数字)で入力してください。
-              </p>
-            </div> */}
-
             <div className="textStyle my-5">
               <p>
                 あなたは今回、<span className="font-bold">提案者</span>
                 に選ばれました。
               </p>
               <p>
-                1000円を、自身と相手でどのように分けるかを自由に決めることができます。
+                1000円を、あなたと相手でどのように分けるかを自由に決めることができます。
               </p>
               {passedGameType === "UG" ? (
                 <p>
                   ただし、
                   <span className="underline underline-offset-4">
-                    提案が断られると自身も相手も何も得られません
+                    提案が断られるとあなたも相手も何も得られません
                   </span>
                   。
                 </p>
@@ -170,7 +130,7 @@ export default function ThirdGameForm({
                   <p>
                     ただし、
                     <span className="underline underline-offset-4">
-                      応答者は提案者の提案を
+                      相手はあなたの提案を
                       <span className=" font-semibold">
                         断ることができません
                       </span>
@@ -192,9 +152,8 @@ export default function ThirdGameForm({
                 人です。
               </p>
 
-              {passedGameType === "UG" ? (
+              {passedCondition === "同じ" ? (
                 <>
-                  {/* for ug  */}
                   <p className="mt-3">
                     1回目には相手はあなたに
                     <span className="font-semibold">{prevOffer}円</span>
@@ -212,7 +171,6 @@ export default function ThirdGameForm({
                 </>
               ) : (
                 <>
-                  {/* for dg */}
                   <p className="mt-3">
                     1回目の相手はあなたに
                     <span className="font-semibold">{prevOffer}円</span>
@@ -254,7 +212,7 @@ export default function ThirdGameForm({
                 円
               </div>
 
-              <div className="text-xl mt-3">自分が受け取る金額：</div>
+              <div className="text-xl mt-3">あなたが受け取る金額：</div>
               <div className="text-xl">
                 {1000 - Number(responseBody.thirdDistribution)}円
               </div>

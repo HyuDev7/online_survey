@@ -32,9 +32,9 @@ export default async function Page({ params }: { params: { id: string } }) {
 
       <main className="mx-3 sm:container sm:mx-auto flex-1">
         <div className="container mx-auto">
-          <h1 className="text-3xl my-5">これまでの回答</h1>
+          <h1 className="text-3xl my-5">ここまでの回答</h1>
           <div className="textStyle">
-            <p>以下がご自身の回答です。</p>
+            <p>以下があなたのここまでの回答です。</p>
             <p className="text-sm mt-1 text-red-600">
               ※このページには戻るボタンがありません。確認が終わり次第タブを閉じていただいて構いません。
             </p>
@@ -45,7 +45,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             <p>１回目の質問では相手は以下の分け方を提案しました。</p>
             <div>
               <p>相手の取り分 :{1000 - offerMoney} 円</p>
-              <p>自分の取り分 :{offerMoney} 円</p>
+              <p>あなたの取り分 :{offerMoney} 円</p>
             </div>
             <p className="mt-1">
               あなたはこの提案を
@@ -68,7 +68,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               </p>
               <div>
                 <p>相手の取り分 : {secondGame.secondDistribution}円</p>
-                <p>自分の取り分 : {1000 - secondGame.secondDistribution}円</p>
+                <p>あなたの取り分 : {1000 - secondGame.secondDistribution}円</p>
               </div>
               <div className="mt-1">を提案しました。</div>
             </div>
@@ -86,7 +86,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               </p>
               <div>
                 <p>相手の取り分 : {thirdGame.thirdDistribution}円</p>
-                <p>自分の取り分 : {1000 - thirdGame.thirdDistribution}円</p>
+                <p>あなたの取り分 : {1000 - thirdGame.thirdDistribution}円</p>
               </div>
               <div className="mt-1">を提案しました。</div>
             </div>

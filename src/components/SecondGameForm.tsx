@@ -102,13 +102,13 @@ export default function SecondGameForm({
                 に選ばれました。
               </p>
               <p>
-                1000円を、自身と相手でどのように分けるかを自由に決めることができます。
+                1000円を、あなたと相手でどのように分けるかを自由に決めることができます。
               </p>
               {passedGameType === "UG" ? (
                 <p>
                   ただし、
                   <span className="underline underline-offset-4">
-                    提案が断られると自身も相手も何も得られません
+                    提案が断られるとあなたも相手も何も得られません
                   </span>
                   。
                 </p>
@@ -117,7 +117,7 @@ export default function SecondGameForm({
                   <p>
                     ただし、
                     <span className="underline underline-offset-4">
-                      応答者は提案者の提案を
+                      相手はあなたの提案を
                       <span className=" font-semibold">
                         断ることができません
                       </span>
@@ -132,7 +132,6 @@ export default function SecondGameForm({
               )}
 
               <p className="mt-3">
-                {/* {desc === "同じ" ? null : "ただし"} */}
                 相手は先ほどあなたにお金を渡した人と
                 <span className="underline underline-offset-4 font-bold">
                   {desc}
@@ -140,9 +139,8 @@ export default function SecondGameForm({
                 人です。
               </p>
 
-              {/* make find offer logic */}
               <p>
-                先ほどの相手はあなたに
+                先ほど相手はあなたに
                 <span className="font-semibold">{prevOffer}円</span>
                 渡すことを提案していました。
               </p>
@@ -172,7 +170,7 @@ export default function SecondGameForm({
                   円
                 </div>
 
-                <div className="mt-3">自分が受け取る金額：</div>
+                <div className="mt-3">あなたが受け取る金額：</div>
                 <div className="">
                   {1000 - Number(responseBody.secondDistribution)}円
                 </div>

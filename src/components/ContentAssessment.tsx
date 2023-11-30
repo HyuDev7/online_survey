@@ -71,7 +71,7 @@ export default function ContentAssessment({
           <h1 className="text-3xl my-5">これまでの質問について</h1>
           <form>
             <div className="mt-5 mb-4 textStyle">
-              <p>質問へのご回答、お疲れ様でした。</p>
+              <p>質問へのご回答、ありがとうございました。</p>
               <p className="mb-3">
                 最後に、これまでの質問についてのあなたの理解度について、以下の選択肢からお選びください。
               </p>

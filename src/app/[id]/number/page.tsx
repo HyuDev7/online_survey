@@ -54,9 +54,8 @@ export default function Page({ params }: { params: { id: string } }) {
               確認番号：{process.env.REWARD_NUMBER}
             </div>
             <div className="my-4">
-              また、ご自身のメールアドレスへ確認番号を送りたい場合は、下にあるGoogle
-              Formのリンクからフォームを開いてもらい、そちらで送り先のメールアドレスを入力すれば
-              番号をお送りすることができます。
+              また、ご自身のメールアドレスへ確認番号を送りたい場合は、下のリンクからフォームを開き、
+              送り先のメールアドレスを入力してください。
             </div>
             <a
               href="https://forms.gle/NqJ5HLe14GsZTjkE6"
@@ -65,7 +64,7 @@ export default function Page({ params }: { params: { id: string } }) {
               Google Formへはこちらから
             </a>
             <p className="mt-4">
-              番号のお控えが終わり次第、こちらのタブを閉じてアンケートを終了していただいて構いません。
+              番号のお控えが終わり次第、こちらのタブを閉じてアンケートを終了してください。
             </p>
             <p>この度はご協力いただきありがとうございました。</p>
           </div>
