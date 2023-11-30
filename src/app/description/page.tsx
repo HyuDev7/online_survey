@@ -41,7 +41,7 @@ export default function Page() {
       </header>
       <main className="mx-3 sm:container sm:mx-auto flex-1">
         <div className="container mx-auto">
-          <h1 className="text-3xl sm:text-4xl my-5">質問の事前説明</h1>
+          <h1 className="text-3xl my-5">質問の事前説明</h1>
           <div className="textStyle">
             <p>本ページは質問の事前説明ページです。</p>
             <p className="text-sm mt-1 text-red-600">

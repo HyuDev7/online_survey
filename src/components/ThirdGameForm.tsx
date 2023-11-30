@@ -3,23 +3,30 @@ import RandomNavigateButton from "./RandomNavigateButton";
 import { ThirdFormDataType } from "@/lib/formDataTypes";
 import { useState } from "react";
 import Link from "next/link";
+import findSecondReaction from "@/lib/findSecondReaction";
 
 export default function ThirdGameForm({
   passedCondition,
   sessionId,
   passedGameType,
   desc,
-  prevCondition,
+  firstGame,
+  secondGame,
 }: {
   passedCondition: string;
   sessionId: string;
   passedGameType: string;
   desc: string;
-  prevCondition: {
-    firstroute: string;
-    secondroute: string;
-    thirdroute: string;
+  firstGame: {
+    firstCondition: string;
+    offer: string;
+    assessment: string;
     assessmentOrder: boolean;
+  };
+  secondGame: {
+    secondCondition: string;
+    secondGameType: string;
+    secondDistribution: string;
   };
 }): JSX.Element {
   //initialise form data
@@ -38,15 +45,23 @@ export default function ThirdGameForm({
     setResponseBody({ ...responseBody, [name]: value });
   }
 
+  //about 1st game
   let prevOffer: number;
-  const firstroute = prevCondition.firstroute;
-  // console.log(prevCondition);
-  if (firstroute === "cRAwf") {
+  let prevReact: string;
+  const firstcond = firstGame.firstCondition;
+  const firstReac = firstGame.offer;
+  if (firstcond === "angry") {
     prevOffer = 250;
-  } else if (firstroute === "ral0P") {
+  } else if (firstcond === "neutral") {
     prevOffer = 500;
   } else {
     prevOffer = 750;
+  }
+
+  if (firstReac == "refuse") {
+    prevReact = "断り";
+  } else {
+    prevReact = "受け入れ";
   }
 
   return (
@@ -58,34 +73,34 @@ export default function ThirdGameForm({
               <h1 className="text-lg sm:text-4xl my-3">応用経済分析研究室</h1>
             </div>
             <div className="buttons flex">
-                  <div className="text-center mx-1">
-                    <Link
-                      href={`/${sessionId}/check`}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="buttonStyle mb-0 min-w-full text-sm sm:text-xl p-0.5 font-normal"
-                    >
-                      回答の確認
-                    </Link>
-                    <p className="text-xs font-normal">
-                      ※今までの回答が別タブで開きます
-                    </p>
-                  </div>
+              <div className="text-center mx-1">
+                <Link
+                  href={`/${sessionId}/check`}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="buttonStyle mb-0 min-w-full text-sm sm:text-xl p-0.5 font-normal"
+                >
+                  回答の確認
+                </Link>
+                <p className="text-xs font-normal">
+                  ※今までの回答が別タブで開きます
+                </p>
+              </div>
 
-                  <div className="text-center mx-1">
-                    <Link
-                      href={`/description`}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="buttonStyle mb-0 min-w-full text-sm sm:text-xl p-0.5 font-normal"
-                    >
-                      質問の事前説明
-                    </Link>
-                    <p className="text-xs font-normal">
-                      ※事前説明が別タブで開きます
-                    </p>
-                  </div>
-                </div>
+              <div className="text-center mx-1">
+                <Link
+                  href={`/description`}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="buttonStyle mb-0 min-w-full text-sm sm:text-xl p-0.5 font-normal"
+                >
+                  質問の事前説明
+                </Link>
+                <p className="text-xs font-normal">
+                  ※事前説明が別タブで開きます
+                </p>
+              </div>
+            </div>
           </nav>
         </div>
       </header>
@@ -94,7 +109,7 @@ export default function ThirdGameForm({
         <div className="container mx-auto">
           <h1 className="text-3xl my-5">３回目の質問</h1>
           <form>
-            <div className="textStyle my-5">
+            {/* <div className="textStyle my-5">
               <p>
                 もう一度<span className="font-bold">提案者</span>
                 としてお金の分け方を提案してください。
@@ -122,11 +137,74 @@ export default function ThirdGameForm({
                 人です。
               </p>
 
-              {/* make find offer logic */}
               <p>
                 1回目のゲームの相手はあなたに
                 <span className="font-semibold">{prevOffer}円</span>
                 渡すことを提案していました。
+              </p>
+
+              <p className="mt-3">いくら相手にお金を渡しますか？</p>
+              <p>
+                渡す金額を以下の欄に整数(0以上1000以下の半角数字)で入力してください。
+              </p>
+            </div> */}
+
+            <div className="textStyle my-5">
+              <p>
+                あなたは今回、<span className="font-bold">提案者</span>
+                に選ばれました。
+              </p>
+              <p>
+                1000円を、自身と相手でどのように分けるかを自由に決めることができます。
+              </p>
+              {passedGameType === "UG" ? (
+                <p>
+                  ただし、
+                  <span className="underline underline-offset-4">
+                    提案が断られると自身も相手も何も得られません
+                  </span>
+                  。
+                </p>
+              ) : (
+                <>
+                  <p>
+                    ただし、
+                    <span className="underline underline-offset-4">
+                      応答者は提案者の提案を
+                      <span className=" font-semibold">
+                        断ることができません
+                      </span>
+                    </span>
+                    (※最初の説明と異なりますのでご注意ください) 。
+                  </p>
+                  <p className="mb-3">
+                    つまり、提案した分配金額が
+                    <span className="font-semibold">そのまま実現します</span>。
+                  </p>
+                </>
+              )}
+
+              <p className="mt-3">
+                {/* {desc === "同じ" ? null : "ただし"} */}
+                相手は1回目、2回目の質問時とは
+                <span className="underline underline-offset-4 font-bold">
+                  {desc}
+                </span>
+                人です。
+              </p>
+
+              {/* make find offer logic */}
+              <p className="mt-3">
+                1回目の相手はあなたに
+                <span className="font-semibold">{prevOffer}円</span>
+                渡すことを提案しており、あなたはこの提案を
+                <span className="font-semibold">{prevReact}</span>
+                ました。
+              </p>
+              <p>
+                また、あなたは2回目の相手に
+                <span className="font-semibold">{secondGame.secondDistribution}円</span>
+                渡すことを提案しました。
               </p>
 
               <p className="mt-3">いくら相手にお金を渡しますか？</p>
@@ -160,7 +238,7 @@ export default function ThirdGameForm({
 
               <RandomNavigateButton
                 formData={responseBody}
-                buttonWord="実験の事後説明へ移る"
+                buttonWord="次のページへ進む"
                 nextNum={4}
                 grandParentPass={sessionId}
                 parentpass="assessment"

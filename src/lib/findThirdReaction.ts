@@ -1,4 +1,4 @@
-export default async function findSecondReaction(sessionId: string) {
+export default async function findThirdReaction(sessionId: string) {
     let thirdGame: any;
   
     try {

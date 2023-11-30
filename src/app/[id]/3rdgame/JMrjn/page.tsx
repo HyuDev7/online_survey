@@ -19,7 +19,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     <ThirdGameForm
       sessionId={sessionID}
       desc="異なる"
-      passedGameType="DG"
+      passedGameType="UG"
       passedCondition="new"
       firstGame={firstCond}
       secondGame={secondCond}

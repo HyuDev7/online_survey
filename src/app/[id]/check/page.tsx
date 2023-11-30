@@ -1,13 +1,12 @@
 import findFirstReaction from "@/lib/findFirstReaction";
 import findSecondReaction from "@/lib/findSecondReaction";
-import { findThirdGame } from "@/lib/mongodb";
-import Link from "next/link";
+import findThirdReaction from "@/lib/findThirdReaction";
 
 export default async function Page({ params }: { params: { id: string } }) {
   //get answers from db
   let firstGame = await findFirstReaction(params.id);
   let secondGame = await findSecondReaction(params.id);
-  let thirdGame = await findThirdGame(params.id);
+  let thirdGame = await findThirdReaction(params.id);
 
   //determin a distribution from offerer in 1st game
   let offerMoney: number;
@@ -33,7 +32,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
       <main className="mx-3 sm:container sm:mx-auto flex-1">
         <div className="container mx-auto">
-          <h1 className="my-5">これまでの回答</h1>
+          <h1 className="text-3xl my-5">これまでの回答</h1>
           <div className="textStyle">
             <p>以下がご自身の回答です。</p>
             <p className="text-sm mt-1 text-red-600">

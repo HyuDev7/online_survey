@@ -16,6 +16,7 @@ import {
   THIRDGAME_COLLECTION,
   AGREEMENT_COLLECTION,
 } from "./dbConfig";
+import { list } from "postcss";
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const uri = process.env.DB_URL;
@@ -38,6 +39,7 @@ const secondGameCollection = myDB.collection(SECONDGAME_COLLECTION);
 const thirdGameCollection = myDB.collection(THIRDGAME_COLLECTION);
 const agreementCollection = myDB.collection(AGREEMENT_COLLECTION);
 const assessmentCollection = myDB.collection("assessment");
+const counterCollectioin = myDB.collection("counter");
 
 //for checking the connection of db
 export function connectDB() {
@@ -65,27 +67,127 @@ export async function getSessionId(userIdBody: UserIdType) {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
-    //filter for finding document
-    const filter = {
-      passCode: userIdBody.passCode,
-      isSent: false,
-    };
+    //get a list of counter
+    const counterRes = await counterCollectioin.findOne(
+      {
+        title: "condition_counter",
+      },
+      { projection: { _id: 0, title: 0 } }
+    );
 
-    //options of returned document
-    const options = {
-      projection: { _id: 0, passCode: 0, isSent: 0 },
-    };
+    const { total, ...counterlist } = counterRes;
+    console.log("this is counter list");
+    console.log(counterlist);
+    console.log("this is total count");
+    console.log(total);
 
-    //indicating what is updated
-    const updateDocument = {
-      $set: { isSent: true },
-    };
+    //acceptable condition list array
+    let acceptablecCondArr = [];
+    for (const property in counterlist) {
+      if (counterlist[property] < 100) {
+        acceptablecCondArr.push(property);
+      }
+    }
+    console.log(acceptablecCondArr);
+    //calculate the time 3hours before forom current one
+    const current = new Date();
+    const currentMilli = current.valueOf();
+    const threehoursMilli = 3 * 60 * 60 * 1000;
+    const targetTimeMilli = currentMilli - threehoursMilli;
+    const targetTime = new Date(targetTimeMilli);
+    console.log("this is target iso time " + targetTime.toISOString());
 
-    //get document
-    sessionIdResult = await userIdCollection.findOneAndUpdate(
-      filter,
-      updateDocument,
-      options
+    //find a document
+    sessionIdResult = await userIdCollection.findOne(
+      {
+        passCode: userIdBody.passCode,
+        // isSent: false,
+        cond_num: { $in: acceptablecCondArr },
+        fin: false,
+        sentAt: { $lt: new Date(targetTime.toISOString()) },
+      },
+      {
+        projection: { _id: 0, passCode: 0 },
+      }
+    );
+    console.log("this is first found id ");
+    console.log(sessionIdResult);
+
+    //if total count is over 1,200 and, there is no id whose sentAt is less than 3h and fin is false
+    // findOne function returns null
+    if (sessionIdResult === null) {
+      //if total is over 1200, send message about it's over
+      if (total >= 1200) {
+        sessionIdResult = { sessionID: "over" };
+        return sessionIdResult;
+      }
+    }
+
+    //check condition count
+    let condition_number: string = sessionIdResult.cond_num;
+    const targetVal = counterRes[condition_number];
+    console.log("this is target value type" + typeof targetVal);
+    console.log("original condition number is " + condition_number);
+
+    //when target value is more than 100, try to give other condition number havnig minimal count
+    // if (targetVal >= 100) {
+    //   //get a list of value of counter list
+    //   const numArr: Array<number> = Object.values(counterlist);
+    //   //find minimal value in counter list
+    //   const minVal = Math.min(...numArr);
+    //   console.log("this is min val " + minVal);
+    //   //find a field having minimal value
+    //   for (const [key, value] of Object.entries(counterlist)) {
+    //     if (value === minVal) {
+    //       //get a name having minimal count
+    //       condition_number = key;
+    //       break;
+    //     }
+    //   }
+    //   //id with condition, the number of it is over 100 should be updated(isSent : true)
+    //   await userIdCollection.updateOne(
+    //     { sessionID: sessionIdResult.sessionID },
+    //     {
+    //       $set: { isSent: true },
+    //     }
+    //   );
+
+    //   console.log("new condition number is " + condition_number);
+    //   //find a new id with the condition
+    //   sessionIdResult = await userIdCollection.findOne(
+    //     {
+    //       passCode: userIdBody.passCode,
+    //       isSent: false,
+    //       cond_num: condition_number,
+    //     },
+    //     {
+    //       projection: { _id: 0, passCode: 0, isSent: 0 },
+    //     }
+    //   );
+    // }
+
+    console.log("current condition number is " + condition_number);
+    console.log("this is session is isSent field : " + sessionIdResult.isSent);
+
+    if (sessionIdResult.isSent == false) {
+      //indicating what is and how incremented
+      let count_updateDocument: any = {
+        $inc: {},
+      };
+      count_updateDocument.$inc[condition_number] = 1;
+      count_updateDocument.$inc["total"] = 1;
+      await counterCollectioin.updateOne(
+        { title: "condition_counter" },
+        count_updateDocument
+      );
+    }
+
+    //update counter doc and isSent field of sent id document
+    await userIdCollection.updateOne(
+      { sessionID: sessionIdResult.sessionID },
+      {
+        $set: { isSent: true, sentAt: new Date() },
+      }
     );
   } catch (e) {
     console.dir(e);
@@ -93,7 +195,7 @@ export async function getSessionId(userIdBody: UserIdType) {
     // Ensures that the client will close when you finish/error
     await client.close();
     console.log("connection is closed from getSessionID!");
-    return sessionIdResult.value;
+    return sessionIdResult;
   }
 }
 
@@ -137,6 +239,7 @@ export async function updateAgreement(
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+    console.log("connected from update agreement");
 
     //filter for finding document
     const filter = {
@@ -163,6 +266,34 @@ export async function updateAgreement(
     // Ensures that the client will close when you finish/error
     await client.close();
     console.log("connection is closed from update agreement");
+  }
+}
+
+export async function updateFin(passedAgreementForm: AgreementFormDataType) {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+
+    //filter for finding document
+    const filter = {
+      sessionID: passedAgreementForm.sessionID,
+    };
+
+    //indicating what is updated
+    const updateDocument = {
+      $set: {
+        fin: true,
+      },
+    };
+
+    //get document
+    const updateRes = await userIdCollection.updateOne(filter, updateDocument);
+  } catch (e) {
+    console.dir(e);
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+    console.log("connection is closed from update fin");
   }
 }
 
@@ -451,7 +582,7 @@ export async function findFirstGame(passedSessionID: string) {
 
       //options of returned document
       const options = {
-        projection: { _id: 0 },
+        projection: { _id: 0, sessionID: 0, firstGameCreatedAt: 0 },
       };
 
       //get document
@@ -475,7 +606,7 @@ export async function findSecondGame(passedSessionID: string) {
     try {
       // Connect the client to the server	(optional starting in v4.7)
       await client.connect();
-      console.log("connected from find secon game reaction!");
+      console.log("connected from find second game reaction!");
 
       //filter for finding document
       const filter = {
@@ -484,7 +615,7 @@ export async function findSecondGame(passedSessionID: string) {
 
       //options of returned document
       const options = {
-        projection: { _id: 0 },
+        projection: { _id: 0, sessionID: 0, secondGameCreatedAt: 0 },
       };
 
       //get document
