@@ -152,7 +152,7 @@ export default function ThirdGameForm({
                 人です。
               </p>
 
-              {passedCondition === "同じ" ? (
+              {desc === "同じ" ? (
                 <>
                   <p className="mt-3">
                     1回目には相手はあなたに
