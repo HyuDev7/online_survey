@@ -98,13 +98,16 @@ export async function getSessionId(userIdBody: UserIdType) {
     console.log("this is target iso time " + targetTime.toISOString());
 
     //find a document
-    sessionIdResult = await userIdCollection.findOne(
+    sessionIdResult = await userIdCollection.findOneAndUpdate(
       {
         passCode: userIdBody.passCode,
         // isSent: false,
         cond_num: { $in: acceptablecCondArr },
         fin: false,
         sentAt: { $lt: new Date(targetTime.toISOString()) },
+      },
+      {
+        $set: { isSent: true, sentAt: new Date() },
       },
       {
         projection: { _id: 0, passCode: 0 },
@@ -182,13 +185,13 @@ export async function getSessionId(userIdBody: UserIdType) {
       );
     }
 
-    //update counter doc and isSent field of sent id document
-    await userIdCollection.updateOne(
-      { sessionID: sessionIdResult.sessionID },
-      {
-        $set: { isSent: true, sentAt: new Date() },
-      }
-    );
+    // //update counter doc and isSent field of sent id document
+    // await userIdCollection.updateOne(
+    //   { sessionID: sessionIdResult.sessionID },
+    //   {
+    //     $set: { isSent: true, sentAt: new Date() },
+    //   }
+    // );
   } catch (e) {
     console.dir(e);
   } finally {
