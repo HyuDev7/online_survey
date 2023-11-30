@@ -40,21 +40,6 @@ export default function FirstGameForm({
             <div>
               <h1 className="text-lg sm:text-4xl my-3">応用経済分析研究室</h1>
             </div>
-            {/* <div className="buttons flex">
-                  <div className="text-center mx-1">
-                    <Link
-                      href={`/${params.id}/check`}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="buttonStyle mb-0 min-w-full text-sm sm:text-xl p-0.5 font-normal"
-                    >
-                      回答の確認
-                    </Link>
-                    <p className="text-xs font-normal">
-                      ※今までの回答が別タブで開きます
-                    </p>
-  </div>*/}
-
             <div className="text-center mx-1">
               <Link
                 href={`/description`}

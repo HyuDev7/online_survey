@@ -65,7 +65,7 @@ export default function ContentAssessment({
           </nav>
         </div>
       </header>
-      
+
       <main className="mx-3 sm:container sm:mx-auto flex-1">
         <div className="container mx-auto">
           <h1 className="text-3xl my-5">これまでの質問について</h1>
@@ -77,11 +77,7 @@ export default function ContentAssessment({
               </p>
             </div>
 
-            <div
-              className={
-                "mb-5 flex " + (assess_cond ? "flex-col" : "flex-col-reverse")
-              }
-            >
+            <div className="mb-5 flex flex-col">
               <div className="assessment_radio_button flex mb-1">
                 <div className="mr-1">
                   <input
