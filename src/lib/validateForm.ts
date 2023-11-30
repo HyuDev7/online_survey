@@ -52,7 +52,7 @@ export function validateProfileForm(profileForm: ProfileFormDataType) {
   }
 
   //validation of over or under input
-  if (numOld < 18 || numOld > 100) {
+  if (numOld < 0 || numOld > 100) {
     return (valiRes = false);
   } else {
     valiRes = true;
