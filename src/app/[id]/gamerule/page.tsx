@@ -67,8 +67,8 @@ export default async function Home({ params }: { params: { id: string } }) {
               <li>
                 応答者が提案を受け入れた場合はその金額による分配が行われ、
                 <span className="font-bold underline underline-offset-4">
-                  断った場合は提案者と応答者は共にお金を受け取ることはできない．
-                </span>
+                  断った場合は提案者と応答者は共にお金を受け取ることはできない
+                </span>。
               </li>
             </ol>
           </div>
