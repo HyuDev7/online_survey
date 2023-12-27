@@ -20,7 +20,7 @@ export default function Page() {
           <h1 className="text-3xl sm:text-4xl my-5">
             分配の考え方に関するアンケート調査
           </h1>
-          <div className="textStyle">
+          {/* <div className="textStyle">
             <SplitText text={T_text1} />
           </div>
           <div className="textStyle">
@@ -32,7 +32,13 @@ export default function Page() {
 
           <Link className="inputStyle mt-3" href="/auth">
             実験のログイン
-          </Link>
+          </Link> */}
+          <div className="textStype">
+            本実験の回答は終了いたしました。
+          </div>
+          <div className="textStype">
+            ご協力いただきありがとうございました。
+          </div>
         </div>
       </main>
     </>
